@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Loader from "./components/Loader/Loader";
 // COMPONENTS
-const Example = React.lazy(() => import("./components/Example/Example"));
+//const Example = React.lazy(() => import("./components/Example/Example"));
 function App() {
     return (
         <React.Suspense fallback={<Loader />}>
