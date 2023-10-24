@@ -1,18 +1,20 @@
 // DEPENDENCIES
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import Loader from "./components/Loader/Loader";
 // COMPONENTS
-import Example from './components/Example/Example';
-
+const Example = React.lazy(() => import("./components/Example/Example"));
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<h1>Hello world!</h1>} />
-      </Routes>
-    </Router>
-  )
+    return (
+        <React.Suspense fallback={<Loader />}>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<h1>Hello world!</h1>} />
+                </Routes>
+            </Router>
+        </React.Suspense>
+    );
 }
 
-export default App
+export default App;
