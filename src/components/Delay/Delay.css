@@ -1,0 +1,53 @@
+.delay {
+    width: 25%;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    margin: 10px;
+    border: 3px black solid;
+    border-radius: 25px;
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "slider1 time"
+        "slider2 feedback"
+        "slider3 amount"
+        "submit submit";
+}
+.header {
+    grid-area: header;
+}
+.slider1 {
+    grid-area: slider1;
+}
+.time {
+    grid-area: time;
+    padding-left: 10px;
+}
+.slider2 {
+    grid-area: slider2;
+}
+.amount {
+    grid-area: amount;
+    padding-left: 10px;
+}
+.slider3 {
+    grid-area: slider3;
+}
+.feedback {
+    grid-area: feedback;
+    padding-left: 10px;
+}
+.submit {
+    grid-area: submit;
+    text-align: center;
+}
+.slider {
+    width: 100%;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
