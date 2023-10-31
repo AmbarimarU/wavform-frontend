@@ -62,7 +62,13 @@ function Delay() {
             </div>
             <span className="amount">Amount</span>
             <div className="submit">
-                <input type="submit" value="Apply" />
+                <input
+                    type="submit"
+                    value="Reset"
+                    className="button"
+                    onClick={(e) => setFormData(initialFormData)}
+                />{" "}
+                <input type="submit" className="button" value="Apply" />
             </div>
         </div>
     );
