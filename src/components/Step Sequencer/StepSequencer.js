@@ -14,6 +14,8 @@ function StepSequencer() {
     tempo: 120,
   });
 
+  const [beat, setBeat] = useState(0);
+
   const [grid, setGrid] = useState([]);
 
   const makeGrid = (notes) => {
@@ -46,6 +48,7 @@ function StepSequencer() {
     setGrid(makeGrid(sequencer.notes));
   }, []);
 
+
   const makeSynths = (count) => {
     // each synth can only play one note at a time.
     // for simplicity, we'll create one synth for each note available
@@ -63,6 +66,8 @@ function StepSequencer() {
     return synths;
   };
 
+  let testBeat = 0
+
   const configLoop = (tempo) => {
     // This is our callback function. It will execute repeatedly
     const repeat = (time) => {
@@ -72,7 +77,7 @@ function StepSequencer() {
         let synth = synths[index];
         // beat is used to keep track of what subdivision we are on
         // there are eight *beats* or subdivisions for this sequencer
-        let note = row[sequencer.beat];
+        let note = row[testBeat];
 
         if (note.isActive) {
           // triggerAttackRelease() plays a specific pitch for a specific duration
@@ -82,9 +87,16 @@ function StepSequencer() {
       });
       // increment the counter
 
-      setSequencer({...sequencer,
-          beat: (sequencer.beat + 1) % 8
-      });
+      //   setSequencer({...sequencer,
+      //       beat: (sequencer.beat + 1) % 8
+      //   });
+
+      setBeat((beat + 1) % 8);
+
+      testBeat = (testBeat + 1) % 8
+
+    //   console.log(beat)
+      console.log(testBeat)
     };
 
     // set the tempo in beats per minute.
@@ -102,6 +114,8 @@ function StepSequencer() {
         if (clickedRowIndex === rowIndex && clickedNoteIndex === noteIndex) {
           // setGrid(grid[rowIndex][noteIndex] = !note.isActive)
 
+          e.target["data-active"] = String(!note.isActive)
+
           note.isActive = !note.isActive;
         }
       });
@@ -109,7 +123,7 @@ function StepSequencer() {
   };
 
   const handlePlayButton = (e) => {
-    if (!started) {
+    if (!sequencer.started) {
       // Only executed the first time the button is clicked
       // initializing Tone, setting the volume, and setting up the loop
 
@@ -123,15 +137,13 @@ function StepSequencer() {
     }
 
     // toggle Tone.Trasport and the flag variable.
-    if (playing) {
+    if (sequencer.playing) {
       e.target.innerText = "Play";
       Tone.Transport.stop();
       setSequencer({
         ...sequencer,
         playing: false,
       });
-
-      console.log(sequencer);
     } else {
       e.target.innerText = "Stop";
       Tone.Transport.start();
@@ -139,15 +151,10 @@ function StepSequencer() {
         ...sequencer,
         playing: true,
       });
-
-      console.log(sequencer);
     }
   };
 
-  //   let beat = 0
   const synths = makeSynths(8);
-  let playing = false;
-  let started = false;
 
   return (
     <div className="sequencer">
@@ -159,14 +166,17 @@ function StepSequencer() {
                 <button
                   key={String(rowIndex) + String(noteIndex)}
                   data-index-number={String(rowIndex) + String(noteIndex)}
+                  data-active={String(note.isActive)}
                   className="note"
                   onClick={(e) => {
                     handleNoteClick(rowIndex, noteIndex, e);
 
-                    if ((e.target.innerText = "I")) {
+                    if (e.target.innerText === "I") {
                       e.target.innerText = "A";
+                      e.target.style["background-color"] = "green"
                     } else {
                       e.target.innerText = "I";
+                      e.target.style["background-color"] = "white"
                     }
                   }}
                 >
