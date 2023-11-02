@@ -66,7 +66,8 @@ function StepSequencer() {
     return synths;
   };
 
-  let testBeat = 0
+    //   let testBeat = 0
+    let currentBeat = beat
 
   const configLoop = (tempo) => {
     // This is our callback function. It will execute repeatedly
@@ -77,7 +78,7 @@ function StepSequencer() {
         let synth = synths[index];
         // beat is used to keep track of what subdivision we are on
         // there are eight *beats* or subdivisions for this sequencer
-        let note = row[testBeat];
+        let note = row[currentBeat];
 
         if (note.isActive) {
           // triggerAttackRelease() plays a specific pitch for a specific duration
@@ -91,12 +92,17 @@ function StepSequencer() {
       //       beat: (sequencer.beat + 1) % 8
       //   });
 
-      setBeat((beat + 1) % 8);
+      
+      currentBeat = (currentBeat + 1) % 8
 
-      testBeat = (testBeat + 1) % 8
+
+    //   setBeat((beat + 1) % 8);
+
+    //   testBeat = (testBeat + 1) % 8
 
     //   console.log(beat)
-      console.log(testBeat)
+    //   console.log(testBeat)
+      console.log(currentBeat)
     };
 
     // set the tempo in beats per minute.
@@ -122,6 +128,16 @@ function StepSequencer() {
     });
   };
 
+  useEffect(() => {
+    if (!sequencer.started && sequencer.playing) {
+        setSequencer({
+            ...sequencer,
+            started: true,
+        });
+    }
+  }, [sequencer])
+  
+
   const handlePlayButton = (e) => {
     if (!sequencer.started) {
       // Only executed the first time the button is clicked
@@ -130,10 +146,10 @@ function StepSequencer() {
       Tone.start();
       Tone.getDestination().volume.rampTo(-10, 0.001);
       configLoop(sequencer.tempo);
-      setSequencer({
-        ...sequencer,
-        started: true,
-      });
+    //   setSequencer({
+    //     ...sequencer,
+    //     started: true,
+    // });
     }
 
     // toggle Tone.Trasport and the flag variable.
@@ -144,6 +160,10 @@ function StepSequencer() {
         ...sequencer,
         playing: false,
       });
+
+      setBeat(0)
+
+    //   testBeat = 0;
     } else {
       e.target.innerText = "Stop";
       Tone.Transport.start();
