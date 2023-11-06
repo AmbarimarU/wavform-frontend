@@ -2,16 +2,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import Loader from "./components/Loader/Loader";
 // COMPONENTS
-import Example from './components/Example/Example';
-
+import Synth from './components/Synth/Synth'
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<h1>Hello world!</h1>} />
-      </Routes>
-    </Router>
+    <React.Suspense fallback={<Loader />}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<h1>Hello world!</h1>} />
+          <Route path='/synth' element={<Synth/>}/>
+        </Routes>
+      </Router>
+    </React.Suspense>
   )
 }
 
