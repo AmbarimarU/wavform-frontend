@@ -1,0 +1,25 @@
+.sequencer {
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: fit-content;
+    width: fit-content;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.note {
+    height: 3em;
+    width: 3em;
+    border-radius: 4px;
+    border-style: ridge;
+    border-width: 2px;
+    border-color: aliceblue;
+    margin: 2px;
+    outline: none;
+    background-color: white;
+}
+
+.sequencer-row {
+    display: inline-block;
+
+}

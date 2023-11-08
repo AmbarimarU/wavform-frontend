@@ -7,6 +7,14 @@ import Loader from "./components/Loader/Loader";
 
   import Synth from './components/Synth/Synth'
 //const Example = React.lazy(() => import("./components/Example/Example"));
+
+const Sequencer = React.lazy(() => import("./components/Step Sequencer/StepSequencer"))
+
+
+const Delay = React.lazy(() => import("./components/Delay/Delay"));
+
+  import Synth from './components/Synth/Synth'
+//const Example = React.lazy(() => import("./components/Example/Example"));
 const Delay = React.lazy(() => import("./components/Delay/Delay"));
 function App() {
     return (
@@ -14,8 +22,12 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<h1>Hello world!</h1>} />
+
                     <Route path="/delay" element={<Delay />} />
                     <Route path='/synth' element={<Synth/>}/>
+
+
+                    <Route path="/sequencer" element={<Sequencer />} />
                 </Routes>
             </Router>
         </React.Suspense>
