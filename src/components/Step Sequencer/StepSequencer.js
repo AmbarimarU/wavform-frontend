@@ -98,10 +98,6 @@ function StepSequencer() {
 
     //   setBeat((beat + 1) % 8);
 
-    //   testBeat = (testBeat + 1) % 8
-
-    //   console.log(beat)
-    //   console.log(testBeat)
       console.log(currentBeat)
     };
 
@@ -160,8 +156,6 @@ function StepSequencer() {
         ...sequencer,
         playing: false,
       });
-
-      setBeat(0)
 
     //   testBeat = 0;
     } else {
