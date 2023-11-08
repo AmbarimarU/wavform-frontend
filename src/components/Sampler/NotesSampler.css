@@ -1,0 +1,18 @@
+.select-sample {
+    font-size: 20px;
+}
+
+.note-button {
+    font-size: 20px;
+    color: #007EAD;
+    transition: background-color 0.3s;
+    background-color: #ddd;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; 
+}
+
+.note-button:hover {
+    background-color: #786BB1;
+    cursor: pointer;
+}
