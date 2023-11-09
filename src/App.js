@@ -8,6 +8,7 @@ import Loader from "./components/Loader/Loader";
 //const Example = React.lazy(() => import("./components/Example/Example"));
 
 const Synth = React.lazy(() => import("./components/Synth/Synth"));
+const MusicTool = React.lazy(() => import("./components/MusicTool/MusicTool"));
 const Reverb = React.lazy(() => import("./components/Reverb/Reverb"));
 const Sequencer = React.lazy(() =>
     import("./components/Step Sequencer/StepSequencer")
@@ -24,6 +25,8 @@ function App() {
                     <Route path="/synth" element={<Synth />} />
                     <Route path="/sampler" element={<Sampler />} />
                     <Route path="/reverb" element={<Reverb />} />
+                    <Route path="/musictool" element={<MusicTool />} />
+
                     <Route path="/sequencer" element={<Sequencer />} />
                 </Routes>
             </Router>
