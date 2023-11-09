@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./Delay.css";
+import "./Delay.scss";
 import * as Tone from "tone";
 function Delay() {
     const initialFormData = {
@@ -46,15 +46,15 @@ function Delay() {
     }, [formData, feedbackDelay.delayTime, feedbackDelay.feedback]);
     return (
         <div className="delay">
-            <h2 className="header">Delay</h2>
-            <div className="slider1">
+            <h2 className="delay_header">Delay</h2>
+            <div className="delay_slider1">
                 <input
                     type="range"
                     min="0"
                     max="60"
                     value={formData.dTime}
                     name="dTime"
-                    className="slider"
+                    className="delay_slider"
                     onChange={(e) =>
                         setFormData((prevFormData) => ({
                             ...prevFormData,
@@ -63,14 +63,14 @@ function Delay() {
                     }
                 />
             </div>
-            <span className="time">Time</span>
-            <div className="slider2">
+            <span className="delay_time">Time</span>
+            <div className="delay_slider2">
                 <input
                     type="range"
                     min="0"
                     max="60"
                     value={formData.dFeedback}
-                    className="slider"
+                    className="delay_slider"
                     name="dFeedback"
                     onChange={(e) =>
                         setFormData((prevFormData) => ({
@@ -80,15 +80,15 @@ function Delay() {
                     }
                 />
             </div>
-            <span className="feedback">Feedback</span>
-            <div className="slider3">
+            <span className="delay_feedback">Feedback</span>
+            <div className="delay_slider3">
                 <input
                     type="range"
                     min="-60"
                     max="6"
                     step="1"
                     value={formData.dAmount}
-                    className="slider"
+                    className="delay_slider"
                     name="dAmount"
                     onChange={(e) =>
                         setFormData((prevFormData) => ({
@@ -98,23 +98,20 @@ function Delay() {
                     }
                 />
             </div>
-            <span className="amount">Amount</span>
-            <div className="submit">
-                <input
-                    type="submit"
-                    value="Reset"
-                    className="button"
+            <span className="delay_amount">Amount</span>
+            <div className="delay_submit">
+                <button
+                    className="delay_button"
                     onClick={(e) => {
                         setFormData(initialFormData);
                         player.stop();
                     }}
-                />{" "}
-                <input
-                    type="submit"
-                    className="button"
-                    value="Apply"
-                    onClick={(e) => applyDelay(e)}
-                />
+                >
+                    Reset
+                </button>{" "}
+                <button className="delay_button" onClick={(e) => applyDelay(e)}>
+                    Apply
+                </button>
             </div>
         </div>
     );
