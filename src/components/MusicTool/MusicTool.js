@@ -22,10 +22,9 @@ function MusicTool() {
     const [oscillatorType, setOscillatorType] = useState("sine");
     let synths = [];
 
-    //const player = new Tone.Player();
+    const player = new Tone.Player();
     const createSynths = (count) => {
-        synths = [];
-        //console.log("Making with type:" + oscillatorType);
+        const newSynths = [];
         for (let i = 0; i < count; i++) {
             const newSynth = new Tone.Synth({
                 oscillator: {
@@ -38,15 +37,12 @@ function MusicTool() {
                     release: 1,
                 },
             }).toDestination();
-            synths.push(newSynth);
+            newSynths.push(newSynth);
         }
 
-        setSynthArray(synths);
-        //console.log(synths[1].oscillator.type);
+        setSynthArray(newSynths);
     };
-    // useEffect(() => {
-    //     createSynths(8);
-    // }, [oscillatorType]);
+
     useEffect(() => {
         createSynths(8);
     }, []);
@@ -60,28 +56,8 @@ function MusicTool() {
         <div className="musictool">
             <div className="musictool_header">
                 <select
+                    name="handler"
                     onChange={(e) => {
-                        //console.log(e.target.value);
-                        //console.log(synthArray);
-
-                        console.log(e.target.value);
-                        //synths = [];
-                        //console.log("Making with type:" + oscillatorType);
-                        // for (let i = 0; i < 8; i++) {
-                        //     const newSynth = new Tone.Synth({
-                        //         oscillator: {
-                        //             type: oscillatorType,
-                        //         },
-                        //         envelope: {
-                        //             attack: 0.8,
-                        //             decay: 0.5,
-                        //             sustain: 0.6,
-                        //             release: 1,
-                        //         },
-                        //     }).toDestination();
-                        //     synths.push(newSynth);
-                        // }
-
                         synths = synthArray;
                         for (let i = 0; i < synths.length; i++) {
                             synths[i].set({
@@ -110,6 +86,9 @@ function MusicTool() {
                     synthArray={synthArray}
                     sequencer={sequencer}
                     setSequencer={setSequencer}
+                    player={player}
+                    createSynths={createSynths}
+                    setSynthArray={setSynthArray}
                 />
             </div>
             <div className="musictool_effects">
