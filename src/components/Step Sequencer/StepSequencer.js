@@ -5,14 +5,14 @@ import "./StepSequencer.css";
 
 // const testSampler = new Tone.Sampler().toDestination();
 
-function StepSequencer() {
-  const [sequencer, setSequencer] = useState({
-    beat: 0,
-    notes: ["F4", "D#4", "D4", "C4", "A#3", "G#3", "G3", "F3"],
-    playing: false,
-    started: false,
-    tempo: 120,
-  });
+function StepSequencer({ synthArray, sequencer, setSequencer }) {
+  // const [sequencer, setSequencer] = useState({
+  //   beat: 0,
+  //   notes: ["F4", "D#4", "D4", "C4", "A#3", "G#3", "G3", "F3"],
+  //   playing: false,
+  //   started: false,
+  //   tempo: 120,
+  // });
 
   const [beat, setBeat] = useState(0);
 
@@ -67,7 +67,7 @@ function StepSequencer() {
   };
 
     //   let testBeat = 0
-    let currentBeat = beat
+    let currentBeat = sequencer.beat
 
   const configLoop = (tempo) => {
     // This is our callback function. It will execute repeatedly
@@ -75,7 +75,7 @@ function StepSequencer() {
       grid.forEach((row, index) => {
         // as the index increments we are moving *down* the rows
         // One note per row and one synth per note means that each row corresponds to a synth
-        let synth = synths[index];
+        let synth = synthArray[index];
         // beat is used to keep track of what subdivision we are on
         // there are eight *beats* or subdivisions for this sequencer
         let note = row[currentBeat];
@@ -168,7 +168,7 @@ function StepSequencer() {
     }
   };
 
-  const synths = makeSynths(8);
+  // const synths = makeSynths(8);
 
   return (
     <div className="sequencer">

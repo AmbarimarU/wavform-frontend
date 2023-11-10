@@ -19,15 +19,15 @@ function Reverb() {
         }).toDestination();
 
         // Oscillator
-        const oscillator = new Tone.Oscillator(440, "sine").connect(reverb);
+        // const oscillator = new Tone.Oscillator(440, "sine").connect(reverb);
 
         // Start the oscillator
-        oscillator.start();
+        // oscillator.start();
 
         // Stop the oscillator
-        setTimeout(() => {
-            oscillator.stop();
-        }, 3000); // duration
+        // setTimeout(() => {
+        //     oscillator.stop();
+        // }, 3000); // duration
     };
 
     //  // sound
