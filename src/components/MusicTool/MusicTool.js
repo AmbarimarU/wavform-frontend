@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./MusicTool.scss";
 import * as Tone from "tone";
-
+​
 const Synth = React.lazy(() => import("../Synth/Synth"));
 const Reverb = React.lazy(() => import("../Reverb/Reverb"));
 const Sequencer = React.lazy(() => import("../Step Sequencer/StepSequencer"));
 const Delay = React.lazy(() => import("../Delay/Delay"));
 const Sampler = React.lazy(() => import("../Sampler/NotesSampler"));
-
+​
 function MusicTool() {
     const [sequencer, setSequencer] = useState({
         beat: 0,
@@ -16,15 +16,16 @@ function MusicTool() {
         started: false,
         tempo: 120,
     });
-
+​
     const [synthArray, setSynthArray] = useState([]);
-
+​
     const [oscillatorType, setOscillatorType] = useState("sine");
     let synths = [];
-
-    const player = new Tone.Player();
+​
+    //const player = new Tone.Player();
     const createSynths = (count) => {
-        const newSynths = [];
+        synths = [];
+        //console.log("Making with type:" + oscillatorType);
         for (let i = 0; i < count; i++) {
             const newSynth = new Tone.Synth({
                 oscillator: {
@@ -37,27 +38,50 @@ function MusicTool() {
                     release: 1,
                 },
             }).toDestination();
-            newSynths.push(newSynth);
+            synths.push(newSynth);
         }
-
-        setSynthArray(newSynths);
+​
+        setSynthArray(synths);
+        //console.log(synths[1].oscillator.type);
     };
-
+    // useEffect(() => {
+    //     createSynths(8);
+    // }, [oscillatorType]);
     useEffect(() => {
         createSynths(8);
     }, []);
-
+​
     useEffect(() => {
         setSynthArray([]);
         createSynths(8);
     }, [oscillatorType]);
-
+​
     return (
         <div className="musictool">
             <div className="musictool_header">
                 <select
-                    name="handler"
                     onChange={(e) => {
+                        //console.log(e.target.value);
+                        //console.log(synthArray);
+​
+                        console.log(e.target.value);
+                        //synths = [];
+                        //console.log("Making with type:" + oscillatorType);
+                        // for (let i = 0; i < 8; i++) {
+                        //     const newSynth = new Tone.Synth({
+                        //         oscillator: {
+                        //             type: oscillatorType,
+                        //         },
+                        //         envelope: {
+                        //             attack: 0.8,
+                        //             decay: 0.5,
+                        //             sustain: 0.6,
+                        //             release: 1,
+                        //         },
+                        //     }).toDestination();
+                        //     synths.push(newSynth);
+                        // }
+                        
                         synths = synthArray;
                         for (let i = 0; i < synths.length; i++) {
                             synths[i].set({
@@ -86,9 +110,6 @@ function MusicTool() {
                     synthArray={synthArray}
                     sequencer={sequencer}
                     setSequencer={setSequencer}
-                    player={player}
-                    createSynths={createSynths}
-                    setSynthArray={setSynthArray}
                 />
             </div>
             <div className="musictool_effects">
@@ -103,5 +124,5 @@ function MusicTool() {
         </div>
     );
 }
-
+​
 export default MusicTool;

@@ -68,44 +68,50 @@ function StepSequencer({ synthArray, sequencer, setSequencer }) {
     //   let testBeat = 0
     let currentBeat = sequencer.beat;
 
+    // This is our callback function. It will execute repeatedly
+    const repeat = (time) => {
+        grid.forEach((row, index) => {
+            // as the index increments we are moving *down* the rows
+            // One note per row and one synth per note means that each row corresponds to a synth
+            let synth = synthArray[index];
+            // beat is used to keep track of what subdivision we are on
+            // there are eight *beats* or subdivisions for this sequencer
+            let note = row[currentBeat];
+
+            if (note.isActive) {
+                // triggerAttackRelease() plays a specific pitch for a specific duration
+
+                synth.triggerAttackRelease(note.note, "8n", time);
+            }
+        });
+        // increment the counter
+
+        //   setSequencer({...sequencer,
+        //       beat: (sequencer.beat + 1) % 8
+        //   });
+
+        currentBeat = (currentBeat + 1) % 8;
+
+        //   setBeat((beat + 1) % 8);
+
+        console.log(currentBeat);
+    };
+
     const configLoop = (tempo) => {
-        // This is our callback function. It will execute repeatedly
-        const repeat = (time) => {
-            grid.forEach((row, index) => {
-                // as the index increments we are moving *down* the rows
-                // One note per row and one synth per note means that each row corresponds to a synth
-                let synth = synthArray[index];
-                // beat is used to keep track of what subdivision we are on
-                // there are eight *beats* or subdivisions for this sequencer
-                let note = row[currentBeat];
-
-                if (note.isActive) {
-                    // triggerAttackRelease() plays a specific pitch for a specific duration
-
-                    //synth.triggerAttackRelease(note.note, "8n", time);
-                    synth.triggerRelease(time);
-                    synth.triggerAttack(note.note, time);
-                    synth.triggerRelease(time + Tone.Time("8n"));
-                }
-            });
-            // increment the counter
-
-            //   setSequencer({...sequencer,
-            //       beat: (sequencer.beat + 1) % 8
-            //   });
-
-            currentBeat = (currentBeat + 1) % 8;
-
-            //   setBeat((beat + 1) % 8);
-
-            //console.log(currentBeat);
-        };
-
         // set the tempo in beats per minute.
         Tone.Transport.bpm.value = tempo;
         // telling the transport to execute our callback function every eight note.
         Tone.Transport.scheduleRepeat(repeat, "8n");
     };
+
+    useEffect(() => {
+        if (sequencer.started) {
+            console.log("112");
+            Tone.Transport.cancel();
+            Tone.Transport.bpm.value = sequencer.tempo;
+            Tone.Transport.scheduleRepeat(repeat, "8n");
+        }
+    }, [synthArray]);
 
     const handleNoteClick = (clickedRowIndex, clickedNoteIndex, e) => {
         // iterating through the grid
@@ -136,12 +142,12 @@ function StepSequencer({ synthArray, sequencer, setSequencer }) {
         }
     }, [sequencer]);
 
-    const handlePlayButton = (e) => {
+    const handlePlayButton = async (e) => {
         if (!sequencer.started) {
             // Only executed the first time the button is clicked
             // initializing Tone, setting the volume, and setting up the loop
 
-            Tone.start();
+            await Tone.start();
             Tone.getDestination().volume.rampTo(-10, 0.001);
             configLoop(sequencer.tempo);
             //   setSequencer({
@@ -152,22 +158,22 @@ function StepSequencer({ synthArray, sequencer, setSequencer }) {
 
         // toggle Tone.Trasport and the flag variable.
         if (sequencer.playing) {
+            console.log("stop");
             e.target.innerText = "Play";
             Tone.Transport.stop();
             setSequencer({
                 ...sequencer,
                 playing: false,
-                //started: false, // Reset started when stopped
             });
 
             //   testBeat = 0;
         } else {
+            console.log("stop - playing");
             e.target.innerText = "Stop";
             Tone.Transport.start();
             setSequencer({
                 ...sequencer,
                 playing: true,
-                //started: true,
             });
         }
     };
