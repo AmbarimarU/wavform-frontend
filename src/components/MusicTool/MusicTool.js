@@ -16,6 +16,20 @@ function MusicTool() {
         tempo: 120,
     });
 
+    const initialReverbValues = {
+        timeValue: 1,
+        sizeValue: 1,
+        amountValue: 1,
+    };
+
+    const [reverbValues, setReverbValues] = useState(initialReverbValues);
+
+    const [reverb, setReverb] = useState(new Tone.Reverb({
+        decay: reverbValues.timeValue / 10,
+        preDelay: reverbValues.sizeValue / 10,
+        wet: reverbValues.amountValue / 100,
+    }).toDestination())
+
     const [synthArray, setSynthArray] = useState([]);
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -37,7 +51,7 @@ function MusicTool() {
                     sustain: 0.6,
                     release: 1,
                 },
-            }).toDestination();
+            }).connect(reverb);
             synths.push(newSynth);
         }
 
@@ -55,6 +69,13 @@ function MusicTool() {
         setSynthArray([]);
         createSynths(8);
     }, [oscillatorType]);
+
+    useEffect(() => {
+      for (let i = 0; i < synthArray.length; i++) {
+        synthArray[i].connect(reverb)
+      }
+    }, [reverb])
+    
 
     return (
         <div className="musictool">
@@ -118,7 +139,12 @@ function MusicTool() {
                 <h3>Effects</h3>
             </div>
             <div className="musictool_reverb">
-                <Reverb />
+                <Reverb 
+                    reverbValues={reverbValues}
+                    setReverbValues={setReverbValues}
+                    setReverb={setReverb}
+                    reverb={reverb}
+                />
             </div>
             <div className="musictool_delay">
                 <Delay />

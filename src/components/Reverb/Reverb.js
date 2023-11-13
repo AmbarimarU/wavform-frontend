@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import * as Tone from "tone";
 import "./Reverb.scss";
-function Reverb() {
+function Reverb({ setReverbValues, reverbValues, setReverb, reverb }) {
     const initialValues = {
         timeValue: 1,
         sizeValue: 1,
         amountValue: 1,
     };
 
-    const [values, setValues] = useState(initialValues);
+    // const [values, setValues] = useState(initialValues);
 
     const applyReverb = () => {
         // Reverb effect
-        const reverb = new Tone.Reverb({
-            decay: values.timeValue / 10,
-            preDelay: values.sizeValue / 10,
-            wet: values.amountValue / 100,
-        }).toDestination();
+        reverb.dispose()
+        setReverb(new Tone.Reverb({
+            decay: reverbValues?.timeValue / 10,
+            preDelay: reverbValues?.sizeValue / 10,
+            wet: reverbValues?.amountValue / 100,
+        }).toDestination());
 
         // Oscillator
         // const oscillator = new Tone.Oscillator(440, "sine").connect(reverb);
@@ -38,11 +39,11 @@ function Reverb() {
 
     const valueHandler = (e) => {
         const { name, value } = e.target;
-        setValues({ ...values, [name]: parseFloat(value) });
+        setReverbValues({ ...reverbValues, [name]: parseFloat(value) });
     };
 
     const resetValues = () => {
-        setValues(initialValues);
+        setReverbValues(initialValues);
     };
 
     return (
@@ -53,7 +54,7 @@ function Reverb() {
                     type="range"
                     min="1"
                     max="10"
-                    value={values.timeValue}
+                    value={reverbValues?.timeValue}
                     className="reverb-slider"
                     name="timeValue"
                     onChange={valueHandler}
@@ -65,7 +66,7 @@ function Reverb() {
                     type="range"
                     min="1"
                     max="10"
-                    value={values.sizeValue}
+                    value={reverbValues?.sizeValue}
                     className="reverb-slider"
                     name="sizeValue"
                     onChange={valueHandler}
@@ -77,7 +78,7 @@ function Reverb() {
                     type="range"
                     min="1"
                     max="100"
-                    value={values.amountValue}
+                    value={reverbValues?.amountValue}
                     className="reverb-slider"
                     name="amountValue"
                     onChange={valueHandler}
