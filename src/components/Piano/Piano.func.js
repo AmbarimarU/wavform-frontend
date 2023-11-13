@@ -23,13 +23,12 @@ export const keyboard = {
 
 const synth = new Tone.Synth().toDestination();
 export const playNote = (note) => {
-    synth.clear();
     synth.triggerAttack(note);
 };
 
 export const releaseNote = (note) => {
-    synth.clear();
-    synth.triggerRelease(note);
+    Tone.Transport.stop();
+    //synth.triggerRelease(note);
 };
 
 export const playKey = (event) => {

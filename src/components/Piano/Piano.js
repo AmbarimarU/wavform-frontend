@@ -11,15 +11,16 @@ function Piano() {
     }, []);
 
     return (
-        <div className="pianoPage">
-            <h1>Piano</h1>
-            <div className="piano">
+        <div className="piano">
+            <h1 className="piano-header">Piano</h1>
+            <div className="piano-keyboard">
                 {keyboard.notes.map((note, index) => {
                     const key = keyboard.colors[index]
-                        ? "black-key"
-                        : "white-key";
+                        ? "piano-black-key"
+                        : "piano-white-key";
                     return (
                         <div
+                            key={note}
                             className={key}
                             onMouseDown={() => playNote(note)}
                             onMouseUp={() => releaseNote(note)}
