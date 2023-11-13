@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./MusicTool.scss";
 import * as Tone from "tone";
-​
 const Synth = React.lazy(() => import("../Synth/Synth"));
 const Reverb = React.lazy(() => import("../Reverb/Reverb"));
 const Sequencer = React.lazy(() => import("../Step Sequencer/StepSequencer"));
 const Delay = React.lazy(() => import("../Delay/Delay"));
 const Sampler = React.lazy(() => import("../Sampler/NotesSampler"));
-​
+
 function MusicTool() {
     const [sequencer, setSequencer] = useState({
         beat: 0,
@@ -16,12 +15,13 @@ function MusicTool() {
         started: false,
         tempo: 120,
     });
-​
+
     const [synthArray, setSynthArray] = useState([]);
-​
+
+    const [isPlaying, setIsPlaying] = useState(false);
     const [oscillatorType, setOscillatorType] = useState("sine");
     let synths = [];
-​
+
     //const player = new Tone.Player();
     const createSynths = (count) => {
         synths = [];
@@ -40,7 +40,7 @@ function MusicTool() {
             }).toDestination();
             synths.push(newSynth);
         }
-​
+
         setSynthArray(synths);
         //console.log(synths[1].oscillator.type);
     };
@@ -50,12 +50,12 @@ function MusicTool() {
     useEffect(() => {
         createSynths(8);
     }, []);
-​
+
     useEffect(() => {
         setSynthArray([]);
         createSynths(8);
     }, [oscillatorType]);
-​
+
     return (
         <div className="musictool">
             <div className="musictool_header">
@@ -63,7 +63,7 @@ function MusicTool() {
                     onChange={(e) => {
                         //console.log(e.target.value);
                         //console.log(synthArray);
-​
+
                         console.log(e.target.value);
                         //synths = [];
                         //console.log("Making with type:" + oscillatorType);
@@ -81,7 +81,7 @@ function MusicTool() {
                         //     }).toDestination();
                         //     synths.push(newSynth);
                         // }
-                        
+
                         synths = synthArray;
                         for (let i = 0; i < synths.length; i++) {
                             synths[i].set({
@@ -91,6 +91,7 @@ function MusicTool() {
                         setSynthArray(synths);
                         setOscillatorType(e.target.value);
                     }}
+                    disabled={isPlaying ? 1 : 0}
                 >
                     <option>sine</option>
                     <option>triangle</option>
@@ -110,6 +111,7 @@ function MusicTool() {
                     synthArray={synthArray}
                     sequencer={sequencer}
                     setSequencer={setSequencer}
+                    setIsPlaying={setIsPlaying}
                 />
             </div>
             <div className="musictool_effects">
@@ -124,5 +126,5 @@ function MusicTool() {
         </div>
     );
 }
-​
+
 export default MusicTool;

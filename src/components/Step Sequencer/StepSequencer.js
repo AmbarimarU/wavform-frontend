@@ -5,7 +5,7 @@ import "./StepSequencer.css";
 
 // const testSampler = new Tone.Sampler().toDestination();
 
-function StepSequencer({ synthArray, sequencer, setSequencer }) {
+function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying }) {
     // const [sequencer, setSequencer] = useState({
     //   beat: 0,
     //   notes: ["F4", "D#4", "D4", "C4", "A#3", "G#3", "G3", "F3"],
@@ -165,6 +165,7 @@ function StepSequencer({ synthArray, sequencer, setSequencer }) {
                 ...sequencer,
                 playing: false,
             });
+            setIsPlaying(false);
 
             //   testBeat = 0;
         } else {
@@ -175,6 +176,7 @@ function StepSequencer({ synthArray, sequencer, setSequencer }) {
                 ...sequencer,
                 playing: true,
             });
+            setIsPlaying(true);
         }
     };
 
