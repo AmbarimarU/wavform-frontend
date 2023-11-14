@@ -15,6 +15,7 @@ const Sequencer = React.lazy(() =>
 );
 const Delay = React.lazy(() => import("./components/Delay/Delay"));
 const Sampler = React.lazy(() => import("./components/Sampler/NotesSampler"));
+const Piano = React.lazy(() => import("./components/Piano/Piano"));
 function App() {
     return (
         <React.Suspense fallback={<Loader />}>
@@ -28,6 +29,7 @@ function App() {
                     <Route path="/musictool" element={<MusicTool />} />
 
                     <Route path="/sequencer" element={<Sequencer />} />
+                    <Route path="/piano" element={<Piano />} />
                 </Routes>
             </Router>
         </React.Suspense>
