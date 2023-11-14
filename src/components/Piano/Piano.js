@@ -23,7 +23,7 @@ function Piano() {
                             key={note}
                             className={key}
                             onMouseDown={() => playNote(note)}
-                            onMouseUp={() => releaseNote(note)}
+                            onMouseUp={() => releaseNote()}
                         >
                             {keyboard.letters[index]}
                         </div>
