@@ -1,30 +1,27 @@
-html, 
-body{
+html,
+body {
     padding: 0;
     margin: 0;
 }
 .header-container {
     background-color: #007ead;
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 20px;
-    
 }
-.logo img{
+.logo img {
     width: 70px;
     height: 80px;
-
 }
-.nav-links{
+.nav-links {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
 }
 
-.nav-links a{
+.nav-links a {
     margin-left: 15px;
     font-size: 20px;
     text-decoration: none;
@@ -32,7 +29,7 @@ body{
     color: white;
 }
 
-.active-nav-link{
+.active-nav-link {
     font-weight: 600;
     color: #786bb1;
 }
