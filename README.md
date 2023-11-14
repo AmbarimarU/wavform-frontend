@@ -59,6 +59,8 @@ npm start
 - [React](https://reactjs.org/) - JavaScript library for building user interfaces
 - [react-router-dom](https://reactrouter.com/web/guides/quick-start) - Routing
 - [axios](https://www.npmjs.com/package/axios) - HTTP client
+- [sass](https://www.npmjs.com/package/sass) - CSS extension language
+- [tone.js](https://www.npmjs.com/package/tone) - Web Audio framework for creating interactive music in the browser
 
 ### Additional Notes
 
