@@ -92,7 +92,7 @@ function MusicTool() {
         synthArray[i].chain(delay, reverb, Tone.Destination);
       }
     }
-  }, [reverb, delay]);
+  }, [reverb, delay, synthArray]);
 
   return (
     <div className="musictool">

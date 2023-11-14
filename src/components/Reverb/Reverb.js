@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 import "./Reverb.scss";
 function Reverb({ setReverbValues, reverbValues, setReverb, reverb }) {
@@ -45,6 +45,12 @@ function Reverb({ setReverbValues, reverbValues, setReverb, reverb }) {
     const resetValues = () => {
         setReverbValues(initialValues);
     };
+
+    // useEffect(() => {
+    //     reverb.decay.value = reverbValues.sizeValue * 0.1;
+    //     reverb.preDelay.value = reverbValues.timeValue * 0.1;
+    //     reverb.wet.value = reverbValues.amountValue * 0.01;
+    // }, [reverbValues, reverb.decay, reverb.preDelay, reverb.wet]);
 
     return (
         <div className="reverb">

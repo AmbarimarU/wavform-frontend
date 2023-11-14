@@ -34,7 +34,7 @@ function Delay({ delay, setDelay, formData, setFormData }) {
         // } else {
         //     player.start();
         // }
-
+        delay.dispose()
         setDelay(new Tone.FeedbackDelay({
             delayTime: formData.dTime * 0.01,
             feedback: formData.dFeedback * 0.01,
