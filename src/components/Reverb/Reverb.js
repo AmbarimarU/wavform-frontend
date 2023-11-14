@@ -1,105 +1,106 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
+import "./Reverb.scss";
+function Reverb({ setReverbValues, reverbValues, setReverb, reverb }) {
+    const initialValues = {
+        timeValue: 1,
+        sizeValue: 1,
+        amountValue: 1,
+    };
 
-function Reverb() {
-  const initialValues = {
-    timeValue: 1,
-    sizeValue: 1,
-    amountValue: 1,
-  };
+    // const [values, setValues] = useState(initialValues);
 
-  const [values, setValues] = useState(initialValues);
+    const applyReverb = () => {
+        // Reverb effect
+        reverb.dispose()
+        setReverb(new Tone.Reverb({
+            decay: reverbValues?.timeValue / 10,
+            preDelay: reverbValues?.sizeValue / 10,
+            wet: reverbValues?.amountValue / 100,
+        }).toDestination());
 
-  const applyReverb = () => {
-    // Reverb effect
-    const reverb = new Tone.Reverb({
-      decay: values.timeValue / 10,
-      preDelay: values.sizeValue / 10,
-      wet: values.amountValue / 100,
-    }).toDestination();
+        // Oscillator
+        // const oscillator = new Tone.Oscillator(440, "sine").connect(reverb);
 
-    // Oscillator
-    const oscillator = new Tone.Oscillator(440, "sine").connect(reverb);
+        // Start the oscillator
+        // oscillator.start();
 
-    // Start the oscillator
-    oscillator.start();
+        // Stop the oscillator
+        // setTimeout(() => {
+        //     oscillator.stop();
+        // }, 3000); // duration
+    };
 
-    // Stop the oscillator
-    setTimeout(() => {
-      oscillator.stop();
-    }, 3000); // duration
-  };
+    //  // sound
+    //   const playSound = () => {
+    //     const synth = new Tone.Synth().toDestination();
+    //     synth.triggerAttackRelease("C4", "8n");
+    //   };
 
-  //  // sound
-  //   const playSound = () => {
-  //     const synth = new Tone.Synth().toDestination();
-  //     synth.triggerAttackRelease("C4", "8n");
-  //   };
+    const valueHandler = (e) => {
+        const { name, value } = e.target;
+        setReverbValues({ ...reverbValues, [name]: parseFloat(value) });
+    };
 
-  const valueHandler = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: parseFloat(value) });
-  };
+    const resetValues = () => {
+        setReverbValues(initialValues);
+    };
 
-  const resetValues = () => {
-    setValues(initialValues);
-  };
+    // useEffect(() => {
+    //     reverb.decay.value = reverbValues.sizeValue * 0.1;
+    //     reverb.preDelay.value = reverbValues.timeValue * 0.1;
+    //     reverb.wet.value = reverbValues.amountValue * 0.01;
+    // }, [reverbValues, reverb.decay, reverb.preDelay, reverb.wet]);
 
-  return (
-    <div className="reverb">
-      <h2 className="reverb-header">Reverb</h2>
-      <div className="reverb-header__timediv">
-        <input
-          type="range"
-          min="1"
-          max="10"
-          value={values.timeValue}
-          className="time-slider"
-          name="timeValue"
-          onChange={valueHandler}
-        />
-        <span>Time</span>
-      </div>
-
-      <div className="reverb-header__sizediv">
-        <input
-          type="range"
-          min="1"
-          max="10"
-          value={values.sizeValue}
-          className="size-slider"
-          name="sizeValue"
-          onChange={valueHandler}
-        />
-        <span>Size</span>
-      </div>
-
-      <div className="reverb-header__amountdiv">
-        <input
-          type="range"
-          min="1"
-          max="100"
-          value={values.amountValue}
-          className="amount-slider"
-          name="amountValue"
-          onChange={valueHandler}
-        />
-        <span>Amount</span>
-      </div>
-
-      <div className="reverb-header__btndiv">
-        <button className="reverb-header__resetbtn" onClick={resetValues}>
-          Reset
-        </button>
-        <button className="reverb-header__applybtn" onClick={applyReverb}>
-          Apply
-        </button>
-        {/* <button className="reverb-header__playbtn" onClick={playSound}>
-          Play Sound
-        </button> */}
-      </div>
-    </div>
-  );
+    return (
+        <div className="reverb">
+            <h2 className="reverb-header">Reverb</h2>
+            <div className="reverb-header__timediv">
+                <input
+                    type="range"
+                    min="1"
+                    max="10"
+                    value={reverbValues?.timeValue}
+                    className="reverb-slider"
+                    name="timeValue"
+                    onChange={valueHandler}
+                />
+            </div>
+            <span className="reverb-time">Time</span>
+            <div className="reverb-header__sizediv">
+                <input
+                    type="range"
+                    min="1"
+                    max="10"
+                    value={reverbValues?.sizeValue}
+                    className="reverb-slider"
+                    name="sizeValue"
+                    onChange={valueHandler}
+                />
+            </div>
+            <span className="reverb-size">Size</span>
+            <div className="reverb-header__amountdiv">
+                <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value={reverbValues?.amountValue}
+                    className="reverb-slider"
+                    name="amountValue"
+                    onChange={valueHandler}
+                />
+            </div>{" "}
+            <span className="reverb-amount">Amount</span>
+            <div className="reverb-header__btndiv">
+                <button className="reverb-btn" onClick={resetValues}>
+                    Reset
+                </button>
+                <button className="reverb-btn" onClick={applyReverb}>
+                    Apply
+                </button>
+            </div>
+        </div>
+    );
 }
 
 export default Reverb;

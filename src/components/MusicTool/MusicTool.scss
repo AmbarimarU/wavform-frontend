@@ -1,0 +1,33 @@
+.musictool {
+    margin: 10px 10px;
+    padding: 10px 10px;
+    width: 90%;
+    display: grid;
+    grid-template-areas:
+        "blank blank header header effects effects"
+        "side sequencer sequencer sequencer effects effects"
+        "side sequencer sequencer sequencer reverb reverb"
+        "side sequencer sequencer sequencer delay delay";
+    &_header {
+        grid-area: header;
+        margin-left: 50px;
+        margin-bottom: 20px;
+    }
+    &_side {
+        grid-area: side;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+    }
+    &_sequencer {
+        grid-area: sequencer;
+    }
+    &_effects {
+        grid-area: effects;
+    }
+    &_reverb {
+        grid-area: reverb;
+    }
+    &_delay {
+        grid-area: delay;
+    }
+}

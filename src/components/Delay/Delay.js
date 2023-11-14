@@ -1,49 +1,54 @@
 import { useState, useEffect } from "react";
 import "./Delay.scss";
 import * as Tone from "tone";
-function Delay() {
+function Delay({ delay, setDelay, formData, setFormData }) {
     const initialFormData = {
         dTime: 0,
         dAmount: 0,
         dFeedback: 0,
     };
-    const [formData, setFormData] = useState(initialFormData);
+    // const [formData, setFormData] = useState(initialFormData);
     //const [isPlaying, setIsPlaying] = useState(false);
-    async function loadAudio() {
-        try {
-            await player.load("https://tonejs.github.io/audio/loop/FWDL.mp3");
-        } catch (error) {
-            console.error("Error loading audio file:", error);
-        }
-    }
+    // async function loadAudio() {
+    //     try {
+    //         await player.load("https://tonejs.github.io/audio/loop/FWDL.mp3");
+    //     } catch (error) {
+    //         console.error("Error loading audio file:", error);
+    //     }
+    // }
 
-    const player = new Tone.Player();
-    player.volume.value = formData.dAmount;
-    const feedbackDelay = new Tone.FeedbackDelay({
-        delayTime: formData.dTime * 0.01,
-        feedback: formData.dFeedback * 0.01,
-    });
-    player.connect(feedbackDelay);
-    feedbackDelay.toDestination();
+    // const player = new Tone.Player();
+    // player.volume.value = formData.dAmount;
+    // const feedbackDelay = new Tone.FeedbackDelay({
+    //     delayTime: formData.dTime * 0.01,
+    //     feedback: formData.dFeedback * 0.01,
+    // });
+    // player.connect(feedbackDelay);
+    // feedbackDelay.toDestination();
     const applyDelay = (e) => {
         e.preventDefault();
-        if (Tone.context.state === "suspended") {
-            Tone.context.resume().then(() => {
-                player.start();
-            });
-        } else {
-            player.start();
-        }
+        // if (Tone.context.state === "suspended") {
+        //     Tone.context.resume().then(() => {
+        //         player.start();
+        //     });
+        // } else {
+        //     player.start();
+        // }
+        delay.dispose()
+        setDelay(new Tone.FeedbackDelay({
+            delayTime: formData.dTime * 0.01,
+            feedback: formData.dFeedback * 0.01,
+        }))
     };
 
-    useEffect(() => {
-        loadAudio();
-    }, [player]);
+    // useEffect(() => {
+    //     loadAudio();
+    // }, [player]);
 
     useEffect(() => {
-        feedbackDelay.delayTime.value = formData.dTime * 0.01;
-        feedbackDelay.feedback.value = formData.dFeedback * 0.01;
-    }, [formData, feedbackDelay.delayTime, feedbackDelay.feedback]);
+        delay.delayTime.value = formData.dTime * 0.01;
+        delay.feedback.value = formData.dFeedback * 0.01;
+    }, [formData, delay.delayTime, delay.feedback]);
     return (
         <div className="delay">
             <h2 className="delay_header">Delay</h2>
@@ -104,7 +109,7 @@ function Delay() {
                     className="delay_button"
                     onClick={(e) => {
                         setFormData(initialFormData);
-                        player.stop();
+                        // player.stop();
                     }}
                 >
                     Reset

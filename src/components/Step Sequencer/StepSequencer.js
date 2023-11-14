@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 
-import "./StepSequencer.css";
+import "./StepSequencer.scss";
 
 // const testSampler = new Tone.Sampler().toDestination();
 
-function StepSequencer() {
-  const [sequencer, setSequencer] = useState({
-    beat: 0,
-    notes: ["F4", "D#4", "D4", "C4", "A#3", "G#3", "G3", "F3"],
-    playing: false,
-    started: false,
-    tempo: 120,
-  });
+function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying }) {
+  // const [sequencer, setSequencer] = useState({
+  //   beat: 0,
+  //   notes: ["F4", "D#4", "D4", "C4", "A#3", "G#3", "G3", "F3"],
+  //   playing: false,
+  //   started: false,
+  //   tempo: 120,
+  // });
 
   const [beat, setBeat] = useState(0);
 
@@ -48,64 +48,62 @@ function StepSequencer() {
     setGrid(makeGrid(sequencer.notes));
   }, []);
 
+  // const makeSynths = (count) => {
+  //     // each synth can only play one note at a time.
+  //     // for simplicity, we'll create one synth for each note available
+  //     // this allows for easy polyphony (multiple notes playing at the same time)
 
-  const makeSynths = (count) => {
-    // each synth can only play one note at a time.
-    // for simplicity, we'll create one synth for each note available
-    // this allows for easy polyphony (multiple notes playing at the same time)
+  //     const synths = [];
 
-    const synths = [];
+  //     for (let i = 0; i < count; i++) {
+  //         let synth = new Tone.Synth({
+  //             oscillator: { type: "square8" },
+  //         }).toDestination();
+  //         synths.push(synth);
+  //     }
 
-    for (let i = 0; i < count; i++) {
-      let synth = new Tone.Synth({
-        oscillator: { type: "square8" },
-      }).toDestination();
-      synths.push(synth);
-    }
+  //     return synths;
+  // };
 
-    return synths;
+  let currentBeat = sequencer.beat;
+
+  // This is our callback function. It will execute repeatedly
+  const repeat = (time) => {
+    grid.forEach((row, index) => {
+      // as the index increments we are moving *down* the rows
+      // One note per row and one synth per note means that each row corresponds to a synth
+      let synth = synthArray[index];
+      // beat is used to keep track of what subdivision we are on
+      // there are eight *beats* or subdivisions for this sequencer
+      let note = row[currentBeat];
+
+      if (note.isActive) {
+        // triggerAttackRelease() plays a specific pitch for a specific duration
+
+        synth.triggerAttackRelease(note.note, "8n", time);
+      }
+    });
+    // increment the counter
+
+    currentBeat = (currentBeat + 1) % 8;
+
+    console.log(currentBeat);
   };
 
-    //   let testBeat = 0
-    let currentBeat = beat
-
   const configLoop = (tempo) => {
-    // This is our callback function. It will execute repeatedly
-    const repeat = (time) => {
-      grid.forEach((row, index) => {
-        // as the index increments we are moving *down* the rows
-        // One note per row and one synth per note means that each row corresponds to a synth
-        let synth = synths[index];
-        // beat is used to keep track of what subdivision we are on
-        // there are eight *beats* or subdivisions for this sequencer
-        let note = row[currentBeat];
-
-        if (note.isActive) {
-          // triggerAttackRelease() plays a specific pitch for a specific duration
-
-          synth.triggerAttackRelease(note.note, "8n", time);
-        }
-      });
-      // increment the counter
-
-      //   setSequencer({...sequencer,
-      //       beat: (sequencer.beat + 1) % 8
-      //   });
-
-      
-      currentBeat = (currentBeat + 1) % 8
-
-
-    //   setBeat((beat + 1) % 8);
-
-      console.log(currentBeat)
-    };
-
     // set the tempo in beats per minute.
     Tone.Transport.bpm.value = tempo;
     // telling the transport to execute our callback function every eight note.
     Tone.Transport.scheduleRepeat(repeat, "8n");
   };
+
+  useEffect(() => {
+    if (sequencer.started) {
+      Tone.Transport.cancel();
+      Tone.Transport.bpm.value = sequencer.tempo;
+      Tone.Transport.scheduleRepeat(repeat, "8n");
+    }
+  }, [synthArray]);
 
   const handleNoteClick = (clickedRowIndex, clickedNoteIndex, e) => {
     // iterating through the grid
@@ -116,7 +114,7 @@ function StepSequencer() {
         if (clickedRowIndex === rowIndex && clickedNoteIndex === noteIndex) {
           // setGrid(grid[rowIndex][noteIndex] = !note.isActive)
 
-          e.target["data-active"] = String(!note.isActive)
+          e.target["data-active"] = String(!note.isActive);
 
           note.isActive = !note.isActive;
         }
@@ -126,26 +124,25 @@ function StepSequencer() {
 
   useEffect(() => {
     if (!sequencer.started && sequencer.playing) {
-        setSequencer({
-            ...sequencer,
-            started: true,
-        });
+      setSequencer({
+        ...sequencer,
+        started: true,
+      });
     }
-  }, [sequencer])
-  
+  }, [sequencer]);
 
-  const handlePlayButton = (e) => {
+  const handlePlayButton = async (e) => {
     if (!sequencer.started) {
       // Only executed the first time the button is clicked
       // initializing Tone, setting the volume, and setting up the loop
 
-      Tone.start();
+      await Tone.start();
       Tone.getDestination().volume.rampTo(-10, 0.001);
       configLoop(sequencer.tempo);
-    //   setSequencer({
-    //     ...sequencer,
-    //     started: true,
-    // });
+      //   setSequencer({
+      //     ...sequencer,
+      //     started: true,
+      // });
     }
 
     // toggle Tone.Trasport and the flag variable.
@@ -156,53 +153,63 @@ function StepSequencer() {
         ...sequencer,
         playing: false,
       });
+      setIsPlaying(false);
 
-    //   testBeat = 0;
+      //   testBeat = 0;
     } else {
+      console.log("stop - playing");
       e.target.innerText = "Stop";
       Tone.Transport.start();
       setSequencer({
         ...sequencer,
         playing: true,
       });
+      setIsPlaying(true);
     }
   };
 
-  const synths = makeSynths(8);
+  // const synths = makeSynths(8);
 
   return (
-    <div className="sequencer">
-      {grid.map((row, rowIndex) => {
-        return (
-          <div key={rowIndex} className="sequencer-row">
-            {row.map((note, noteIndex) => {
-              return (
-                <button
-                  key={String(rowIndex) + String(noteIndex)}
-                  data-index-number={String(rowIndex) + String(noteIndex)}
-                  data-active={String(note.isActive)}
-                  className="note"
-                  onClick={(e) => {
-                    handleNoteClick(rowIndex, noteIndex, e);
+    <>
+      <div className="sequencer">
+        {grid.map((row, rowIndex) => {
+          return (
+            <div key={rowIndex} className="sequencer-row">
+              {row.map((note, noteIndex) => {
+                return (
+                  <button
+                    key={String(rowIndex) + String(noteIndex)}
+                    data-index-number={String(rowIndex) + String(noteIndex)}
+                    data-active={String(note.isActive)}
+                    className="sequencer-note"
+                    style={{ backgroundColor: "white" }}
+                    onClick={(e) => {
+                      handleNoteClick(rowIndex, noteIndex, e);
 
-                    if (e.target.innerText === "I") {
-                      e.target.innerText = "A";
-                      e.target.style["background-color"] = "green"
-                    } else {
-                      e.target.innerText = "I";
-                      e.target.style["background-color"] = "white"
-                    }
-                  }}
-                >
-                  I
-                </button>
-              );
-            })}
-          </div>
-        );
-      })}
-      <button onClick={(e) => handlePlayButton(e)}>Play</button>
-    </div>
+                      if (e.target.style["background-color"] === "white") {
+                        e.target.style["background-color"] = "blue";
+                      } else {
+                        e.target.style["background-color"] = "white";
+                      }
+                    }}
+                  ></button>
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="sequencer-bottom">
+        <button
+          className="sequencer-button"
+          onClick={(e) => handlePlayButton(e)}
+        >
+          Play
+        </button>
+      </div>
+    </>
   );
 }
 
