@@ -1,9 +1,15 @@
 import "./Piano.scss";
-import { playNote, releaseNote, playKey, keyboard } from "./Piano.func.js";
+import {
+    playNote,
+    releaseNote,
+    playKey,
+    keyboard,
+    releaseKey,
+} from "./Piano.func.js";
 import * as Tone from "tone";
 import { useEffect } from "react";
 window.addEventListener("keydown", playKey);
-window.addEventListener("keyup", releaseNote);
+window.addEventListener("keyup", releaseKey);
 
 function Piano() {
     useEffect(() => {
@@ -21,9 +27,10 @@ function Piano() {
                     return (
                         <div
                             key={note}
+                            id={note}
                             className={key}
                             onMouseDown={() => playNote(note)}
-                            onMouseUp={() => releaseNote()}
+                            onMouseUp={() => releaseNote(index)}
                         >
                             {keyboard.letters[index]}
                         </div>
