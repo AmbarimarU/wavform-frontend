@@ -2,20 +2,27 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Loader from "./components/Loader/Loader";
+// import Loader from "./components/Loader/Loader";
+import Lessons from './components/Lessons/lessons'
+import Topics from "./components/Topics/Topics";
+import TopicsDetails from "./components/Topics/TopicsDetails";
+
 // COMPONENTS
 //const Example = React.lazy(() => import("./components/Example/Example"));
-const Delay = React.lazy(() => import("./components/Delay/Delay"));
+// const Delay = React.lazy(() => import("./components/Delay/Delay"));
 function App() {
     return (
-        <React.Suspense fallback={<Loader />}>
+        // <React.Suspense fallback={<Loader />}>
             <Router>
                 <Routes>
                     <Route path="/" element={<h1>Hello world!</h1>} />
-                    <Route path="/delay" element={<Delay />} />
+                    {/* <Route path="/delay" element={<Delay />} /> */}
+                    <Route path="/lessons" element={<Lessons />} />
+                    <Route path="/topics/:lessonId" element={<Topics />} />
+                    <Route path="/topics/topic/:id" element={<TopicsDetails />} />
                 </Routes>
             </Router>
-        </React.Suspense>
+        // </React.Suspense>
     );
 }
 
