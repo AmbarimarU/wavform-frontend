@@ -1,6 +1,6 @@
 import * as Tone from "tone";
 
-export const keyboard = {
+const keyboard = {
     notes: [
         "C4",
         "Db4",
@@ -22,27 +22,29 @@ export const keyboard = {
 };
 
 const synth = new Tone.Synth().toDestination();
-export const playNote = (note) => {
+const playNote = (note) => {
     document.getElementById(note).style.backgroundColor = "blue";
     synth.triggerAttack(note, "8n");
 };
 
-export const releaseNote = (index) => {
+const releaseNote = (index) => {
     document.getElementById(keyboard.notes[index]).style = "";
     synth.triggerRelease(".1");
 };
 
-export const releaseKey = () => {
+const releaseKey = () => {
     for (let i = 0; i < keyboard.notes.length; i++) {
         document.getElementById(keyboard.notes[i]).style = "";
     }
     synth.triggerRelease(".0001");
 };
 
-export const playKey = (event) => {
+const playKey = (event) => {
     for (let i = 0; i < keyboard.notes.length; i++) {
         if (event.keyCode === keyboard.keys[i]) {
             playNote(keyboard.notes[i]);
         }
     }
 };
+
+export { keyboard, playNote, releaseNote, releaseKey, playKey };
