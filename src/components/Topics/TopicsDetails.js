@@ -23,6 +23,9 @@ function TopicsDetails() {
     fetchSingleTopic();
   }, []);
 
+  // Format description to the next line
+  const formattedDesc = singleTopic?.description.replace(/\n/g, '<br />');
+
   return (
     <div>
       {singleTopic && (
@@ -30,9 +33,9 @@ function TopicsDetails() {
           <div>
             <h1>{singleTopic.name}</h1>
           </div>
-
+          
           <div>
-            <p>{singleTopic.description}</p>
+            <p dangerouslySetInnerHTML={{__html: formattedDesc}}></p>
           </div>
         </div>
       )}
