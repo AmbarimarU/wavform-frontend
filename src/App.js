@@ -3,8 +3,6 @@ import React from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import TopicsDetails from "./components/Topics/TopicsDetails";
-
 // COMPONENTS
 //const Example = React.lazy(() => import("./components/Example/Example"));
 
