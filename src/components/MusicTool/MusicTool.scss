@@ -4,10 +4,10 @@
     width: 90%;
     display: grid;
     grid-template-areas:
-        "blank blank header header effects effects"
-        "side sequencer sequencer sequencer effects effects"
-        "side sequencer sequencer sequencer reverb reverb"
-        "side sequencer sequencer sequencer delay delay";
+        "blank blank blank header header effects effects"
+        "side side2 sequencer sequencer sequencer effects effects"
+        "side side2 sequencer sequencer sequencer reverb reverb"
+        "side side2 sequencer sequencer sequencer delay delay";
     &_header {
         grid-area: header;
         margin-left: 50px;
@@ -16,10 +16,22 @@
     &_side {
         grid-area: side;
         writing-mode: vertical-rl;
-        text-orientation: mixed;
+        text-orientation: upright;
+    }
+    &_side2 {
+        grid-area: side2;
+        width: 200px;
+        padding-top: 26px;
+        letter-spacing: 1vh;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
     }
     &_sequencer {
+        margin-left: -50px;
+        padding: 0;
+        width: fit-content;
         grid-area: sequencer;
+        z-index: 1;
     }
     &_effects {
         grid-area: effects;
