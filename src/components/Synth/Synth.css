@@ -1,0 +1,45 @@
+body{
+    margin: 25px;
+    padding: 10px;
+
+}
+
+.synth-container{
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    width: fit-content;
+    text-align: center;
+}
+label{
+    margin: 3px;
+    padding: 3px;
+    line-height: 1.5rem;
+    display: block;
+}
+.buttons{
+
+    padding: 20px;
+    margin: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    
+
+}
+.buttons:hover{
+    background-color: #007ead ;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+.active-button{
+    padding: 20px;
+    margin: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #007ead ;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    border: none;
+}

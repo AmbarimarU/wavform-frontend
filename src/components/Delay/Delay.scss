@@ -1,0 +1,71 @@
+.delay {
+    width: 75%;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    margin: 10px;
+    border: 3px black solid;
+    border-radius: 25px;
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "slider1 time"
+        "slider2 feedback"
+        "slider3 amount"
+        "submit submit";
+
+    &_header {
+        grid-area: header;
+    }
+    &_slider1 {
+        grid-area: slider1;
+    }
+    &_time {
+        grid-area: time;
+        padding-left: 10px;
+    }
+    &_slider2 {
+        grid-area: slider2;
+    }
+    &_amount {
+        grid-area: amount;
+        padding-left: 10px;
+    }
+    &_slider3 {
+        grid-area: slider3;
+    }
+    &_feedback {
+        grid-area: feedback;
+        padding-left: 10px;
+    }
+    &_submit {
+        grid-area: submit;
+        text-align: center;
+    }
+    &_slider {
+        width: 100%;
+        opacity: 0.7;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    &_button {
+        background-color: #2600ff;
+        border: none;
+        color: white;
+        padding: 5px 25px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        opacity: 0.8;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
