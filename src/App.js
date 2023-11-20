@@ -3,9 +3,6 @@ import React from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
-import Lessons from './components/Lessons/lessons'
-import Topics from "./components/Topics/Topics";
 import TopicsDetails from "./components/Topics/TopicsDetails";
 
 // COMPONENTS
@@ -19,20 +16,28 @@ const Signup = React.lazy(() => import("./components/Signup/Signup"));
 const Welcome = React.lazy(() => import("./components/Welcome/Welcome"));
 const Lessons = React.lazy(() => import("./components/Lessons/Lessons"));
 const Nav = React.lazy(() => import("./components/Nav/Nav"));
-const ToggleNavBar = React.lazy(() => import("./components/ToggleNavBar/ToggleNavBar"));
+const ToggleNavBar = React.lazy(() =>
+    import("./components/ToggleNavbar/ToggleNavbar")
+);
 const Home = React.lazy(() => import("./components/Home/Home"));
 const Synth = React.lazy(() => import("./components/Synth/Synth"));
 const MusicTool = React.lazy(() => import("./components/MusicTool/MusicTool"));
 const Reverb = React.lazy(() => import("./components/Reverb/Reverb"));
-const Sequencer = React.lazy(() => import("./components/Step Sequencer/StepSequencer"));
+const Sequencer = React.lazy(() =>
+    import("./components/Step Sequencer/StepSequencer")
+);
 const Delay = React.lazy(() => import("./components/Delay/Delay"));
 const Sampler = React.lazy(() => import("./components/Sampler/NotesSampler"));
 const Piano = React.lazy(() => import("./components/Piano/Piano"));
+const Topics = React.lazy(() => import("./components/Topics/Topics"));
 
+const TopicsDetails = React.lazy(() =>
+    import("./components/Topics/TopicsDetails")
+);
 
 function App() {
     return (
-        // <React.Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
             <Router>
                 <ToggleNavBar>
                     <Nav />
@@ -53,10 +58,14 @@ function App() {
                     <Route path="/sequencer" element={<Sequencer />} />
                     <Route path="/piano" element={<Piano />} />
                     <Route path="/topics/:lessonId" element={<Topics />} />
-                    <Route path="/topics/topic/:id" element={<TopicsDetails />} />
+                    <Route
+                        path="/topics/topic/:id"
+                        element={<TopicsDetails />}
+                    />
                 </Routes>
             </Router>
-        // </React.Suspense>
+            //{" "}
+        </React.Suspense>
     );
 }
 
