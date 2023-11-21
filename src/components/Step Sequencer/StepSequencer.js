@@ -5,7 +5,7 @@ import "./StepSequencer.scss";
 
 // const testSampler = new Tone.Sampler().toDestination();
 
-function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying }) {
+function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying, grid, setGrid }) {
   // const [sequencer, setSequencer] = useState({
   //   beat: 0,
   //   notes: ["F4", "D#4", "D4", "C4", "A#3", "G#3", "G3", "F3"],
@@ -15,8 +15,6 @@ function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying }) {
   // });
 
   const [beat, setBeat] = useState(0);
-
-  const [grid, setGrid] = useState([]);
 
   const makeGrid = (notes) => {
     // our "notation" will consist of an array with 6 sub arrays
