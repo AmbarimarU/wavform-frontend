@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchLessons } from "../Api/Api";
 import "./Lessons.css";
-
 function Lessons() {
     const [lessonsArray, setlessonsArray] = useState([]);
     useEffect(() => {
