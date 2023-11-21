@@ -5,7 +5,6 @@ import "./Lessons.css";
 
 function Lessons() {
     const [lessonsArray, setlessonsArray] = useState([]);
-
     useEffect(() => {
         async function fetchData() {
             try {
