@@ -1,0 +1,22 @@
+.fourOfour {
+    display: grid;
+    place-items: center;
+}
+  
+.fourOfour img {
+    margin-bottom: 0px;
+}
+
+.fourOfour h2 {
+    margin: 0px;
+    animation: flashColor 2s infinite; /* 2s duration, infinite loop */
+}
+
+@keyframes flashColor {
+    0%, 50%, 100% {
+        color: #007ead; /* Initial color or the color you want to start with */
+    }
+    25%, 75% {
+        color: red; /* The color you want to flash */
+    }
+}
