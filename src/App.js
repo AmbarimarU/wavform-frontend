@@ -15,7 +15,7 @@ const Welcome = React.lazy(() => import("./components/Welcome/Welcome"));
 const Lessons = React.lazy(() => import("./components/Lessons/Lessons"));
 const Nav = React.lazy(() => import("./components/Nav/Nav"));
 const ToggleNavBar = React.lazy(() =>
-    import("./components/ToggleNavbar/ToggleNavbar")
+    import("./components/ToggleNavBar/ToggleNavBar")
 );
 const Home = React.lazy(() => import("./components/Home/Home"));
 const Synth = React.lazy(() => import("./components/Synth/Synth"));
@@ -61,8 +61,7 @@ function App() {
                         element={<TopicsDetails />}
                     />
                 </Routes>
-            </Router>
-            //{" "}
+            </Router>{" "}
         </React.Suspense>
     );
 }
