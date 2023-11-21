@@ -2,7 +2,7 @@ import Axios from "./Axios";
 function getUrl() {
     return process.env.NODE_ENV === "development"
         ? "http://localhost:3001"
-        : "https://cars-backend-hu7s.onrender.com";
+        : "https://wavform-backend.onrender.com/";
 }
 async function getAllLessons() {
     try {
@@ -13,4 +13,13 @@ async function getAllLessons() {
         return;
     }
 }
-export { getAllLessons, getUrl };
+const fetchLessons = async () => {
+    try {
+        const response = await Axios.get(`/lessons`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+export { getAllLessons, getUrl, fetchLessons };
