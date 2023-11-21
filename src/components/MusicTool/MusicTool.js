@@ -8,172 +8,150 @@ const Delay = React.lazy(() => import("../Delay/Delay"));
 const Sampler = React.lazy(() => import("../Sampler/NotesSampler"));
 
 function MusicTool() {
-    const [sequencer, setSequencer] = useState({
-        beat: 0,
-        notes: ["F4", "D#4", "D4", "C4", "A#3", "G#3", "G3", "F3"],
-        playing: false,
-        started: false,
-        tempo: 120,
-    });
+  const [sequencer, setSequencer] = useState({
+    beat: 0,
+    notes: ["F4", "D#4", "D4", "C4", "A#3", "G#3", "G3", "F3"],
+    playing: false,
+    started: false,
+    tempo: 120,
+  });
 
-    const initialReverbValues = {
-        timeValue: 1,
-        sizeValue: 1,
-        amountValue: 1,
-    };
+  const [grid, setGrid] = useState([]);
 
-    const [reverbValues, setReverbValues] = useState(initialReverbValues);
+  const initialReverbValues = {
+    timeValue: 1,
+    sizeValue: 1,
+    amountValue: 1,
+  };
 
-    const initialFormData = {
-        dTime: 0,
-        dAmount: 0,
-        dFeedback: 0,
-    };
-    const [formData, setFormData] = useState(initialFormData);
+  const [reverbValues, setReverbValues] = useState(initialReverbValues);
 
-    const [reverb, setReverb] = useState(
-        new Tone.Reverb({
-            decay: reverbValues.timeValue / 10,
-            preDelay: reverbValues.sizeValue / 10,
-            wet: reverbValues.amountValue / 100,
-        }).toDestination()
-    );
+  const initialDelayValues = {
+    dTime: 0,
+    dAmount: 0,
+    dFeedback: 0,
+  };
+  const [delayValues, setDelayValues] = useState(initialDelayValues);
 
-    const [delay, setDelay] = useState(
-        new Tone.FeedbackDelay({
-            delayTime: formData.dTime * 0.01,
-            feedback: formData.dFeedback * 0.01,
-        })
-    );
+  const [reverb, setReverb] = useState(
+    new Tone.Reverb({
+      decay: reverbValues.timeValue / 10,
+      preDelay: reverbValues.sizeValue / 10,
+      wet: reverbValues.amountValue / 100,
+    }).toDestination()
+  );
 
-    const [synthArray, setSynthArray] = useState([]);
+  const [delay, setDelay] = useState(
+    new Tone.FeedbackDelay({
+      delayTime: delayValues.dTime * 0.01,
+      feedback: delayValues.dFeedback * 0.01,
+    })
+  );
 
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [oscillatorType, setOscillatorType] = useState("sine");
-    let synths = [];
+  const [synthArray, setSynthArray] = useState([]);
 
-    //const player = new Tone.Player();
-    const createSynths = (count) => {
-        synths = [];
-        //console.log("Making with type:" + oscillatorType);
-        for (let i = 0; i < count; i++) {
-            const newSynth = new Tone.Synth({
-                oscillator: {
-                    type: oscillatorType,
-                },
-                envelope: {
-                    attack: 0.8,
-                    decay: 0.5,
-                    sustain: 0.6,
-                    release: 1,
-                },
-            }).chain(delay, reverb, Tone.Destination);
-            synths.push(newSynth);
-        }
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [oscillatorType, setOscillatorType] = useState("sine");
+  let synths = [];
 
-        setSynthArray(synths);
-        //console.log(synths[1].oscillator.type);
-    };
-    // useEffect(() => {
-    //     createSynths(8);
-    // }, [oscillatorType]);
-    useEffect(() => {
-        createSynths(8);
-    }, []);
+  const createSynths = (count) => {
+    synths = [];
 
-    useEffect(() => {
-        setSynthArray([]);
-        createSynths(8);
-    }, [oscillatorType]);
+    for (let i = 0; i < count; i++) {
+      const newSynth = new Tone.Synth({
+        oscillator: {
+          type: oscillatorType,
+        },
+        envelope: {
+          attack: 0.8,
+          decay: 0.5,
+          sustain: 0.6,
+          release: 1,
+        },
+      }).chain(delay, reverb, Tone.Destination);
+      synths.push(newSynth);
+    }
 
-    useEffect(() => {
-        if (sequencer.started) {
-            for (let i = 0; i < synthArray.length; i++) {
-                synthArray[i].chain(delay, reverb, Tone.Destination);
+    setSynthArray(synths);
+  };
+
+  useEffect(() => {
+    createSynths(8);
+  }, []);
+
+  useEffect(() => {
+    setSynthArray([]);
+    createSynths(8);
+  }, [oscillatorType]);
+
+  useEffect(() => {
+    if (sequencer.started) {
+      for (let i = 0; i < synthArray.length; i++) {
+        synthArray[i].chain(delay, reverb, Tone.Destination);
+      }
+    }
+  }, [reverb, delay, synthArray]);
+
+  return (
+    <div className="musictool">
+      <div className="musictool_header">
+        <select
+          onChange={(e) => {
+            synths = synthArray;
+            for (let i = 0; i < synths.length; i++) {
+              synths[i].set({
+                oscillator: { type: e.target.value },
+              });
             }
-        }
-    }, [reverb, delay, synthArray]);
-
-    return (
-        <div className="musictool">
-            <div className="musictool_header">
-                <select
-                    onChange={(e) => {
-                        //console.log(e.target.value);
-                        //console.log(synthArray);
-
-                        console.log(e.target.value);
-                        //synths = [];
-                        //console.log("Making with type:" + oscillatorType);
-                        // for (let i = 0; i < 8; i++) {
-                        //     const newSynth = new Tone.Synth({
-                        //         oscillator: {
-                        //             type: oscillatorType,
-                        //         },
-                        //         envelope: {
-                        //             attack: 0.8,
-                        //             decay: 0.5,
-                        //             sustain: 0.6,
-                        //             release: 1,
-                        //         },
-                        //     }).toDestination();
-                        //     synths.push(newSynth);
-                        // }
-
-                        synths = synthArray;
-                        for (let i = 0; i < synths.length; i++) {
-                            synths[i].set({
-                                oscillator: { type: e.target.value },
-                            });
-                        }
-                        setSynthArray(synths);
-                        setOscillatorType(e.target.value);
-                    }}
-                    disabled={isPlaying ? 1 : 0}
-                >
-                    <option>sine</option>
-                    <option>triangle</option>
-                    <option>square</option>
-                    <option>sawtooth</option>
-                </select>
-                <select>
-                    <option>Sampler</option>
-                </select>
-                <select>
-                    <option>Drums/Sounds</option>
-                </select>
-            </div>
-            <div className="musictool_side">Notes / Sounds</div>
-            <div className="musictool_side2">F D D C A G G F</div>
-            <div className="musictool_sequencer">
-                <Sequencer
-                    synthArray={synthArray}
-                    sequencer={sequencer}
-                    setSequencer={setSequencer}
-                    setIsPlaying={setIsPlaying}
-                />
-            </div>
-            <div className="musictool_effects">
-                <h3>Effects</h3>
-            </div>
-            <div className="musictool_reverb">
-                <Reverb
-                    reverbValues={reverbValues}
-                    setReverbValues={setReverbValues}
-                    setReverb={setReverb}
-                    reverb={reverb}
-                />
-            </div>
-            <div className="musictool_delay">
-                <Delay
-                    delay={delay}
-                    setDelay={setDelay}
-                    formData={formData}
-                    setFormData={setFormData}
-                />
-            </div>
-        </div>
-    );
+            setSynthArray(synths);
+            setOscillatorType(e.target.value);
+          }}
+          disabled={isPlaying ? 1 : 0}
+        >
+          <option>sine</option>
+          <option>triangle</option>
+          <option>square</option>
+          <option>sawtooth</option>
+        </select>
+        <select>
+          <option>Sampler</option>
+        </select>
+        <select>
+          <option>Drums/Sounds</option>
+        </select>
+      </div>
+      <div className="musictool_side">Notes / Sounds</div>
+      <div className="musictool_sequencer">
+        <Sequencer
+          synthArray={synthArray}
+          sequencer={sequencer}
+          setSequencer={setSequencer}
+          setIsPlaying={setIsPlaying}
+          grid={grid}
+          setGrid={setGrid}
+        />
+      </div>
+      <div className="musictool_effects">
+        <h3>Effects</h3>
+      </div>
+      <div className="musictool_reverb">
+        <Reverb
+          reverbValues={reverbValues}
+          setReverbValues={setReverbValues}
+          setReverb={setReverb}
+          reverb={reverb}
+        />
+      </div>
+      <div className="musictool_delay">
+        <Delay
+          delay={delay}
+          setDelay={setDelay}
+          delayValues={delayValues}
+          setDelayValues={setDelayValues}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default MusicTool;
