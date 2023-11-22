@@ -9,7 +9,7 @@ function Welcome() {
   }
 
   function handleMusicToolNav(){
-    navigate("/musictools")
+    navigate("/musictool")
   }
 
   function handleSignupNav () {
