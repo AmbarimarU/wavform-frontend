@@ -16,7 +16,9 @@ function MusicTool() {
     tempo: 120,
   });
 
-  const [grid, setGrid] = useState([]);
+  const [grid1, setGrid1] = useState([]);
+  const [grid2, setGrid2] = useState([]);
+  const [grid3, setGrid3] = useState([]);
 
   const initialReverbValues = {
     timeValue: 1,
@@ -84,13 +86,96 @@ function MusicTool() {
     createSynths(8);
   }, [oscillatorType]);
 
+  const [samplerArray1, setSamplerArray1] = useState(null)
+  const [samplerArray2, setSamplerArray2] = useState(null)
+
+  const samples = [
+    {
+      name: "Casio",
+      notes: ["A1", "A2", "B1", "C2", "D2"],
+      url: "https://tonejs.github.io/audio/casio/",
+    },
+    {
+      name: "Salamander",
+      notes: ["A0", "A1", "A2", "A3", "A4"],
+      url: "https://tonejs.github.io/audio/salamander/",
+    },
+  ];
+
+  const loadSamplers = (count) => {
+    let urlsObj = {};
+   
+    samples[0].notes.forEach((note) => {
+      urlsObj[note] = `${note}.mp3`;
+    });
+
+    let samplers = [];
+
+    for (let i = 0; i < count; i++) {
+      let newSampler = new Tone.Sampler({
+        urls: urlsObj,
+
+        // baseUrl can only use for different instruments sound
+        // checking if the selectedSample is a boolean
+        baseUrl: samples[0] ? samples[0].url : null,
+      }).chain(delay, reverb, Tone.Destination);
+      samplers.push(newSampler)
+    }
+      
+    setSamplerArray1(samplers);
+
+    samplers = [];
+
+    for (let i = 0; i < count; i++) {
+      let newSampler = new Tone.Sampler({
+        urls: urlsObj,
+
+        // baseUrl can only use for different instruments sound
+        // checking if the selectedSample is a boolean
+        baseUrl: samples[0] ? samples[0].url : null,
+      }).chain(delay, reverb, Tone.Destination);
+      samplers.push(newSampler)
+    }
+      
+    setSamplerArray2(samplers);
+  };
+
+  useEffect(() => {
+    loadSamplers(8);
+  }, []);
+
   useEffect(() => {
     if (sequencer.started) {
       for (let i = 0; i < synthArray.length; i++) {
         synthArray[i].chain(delay, reverb, Tone.Destination);
+        samplerArray1[i].chain(delay, reverb, Tone.Destination);
+        samplerArray2[i].chain(delay, reverb, Tone.Destination);
       }
     }
-  }, [reverb, delay, synthArray]);
+  }, [reverb, delay, synthArray, samplerArray1, samplerArray2]);
+
+  const handlePlayButton = async (e) => {
+
+    // toggle Tone.Trasport and the flag variable.
+    if (sequencer.playing) {
+      e.target.innerText = "Play";
+      Tone.Transport.stop();
+      setSequencer({
+        ...sequencer,
+        playing: false,
+      });
+      setIsPlaying(false);
+    } else {
+      console.log("stop - playing");
+      e.target.innerText = "Stop";
+      Tone.Transport.start();
+      setSequencer({
+        ...sequencer,
+        playing: true,
+      });
+      setIsPlaying(true);
+    }
+  };
 
   return (
     <div className="musictool">
@@ -121,15 +206,77 @@ function MusicTool() {
         </select>
       </div>
       <div className="musictool_side">Notes / Sounds</div>
+      <button className="musictool_selector" onClick={(e) => {
+        let synthSequencer = document.getElementsByClassName("musictool_sequencer")[0]
+        let sampler1Sequencer = document.getElementsByClassName("musictool_sequencer2")[0]
+        let sampler2Sequencer = document.getElementsByClassName("musictool_sequencer3")[0]
+
+        if (e.target.innerText === "Synth") {
+          e.target.innerText = "Sampler 1"
+
+          synthSequencer.style.visibility = "hidden"
+          sampler2Sequencer.style.visibility = "hidden"
+
+          sampler1Sequencer.style.visibility = "visible"
+        } else if (e.target.innerText === "Sampler 1") {
+          e.target.innerText = "Sampler 2"
+
+          synthSequencer.style.visibility = "hidden"
+          sampler1Sequencer.style.visibility = "hidden"
+
+          sampler2Sequencer.style.visibility = "visible"
+        } else {
+          e.target.innerText = "Synth"
+
+          sampler1Sequencer.style.visibility = "hidden"
+          sampler2Sequencer.style.visibility = "hidden"
+
+          synthSequencer.style.visibility = "visible"
+        }
+      }}>Synth</button>
       <div className="musictool_sequencer">
         <Sequencer
-          synthArray={synthArray}
+          instrumentArray={synthArray}
           sequencer={sequencer}
           setSequencer={setSequencer}
           setIsPlaying={setIsPlaying}
-          grid={grid}
-          setGrid={setGrid}
+          grid={grid1}
+          setGrid={setGrid1}
+          handlePlayButton={handlePlayButton}
+          isSampler2={false}
         />
+      </div>
+      <div className="musictool_sequencer2">
+        <Sequencer
+          instrumentArray={samplerArray1}
+          sequencer={sequencer}
+          setSequencer={setSequencer}
+          setIsPlaying={setIsPlaying}
+          grid={grid2}
+          setGrid={setGrid2}
+          handlePlayButton={handlePlayButton}
+          isSampler2={false}
+        />
+      </div>
+      <div className="musictool_sequencer3">
+        <Sequencer
+          instrumentArray={samplerArray2}
+          sequencer={sequencer}
+          setSequencer={setSequencer}
+          setIsPlaying={setIsPlaying}
+          grid={grid3}
+          setGrid={setGrid3}
+          handlePlayButton={handlePlayButton}
+          isSampler2={true}
+        />
+      </div>
+      <div className="sequencer-bottom">
+        <button
+          className="sequencer-button"
+          onClick={(e) => handlePlayButton(e)}
+        >
+          Play
+        </button>
       </div>
       <div className="musictool_effects">
         <h3>Effects</h3>
