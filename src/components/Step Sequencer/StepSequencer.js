@@ -129,42 +129,42 @@ function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying, grid
     }
   }, [sequencer]);
 
-  const handlePlayButton = async (e) => {
-    if (!sequencer.started) {
-      // Only executed the first time the button is clicked
-      // initializing Tone, setting the volume, and setting up the loop
+  // const handlePlayButton = async (e) => {
+  //   if (!sequencer.started) {
+  //     // Only executed the first time the button is clicked
+  //     // initializing Tone, setting the volume, and setting up the loop
 
-      await Tone.start();
-      Tone.getDestination().volume.rampTo(-10, 0.001);
-      configLoop(sequencer.tempo);
-      //   setSequencer({
-      //     ...sequencer,
-      //     started: true,
-      // });
-    }
+  //     await Tone.start();
+  //     Tone.getDestination().volume.rampTo(-10, 0.001);
+  //     configLoop(sequencer.tempo);
+  //     //   setSequencer({
+  //     //     ...sequencer,
+  //     //     started: true,
+  //     // });
+  //   }
 
-    // toggle Tone.Trasport and the flag variable.
-    if (sequencer.playing) {
-      e.target.innerText = "Play";
-      Tone.Transport.stop();
-      setSequencer({
-        ...sequencer,
-        playing: false,
-      });
-      setIsPlaying(false);
+  //   // toggle Tone.Trasport and the flag variable.
+  //   if (sequencer.playing) {
+  //     e.target.innerText = "Play";
+  //     Tone.Transport.stop();
+  //     setSequencer({
+  //       ...sequencer,
+  //       playing: false,
+  //     });
+  //     setIsPlaying(false);
 
-      //   testBeat = 0;
-    } else {
-      console.log("stop - playing");
-      e.target.innerText = "Stop";
-      Tone.Transport.start();
-      setSequencer({
-        ...sequencer,
-        playing: true,
-      });
-      setIsPlaying(true);
-    }
-  };
+  //     //   testBeat = 0;
+  //   } else {
+  //     console.log("stop - playing");
+  //     e.target.innerText = "Stop";
+  //     Tone.Transport.start();
+  //     setSequencer({
+  //       ...sequencer,
+  //       playing: true,
+  //     });
+  //     setIsPlaying(true);
+  //   }
+  // };
 
   // const synths = makeSynths(8);
 
