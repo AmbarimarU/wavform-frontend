@@ -5,7 +5,16 @@ import "./StepSequencer.scss";
 
 // const testSampler = new Tone.Sampler().toDestination();
 
-function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying, grid, setGrid }) {
+function StepSequencer({
+  instrumentArray,
+  sequencer,
+  setSequencer,
+  setIsPlaying,
+  grid,
+  setGrid,
+  handlePlayButton,
+  isSampler2
+}) {
   // const [sequencer, setSequencer] = useState({
   //   beat: 0,
   //   notes: ["F4", "D#4", "D4", "C4", "A#3", "G#3", "G3", "F3"],
@@ -43,7 +52,31 @@ function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying, grid
   };
 
   useEffect(() => {
-    setGrid(makeGrid(sequencer.notes));
+    if (isSampler2) {
+      let notes = sequencer.notes;
+
+      let newNotes = []
+
+      for (let i = 0; i < notes.length; i++) {
+        if (notes[i].length === 2) {
+          let newNoteString = notes[i][0]
+
+          newNoteString = newNoteString + String(Number(notes[i][1]) - 1)
+
+          newNotes.push(newNoteString)
+        } else {
+          let newNoteString = notes[i][0] + notes[i][1]
+
+          newNoteString = newNoteString + String(Number(notes[i][2]) - 1)
+
+          newNotes.push(newNoteString)
+        }
+      }
+
+      setGrid(makeGrid(newNotes));
+    } else {
+      setGrid(makeGrid(sequencer.notes));
+    }
   }, []);
 
   // const makeSynths = (count) => {
@@ -70,7 +103,7 @@ function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying, grid
     grid.forEach((row, index) => {
       // as the index increments we are moving *down* the rows
       // One note per row and one synth per note means that each row corresponds to a synth
-      let synth = synthArray[index];
+      let synth = instrumentArray[index];
       // beat is used to keep track of what subdivision we are on
       // there are eight *beats* or subdivisions for this sequencer
       let note = row[currentBeat];
@@ -101,7 +134,7 @@ function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying, grid
       Tone.Transport.bpm.value = sequencer.tempo;
       Tone.Transport.scheduleRepeat(repeat, "8n");
     }
-  }, [synthArray]);
+  }, [instrumentArray]);
 
   const handleNoteClick = (clickedRowIndex, clickedNoteIndex, e) => {
     // iterating through the grid
@@ -122,6 +155,13 @@ function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying, grid
 
   useEffect(() => {
     if (!sequencer.started && sequencer.playing) {
+      // Only executed the first time the button is clicked
+      // initializing Tone, setting the volume, and setting up the loop
+
+      Tone.start();
+      Tone.getDestination().volume.rampTo(-10, 0.001);
+      configLoop(sequencer.tempo);
+
       setSequencer({
         ...sequencer,
         started: true,
@@ -199,14 +239,14 @@ function StepSequencer({ synthArray, sequencer, setSequencer, setIsPlaying, grid
         })}
       </div>
 
-      <div className="sequencer-bottom">
+      {/* <div className="sequencer-bottom">
         <button
           className="sequencer-button"
           onClick={(e) => handlePlayButton(e)}
         >
           Play
         </button>
-      </div>
+      </div> */}
     </>
   );
 }
