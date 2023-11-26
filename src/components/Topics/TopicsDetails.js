@@ -1,30 +1,29 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { fetchTopicDetail } from "../Api/Api";
 
 function TopicsDetails() {
   const [singleTopic, setSingleTopic] = useState(null);
   const { id } = useParams();
 
-  let api = process.env.REACT_APP_API_URL;
-
-  const fetchSingleTopic = async () => {
-    try {
-      const response = await axios.get(`${api}/topics/topic/${id}`);
-      // console.log(response.data);
-
-      setSingleTopic(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
   useEffect(() => {
+    const fetchSingleTopic = async () => {
+      try {
+        const res = await fetchTopicDetail(id);
+        // console.log(res);
+
+        setSingleTopic(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchSingleTopic();
-  }, []);
+  }, [id]);
 
   // Format description to the next line
-  const formattedDesc = singleTopic?.description.replace(/\n/g, '<br />');
+  const formattedDesc = singleTopic?.description.replace(/\n/g, "<br />");
+  // console.log(formattedDesc)
 
   return (
     <div>
@@ -33,9 +32,9 @@ function TopicsDetails() {
           <div>
             <h1>{singleTopic.name}</h1>
           </div>
-          
+
           <div>
-            <p dangerouslySetInnerHTML={{__html: formattedDesc}}></p>
+            <p dangerouslySetInnerHTML={{ __html: formattedDesc }}></p>
           </div>
         </div>
       )}
