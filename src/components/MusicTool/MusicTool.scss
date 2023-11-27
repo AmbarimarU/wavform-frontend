@@ -31,7 +31,23 @@
         padding: 0;
         width: fit-content;
         grid-area: sequencer;
-        z-index: 1;
+        z-index: 2;
+    }
+    &_sequencer2 {
+        margin-left: -50px;
+        padding: 0;
+        width: fit-content;
+        grid-area: sequencer;
+        z-index: 2;
+        visibility: hidden;
+    }
+    &_sequencer3 {
+        margin-left: -50px;
+        padding: 0;
+        width: fit-content;
+        grid-area: sequencer;
+        z-index: 2;
+        visibility: hidden;
     }
     &_effects {
         grid-area: effects;

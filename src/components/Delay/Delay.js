@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import "./Delay.scss";
 import * as Tone from "tone";
-function Delay({ delay, setDelay, formData, setFormData }) {
-    const initialFormData = {
+function Delay({ delay, setDelay, delayValues, setDelayValues }) {
+    const initialDelayValues = {
         dTime: 0,
         dAmount: 0,
         dFeedback: 0,
@@ -36,8 +36,8 @@ function Delay({ delay, setDelay, formData, setFormData }) {
         // }
         delay.dispose()
         setDelay(new Tone.FeedbackDelay({
-            delayTime: formData.dTime * 0.01,
-            feedback: formData.dFeedback * 0.01,
+            delayTime: delayValues.dTime * 0.01,
+            feedback: delayValues.dFeedback * 0.01,
         }))
     };
 
@@ -46,9 +46,9 @@ function Delay({ delay, setDelay, formData, setFormData }) {
     // }, [player]);
 
     useEffect(() => {
-        delay.delayTime.value = formData.dTime * 0.01;
-        delay.feedback.value = formData.dFeedback * 0.01;
-    }, [formData, delay.delayTime, delay.feedback]);
+        delay.delayTime.value = delayValues.dTime * 0.01;
+        delay.feedback.value = delayValues.dFeedback * 0.01;
+    }, [delayValues, delay.delayTime, delay.feedback]);
     return (
         <div className="delay">
             <h2 className="delay_header">Delay</h2>
@@ -57,11 +57,11 @@ function Delay({ delay, setDelay, formData, setFormData }) {
                     type="range"
                     min="0"
                     max="60"
-                    value={formData.dTime}
+                    value={delayValues.dTime}
                     name="dTime"
                     className="delay_slider"
                     onChange={(e) =>
-                        setFormData((prevFormData) => ({
+                        setDelayValues((prevFormData) => ({
                             ...prevFormData,
                             [e.target.name]: e.target.value,
                         }))
@@ -74,11 +74,11 @@ function Delay({ delay, setDelay, formData, setFormData }) {
                     type="range"
                     min="0"
                     max="60"
-                    value={formData.dFeedback}
+                    value={delayValues.dFeedback}
                     className="delay_slider"
                     name="dFeedback"
                     onChange={(e) =>
-                        setFormData((prevFormData) => ({
+                        setDelayValues((prevFormData) => ({
                             ...prevFormData,
                             [e.target.name]: e.target.value,
                         }))
@@ -92,11 +92,11 @@ function Delay({ delay, setDelay, formData, setFormData }) {
                     min="-60"
                     max="6"
                     step="1"
-                    value={formData.dAmount}
+                    value={delayValues.dAmount}
                     className="delay_slider"
                     name="dAmount"
                     onChange={(e) =>
-                        setFormData((prevFormData) => ({
+                        setDelayValues((prevFormData) => ({
                             ...prevFormData,
                             [e.target.name]: e.target.value,
                         }))
@@ -108,7 +108,7 @@ function Delay({ delay, setDelay, formData, setFormData }) {
                 <button
                     className="delay_button"
                     onClick={(e) => {
-                        setFormData(initialFormData);
+                        setDelayValues(initialDelayValues);
                         // player.stop();
                     }}
                 >

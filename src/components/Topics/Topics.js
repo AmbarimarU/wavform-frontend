@@ -1,29 +1,26 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { fetchTopics } from "../Api/Api";
 
 function Topics() {
   const { lessonId } = useParams();
   // console.log(lessonId);
   const [topicsArray, setTopicsArray] = useState([]);
-  let api = process.env.REACT_APP_API_URL;
-
-  const fetchTopicsData = async () => {
-    try {
-      const response = await axios.get(`${api}/topics/lessons/${lessonId}`);
-
-      const topics = response.data;
-      console.log(topics);
-
-      setTopicsArray(topics);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
+    async function fetchTopicsData() {
+      try {
+        const res = await fetchTopics(lessonId);
+        // console.log(res)
+
+        setTopicsArray(res);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     fetchTopicsData();
-  }, []);
+  }, [lessonId]);
 
   return (
     <div>

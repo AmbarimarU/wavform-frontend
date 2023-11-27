@@ -1,31 +1,34 @@
-import React from 'react'
-import {useNavigate} from 'react-router-dom'
-import './Lessons.css'
-
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { fetchLessons } from "../Api/Api";
+import "./Lessons.css";
 function Lessons() {
-    const navigate = useNavigate();
-  
-    function handleNotesNav(){
-      navigate("/lessons/notes")
-    }
-  
-    function handleRhythmNav(){
-      navigate("/lessons/rhythm")
-    }
-  
-   
-      return (
-      <div className='lessons-button-container'>
-          <div className='btn-group'>
-          <button  onClick={handleNotesNav} className='lessons-button'>Notes</button>
-          <p className='lessons-button-on-hover'> Use the interactive piano to learn about notes</p>
-          </div>
-          <div className='btn-group'>
-          <button  onClick={handleRhythmNav} className='lessons-button'>Rhythm</button>
-          <p className='lessons-button-on-hover'>Will something clever to place here </p>
-          </div>
-      </div>
-    )
-  }
+    const [lessonsArray, setlessonsArray] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                let res = await fetchLessons();
+                setlessonsArray(res);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        fetchData();
+    }, []);
 
-export default Lessons
+    return (
+        <div className="lessons">
+            {lessonsArray.map((lesson) => {
+                return (
+                    <Link key={lesson.id} to={`/topics/${lesson.id}`}>
+                        <button className="lessons-button">
+                            {lesson.name}
+                        </button>
+                    </Link>
+                );
+            })}
+        </div>
+    );
+}
+
+export default Lessons;
