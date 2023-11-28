@@ -38,23 +38,12 @@
     clear: both;
   }
   
-  /* .gender-container {
-    margin-top: 5px;
-  }
-  
-  .radio-inline {
-    margin-right: 5px;
-  }
-  
-  .radio-inline input {
-    margin-right: 5px;
-  } */
-  
+
   .button-container {
     margin-top: 35px;
   }
   
-  .button-container .login {
+  .login {
     width: 250px;
     padding: 10px 45px 10px;
     border-radius: .75rem;

@@ -23,7 +23,7 @@ function UsernameCheck() {
         }
       }, [input, onBlur, onFocus]);
     
-      return [input, setInput, error, setOnFocus, setOnBlur, usernameButtonState];
+      return [input, setInput, error, setError, setOnFocus, setOnBlur, usernameButtonState];
     }
 
 

@@ -1,30 +1,36 @@
 import React, {useState, useEffect}from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode'
-import {useNavigate} from 'react-router-dom'
+import { jwtDecode }  from 'jwt-decode';
+import useAuthHooks from '../Hooks/Auth/useAuthHooks';
+import {useNavigate} from 'react-router-dom';
+
+import './Login.css';
 
 
 function Login({ setUser }) {
   const [email, setEmail] = useState("")
   const [password, setpassword] = useState("")
   const [username, setUsername] = useState("")
+  const [, , checkToken] = useAuthHooks()
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    let jwtToken = window.localStorage.getItem("jwtToken")
-    console.log(jwtToken)
+    // let jwtToken = window.localStorage.getItem("jwtToken")
+    // console.log(jwtToken)
 
-    if(jwtToken){
-      let decodedToken = jwtDecode(jwtToken)
+    // if(jwtToken){
+    //   let decodedToken = jwtDecode(jwtToken)
 
-      const currentTime = Date.now() / 1000;
+    //   const currentTime = Date.now() / 1000;
 
-      if(decodedToken.exp < currentTime){
-        window.localStorage.removeItem("jwtToken");
-      } else{
-        navigate("/")
-      }
+    //   if(decodedToken.exp < currentTime){
+    //     window.localStorage.removeItem("jwtToken");
+    //   } else{
+    //     navigate("/")
+    //   }
+    if (checkToken()){
+      navigate("/get-all-users")
     }
   }, [])
    
@@ -38,6 +44,7 @@ function Login({ setUser }) {
 
        });
        const jwtToken = result.data.token
+       console.log(jwtToken)
 
        window.localStorage.setItem("jwtToken", jwtToken)
        const decodedToken = jwtDecode(jwtToken)
@@ -48,7 +55,7 @@ function Login({ setUser }) {
         username: decodedToken.username,
         id: decodedToken.id
        });
-       navigate("/")
+       navigate("/welcome")
     } catch (error) {
         console.log(error)
     }
@@ -56,10 +63,10 @@ function Login({ setUser }) {
   
   
   return (
-    <div className='form-container'>
+    <div className='form-container' style={{backgroundColor: "#007ead" }} >
     <div className='form-div'>
         <div className='form-h1'>
-            <h1>Log in</h1>
+            <h2>Log in</h2>
         </div>
         <form onSubmit={handleOnSubmit} >
             
@@ -110,7 +117,7 @@ function Login({ setUser }) {
            
              
                 <div className='button-container'>
-                 <button>Submit</button>
+                 <button className='login'>Submit</button>
             </div>
         </form>
     </div>

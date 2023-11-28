@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
-import { jwtDecode } from 'jwt-decode'
+import useAuthHooks from '../Hooks/Auth/useAuthHooks'
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import { useNavigate, Link } from 'react-router-dom'
 import './Signup.css';
 
@@ -37,7 +36,7 @@ function Signup() {
 
 const [
   usernameInput, 
-  usenameOnChange, 
+  usernameOnChange, 
   usernameError, 
   setUsernameOnFocus, 
   setUsernameOnBlur,
@@ -46,20 +45,13 @@ const [
 
 const navigate =  useNavigate()
 
+const [, , checkToken] = useAuthHooks()
+
 useEffect(() => {
-  let jwtToken = window.localStorage.getItem("jwtToken")
-   console.log(jwtToken)
 
-  if(jwtToken){
-    let decodedToken = jwtDecode(jwtToken)
-
-    const currentTime = Date.now() / 1000;
-
-    if(decodedToken.exp < currentTime){
-      window.localStorage.removeItem("jwtToken");
-    } else{
-      navigate("/")
-    }
+    if(checkToken()){
+      navigate("/get-all-users")
+    
   }
 }, [])
 
@@ -67,18 +59,19 @@ useEffect(() => {
 async function handleOnSubmit(e){
   e.preventDefault();
    try {
-      await axios.post("http://localhost:3001/users/create-user", {
+     await axios.post("http://localhost:3001/users/create-user", {
       
        email,
        password,
        username: usernameInput,
      });
-     toast.success("Congrats! Welcome to the Wavform Family!!")
+     
+
+    
+     alert("Congrats! Welcome to the Wavform Family!!")
+     navigate("/profile")
  
-     setEmail("");
-     setPassword("");
-     setConfirmPassword("");
-     usenameOnChange("");
+    
     
    } catch (e) {
        
@@ -161,7 +154,7 @@ async function handleOnSubmit(e){
                     id="username"
                     placeholder='Username'
                     value={usernameInput}
-                    onChange={(e) => usenameOnChange(e.target.value)}
+                    onChange={(e) => usernameOnChange(e.target.value)}
                     onFocus={()=> setUsernameOnFocus(true)}
                     onBlur={()=> setUsernameOnBlur(true)}
                     />

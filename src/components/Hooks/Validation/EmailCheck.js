@@ -12,7 +12,7 @@ function EmailCheck() {
   useEffect(() => {
     if (onBlur || (onFocus && input.length > 1)) {
       if (input.length === 0) {
-        setError(`${input} cannot be empty`);
+        setError(`Email cannot be empty`);
         setEmailButtonState(true)
       } else if (!isEmail(input)) {
         setError(`${input} is not a valid email, Please try again`);
@@ -24,7 +24,7 @@ function EmailCheck() {
     }
   }, [input, onBlur, onFocus]);
 
-  return [input, setInput, error, setOnFocus, setOnBlur, emailButtonState];
+  return [input, setInput, error, setError, setOnFocus, setOnBlur, emailButtonState];
 }
 
 export default EmailCheck;

@@ -1,37 +1,46 @@
-import { useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import {useState, useEffect} from 'react';
+import { jwtDecode }  from 'jwt-decode'
 
 function useAuthHooks() {
   const [user, setUser] = useState(null);
-  const jwtToken = window.localStorage.getItem('jwtToken');
 
-  useEffect(() => {
-    let decodedToken;
+  const jwtToken = window.localStorage.getItem("jwtToken")
 
-    if (jwtToken) {
-        console.log(jwtToken)
-      decodedToken = jwtDecode(jwtToken);
+  let decodedToken;
 
-      const currentTime = Date.now() / 1000;
-
-      if (decodedToken.exp < currentTime) {
-        window.localStorage.removeItem('jwtToken');
-        setUser(null);
-      } else {
-        setUser({
-          email: decodedToken.email,
-          username: decodedToken.username,
-          id: decodedToken.id,
-        });
-      }
-    }
-  }, [jwtToken]);
-
-  function checkToken() {
-    return user !== null;
+  if(jwtToken){
+    decodedToken = jwtDecode(jwtToken)
   }
 
-  return [user, setUser, checkToken];
+  useEffect(() => {
+    let user = checkToken()
+
+    if(!user){
+        setUser(null)
+    } else {
+        setUser({
+            email:decodedToken.email,
+            username: decodedToken.username,
+            id: decodedToken.id,
+        })
+    }
+  
+    
+  }, [])
+  
+
+  function checkToken () {
+    if (jwtToken){
+        const currentTime = Date.now() / 1000;
+    if (decodedToken.exp < currentTime){
+        window.localStorage.removeItem("jwtToken");
+        return false
+    } else {
+        return true
+      }
+    }
+  }
+    return [user, setUser, checkToken]
 }
 
 export default useAuthHooks;

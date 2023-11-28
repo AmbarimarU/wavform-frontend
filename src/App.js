@@ -1,11 +1,13 @@
 // DEPENDENCIES
 import React from "react";
 
+// import { jwtDecode } from 'jwt-decode'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //const Example = React.lazy(() => import("./components/Example/Example"));
 import Loader from "./components/Loader/Loader";
-import useAuthHooks from './components/Hooks/Auth/useAuthHooks' 
+import useAuthHooks from "./components/Hooks/Auth/useAuthHooks";
+
 
 const About = React.lazy(() => import("./components/About/About"));
 const Login = React.lazy(() => import("./components/Login/Login"));
@@ -22,12 +24,39 @@ const Sequencer = React.lazy(() => import("./components/Step Sequencer/StepSeque
 const Delay = React.lazy(() => import("./components/Delay/Delay"));
 const Sampler = React.lazy(() => import("./components/Sampler/NotesSampler"));
 const Piano = React.lazy(() => import("./components/Piano/Piano"));
-
+const GetAllUsers = React.lazy(() => import("./components/GetAllUsers/GetAllUsers"));
+const Profile = React.lazy(() => import("./components/Profile/Profile"));
+const PrivateRoute = React.lazy(() => import("./components/PrivateRoute/PrivateRoute"));
 
 
 function App() {
 
-    const [user, setUser] = useAuthHooks()
+    const [user, setUser] = useAuthHooks();
+
+    // useEffect(() => {
+    //     let jwtToken = window.localStorage.getItem('jwtToken')
+        
+    
+    //     if (jwtToken) {
+    //       console.log(jwtToken)
+    //       let decodedToken = jwtDecode(jwtToken);
+    
+    //       const currentTime = Date.now() / 1000;
+    
+    //       if (decodedToken.exp < currentTime) {
+    //         window.localStorage.removeItem('jwtToken');
+            
+    //       } else {
+    //         setUser({
+    //           email: decodedToken.email,
+    //           username: decodedToken.username,
+    //           id: decodedToken.id,
+    //         });
+    //       }
+    //     }
+    //   }, []);
+
+
 
      function logout(){
       window.localStorage.removeItem("jwtToken");
@@ -55,6 +84,8 @@ function App() {
                     <Route path="/musictool" element={<MusicTool />} />
                     <Route path="/sequencer" element={<Sequencer />} />
                     <Route path="/piano" element={<Piano />} />
+                    <Route path="/get-all-users" element={ <PrivateRoute> <GetAllUsers /> </PrivateRoute>} />
+                    <Route path="/profile" element={ <PrivateRoute> <Profile /> </PrivateRoute>} />
                 </Routes>
             </Router>
         </React.Suspense>
