@@ -1,37 +1,39 @@
-.lessons-button-container {
+.lessons {
     padding-top: 300px;
     display: flex;
     justify-content: center;
 }
-.btn-group{
+.btn-group {
     text-align: center;
     margin: 0 100px;
 }
 
-.lessons-button{
-    width: 350px;
+.lessons-button {
+    width: 300px;
     height: 150px;
-    border-radius: .75rem;
-    background-color: #007ead; 
+    border-radius: 0.75rem;
+    background-color: #007ead;
     color: white;
     font-size: 20px;
+    text-transform: capitalize;
     /* margin: 0 80px;  */
     margin-bottom: 20px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s; 
+    margin: 10px;
+    transition: background-color 0.3s;
 }
 
-.lessons-button:hover{
+.lessons-button:hover {
     font-size: 24px;
     font-weight: bold;
 }
 
-.lessons-button:hover + .lessons-button-on-hover{
+.lessons-button:hover + .lessons-button-on-hover {
     display: block;
 }
 
-.lessons-button-on-hover{
+.lessons-button-on-hover {
     display: none;
     text-align: center;
     font-size: 20px;

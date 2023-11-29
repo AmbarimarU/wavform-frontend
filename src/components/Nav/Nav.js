@@ -92,4 +92,4 @@ function Nav({user, logout}) {
   )
 }
 
-export default Nav
+export default Nav;

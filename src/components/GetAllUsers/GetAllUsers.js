@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import axios from 'axios'
+import { getAllUsers } from '../Api/Api'
 
 function GetAllUsers() {
     useEffect(() => {
@@ -9,18 +9,10 @@ function GetAllUsers() {
       async function fetchAllUsers(){
         try {
            
-           //let result = await Axios.get("/users")
-           
-           
-            let result = await axios.get("http://localhost:3001/users",
-            {
-                headers: {
-                    authorization: `Bearer ${window.localStorage.getItem("jwtToken")}`,
-                },
-            });
-            
-            
-            console.log(result)
+    
+        let result = await getAllUsers()
+        console.log(result)
+       
         } catch (error) {
             console.log(error)
             

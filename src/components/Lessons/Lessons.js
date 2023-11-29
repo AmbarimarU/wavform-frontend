@@ -1,37 +1,34 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { fetchLessons } from "../Api/Api";
+import "./Lessons.css";
 function Lessons() {
-  const [lessonsArray, setlessonsArray] = useState([]);
+    const [lessonsArray, setlessonsArray] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                let res = await fetchLessons();
+                setlessonsArray(res);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        fetchData();
+    }, []);
 
-  const fetchLessons = async () => {
-    let api = process.env.REACT_APP_API_URL;
-    try {
-      const response = await axios.get(`${api}/lessons`);
-
-      console.log(response.data);
-      setlessonsArray(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchLessons();
-  }, []);
-
-  return (
-    <div>
-      {lessonsArray.map((lesson) => {
-        return (
-          <Link key={lesson.id} to={`/topics/${lesson.id}`}>
-            <button>{lesson.name}</button>
-          </Link>
-        );
-      })}
-    </div>
-  );
+    return (
+        <div className="lessons">
+            {lessonsArray.map((lesson) => {
+                return (
+                    <Link key={lesson.id} to={`/topics/${lesson.id}`}>
+                        <button className="lessons-button">
+                            {lesson.name}
+                        </button>
+                    </Link>
+                );
+            })}
+        </div>
+    );
 }
 
 export default Lessons;

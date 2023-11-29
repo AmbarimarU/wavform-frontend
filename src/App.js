@@ -1,10 +1,11 @@
 // DEPENDENCIES
 import React from "react";
 
-// import { jwtDecode } from 'jwt-decode'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+// COMPONENTS
 //const Example = React.lazy(() => import("./components/Example/Example"));
+
 import Loader from "./components/Loader/Loader";
 import useAuthHooks from "./components/Hooks/Auth/useAuthHooks";
 
@@ -27,49 +28,26 @@ const Piano = React.lazy(() => import("./components/Piano/Piano"));
 const GetAllUsers = React.lazy(() => import("./components/GetAllUsers/GetAllUsers"));
 const Profile = React.lazy(() => import("./components/Profile/Profile"));
 const PrivateRoute = React.lazy(() => import("./components/PrivateRoute/PrivateRoute"));
-
+const Topics = React.lazy(() => import("./components/Topics/Topics"));
+const TopicsDetails = React.lazy(() => import("./components/Topics/TopicsDetails"));
+const FourOFour = React.lazy(() => import("./components/FourOFour/FourOFour"));
 
 function App() {
+const [user, setUser] = useAuthHooks();
 
-    const [user, setUser] = useAuthHooks();
-
-    // useEffect(() => {
-    //     let jwtToken = window.localStorage.getItem('jwtToken')
-        
-    
-    //     if (jwtToken) {
-    //       console.log(jwtToken)
-    //       let decodedToken = jwtDecode(jwtToken);
-    
-    //       const currentTime = Date.now() / 1000;
-    
-    //       if (decodedToken.exp < currentTime) {
-    //         window.localStorage.removeItem('jwtToken');
-            
-    //       } else {
-    //         setUser({
-    //           email: decodedToken.email,
-    //           username: decodedToken.username,
-    //           id: decodedToken.id,
-    //         });
-    //       }
-    //     }
-    //   }, []);
-
-
-
-     function logout(){
-      window.localStorage.removeItem("jwtToken");
-      setUser(null);
-      console.log("click me")
-    }
+    function logout(){
+    window.localStorage.removeItem("jwtToken");
+    setUser(null);
+    console.log("click me")
+  }
+  
+  
     return (
-        <React.Suspense fallback={<Loader />}>
-            <Router>
-                <ToggleNavBar>
-                <Nav user={user} logout={logout}/>
-                </ToggleNavBar>
-                
+    <React.Suspense fallback={<Loader />}>
+      <Router>
+        <ToggleNavBar>
+          <Nav user={user} logout={logout}/>
+        </ToggleNavBar>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/welcome" element={<Welcome />} />
@@ -77,7 +55,7 @@ function App() {
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/login" element={<Login setUser={setUser}/>} />
                     <Route path="/delay" element={<Delay />} />
-                    <Route path='/lessons' element={<Lessons/>}/> 
+                    <Route path="/lessons" element={<Lessons />} />
                     <Route path="/synth" element={<Synth />} />
                     <Route path="/sampler" element={<Sampler />} />
                     <Route path="/reverb" element={<Reverb />} />
@@ -86,8 +64,14 @@ function App() {
                     <Route path="/piano" element={<Piano />} />
                     <Route path="/get-all-users" element={ <PrivateRoute> <GetAllUsers /> </PrivateRoute>} />
                     <Route path="/profile" element={ <PrivateRoute> <Profile /> </PrivateRoute>} />
+                    <Route path="/topics/:lessonId" element={<Topics />} />
+                    <Route
+                        path="/topics/topic/:id"
+                        element={<TopicsDetails />}
+                    />   
+                    <Route path="/*" element={<FourOFour />} />
                 </Routes>
-            </Router>
+            </Router>{" "}
         </React.Suspense>
     );
 }

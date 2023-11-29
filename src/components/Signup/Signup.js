@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import useAuthHooks from '../Hooks/Auth/useAuthHooks'
-import axios from 'axios';
+//import {createUsers} from '../Api/Api'
+import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import './Signup.css';
 
@@ -58,7 +59,14 @@ useEffect(() => {
 
 async function handleOnSubmit(e){
   e.preventDefault();
-   try {
+    try {
+  
+  //    await createUsers({
+  //     email,
+  //     password,
+  //     username: usernameInput
+  //    })
+  
      await axios.post("http://localhost:3001/users/create-user", {
       
        email,
