@@ -79,15 +79,16 @@ function MusicTool() {
 
   useEffect(() => {
     createSynths(8);
+    loadSamplers(8);
   }, []);
 
-  useEffect(() => {
-    setSynthArray([]);
-    createSynths(8);
-  }, [oscillatorType]);
+//   useEffect(() => {
+//     setSynthArray([]);
+//     createSynths(8);
+//   }, [oscillatorType]);
 
-  const [samplerArray1, setSamplerArray1] = useState(null)
-  const [samplerArray2, setSamplerArray2] = useState(null)
+  const [samplerArray1, setSamplerArray1] = useState([])
+  const [samplerArray2, setSamplerArray2] = useState([])
 
   const samples = [
     {
@@ -141,10 +142,6 @@ function MusicTool() {
   };
 
   useEffect(() => {
-    loadSamplers(8);
-  }, []);
-
-  useEffect(() => {
     if (sequencer.started) {
       for (let i = 0; i < synthArray.length; i++) {
         synthArray[i].chain(delay, reverb, Tone.Destination);
@@ -152,7 +149,7 @@ function MusicTool() {
         samplerArray2[i].chain(delay, reverb, Tone.Destination);
       }
     }
-  }, [reverb, delay, synthArray, samplerArray1, samplerArray2]);
+  }, [reverb, delay, synthArray, samplerArray1, samplerArray2, oscillatorType]);
 
   const handlePlayButton = async (e) => {
 
