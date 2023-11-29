@@ -74,6 +74,29 @@ const fetchTopicDetail = async (id) => {
   }
 };
 
+//user api
+
+const getAllUsers = async () => {
+  try {
+    const result = await Axios.get('/users')
+    console.log(result)
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+// const createUsers = async () => {
+//   try {
+//     const result = await Axios.post('/users/create-user')
+//     console.log(result)
+//     return result.data
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
 export {
   getAllLessons,
   getUrl,
@@ -82,4 +105,6 @@ export {
   fetchTopics,
   getSingleTopic,
   fetchTopicDetail,
+  getAllUsers,
+  
 };
