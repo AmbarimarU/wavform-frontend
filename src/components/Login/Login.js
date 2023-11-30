@@ -1,5 +1,5 @@
 import React, {useState, useEffect}from 'react';
-import axios from 'axios';
+import {loginUsers} from '../Api/Api'
 import { jwtDecode }  from 'jwt-decode';
 import useAuthHooks from '../Hooks/Auth/useAuthHooks';
 import {useNavigate} from 'react-router-dom';
@@ -16,19 +16,7 @@ function Login({ setUser }) {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // let jwtToken = window.localStorage.getItem("jwtToken")
-    // console.log(jwtToken)
-
-    // if(jwtToken){
-    //   let decodedToken = jwtDecode(jwtToken)
-
-    //   const currentTime = Date.now() / 1000;
-
-    //   if(decodedToken.exp < currentTime){
-    //     window.localStorage.removeItem("jwtToken");
-    //   } else{
-    //     navigate("/")
-    //   }
+    
     if (checkToken()){
       navigate("/get-all-users")
     }
@@ -37,7 +25,7 @@ function Login({ setUser }) {
   async function handleOnSubmit(e){
     e.preventDefault()
     try {
-       let result = await axios.post(`http://localhost:3001/users/login`, {
+       let result = await loginUsers({
         email,
         password,
         username,
