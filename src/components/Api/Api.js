@@ -1,5 +1,8 @@
 import Axios from "./Axios";
 
+
+
+
 function getUrl() {
   return process.env.NODE_ENV === "development"
     ? "http://localhost:3001"
@@ -85,17 +88,29 @@ const getAllUsers = async () => {
     console.log(error)
   }
 }
+  
+const createUsers = async (userData) => {
+  try {
+    const result = await Axios.post("/users/create-user", userData);
+    console.log(result.data);
+    return result.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const loginUsers = async (userData) => {
+  try {
+    const result = await Axios.post("/users/login", userData);
+    console.log(result);
+    return result
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 
-// const createUsers = async () => {
-//   try {
-//     const result = await Axios.post('/users/create-user')
-//     console.log(result)
-//     return result.data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+
 
 export {
   getAllLessons,
@@ -106,5 +121,8 @@ export {
   getSingleTopic,
   fetchTopicDetail,
   getAllUsers,
+  createUsers,
+  loginUsers
+  
   
 };

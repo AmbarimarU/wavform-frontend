@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
-import useAuthHooks from '../Hooks/Auth/useAuthHooks'
-//import {createUsers} from '../Api/Api'
-import axios from 'axios'
-import { useNavigate, Link } from 'react-router-dom'
+import useAuthHooks from '../Hooks/Auth/useAuthHooks';
+import {createUsers} from '../Api/Api';
+import { useNavigate, Link } from 'react-router-dom';
 import './Signup.css';
 
 import {
@@ -61,13 +60,7 @@ async function handleOnSubmit(e){
   e.preventDefault();
     try {
   
-  //    await createUsers({
-  //     email,
-  //     password,
-  //     username: usernameInput
-  //    })
-  
-     await axios.post("http://localhost:3001/users/create-user", {
+     await createUsers({
       
        email,
        password,
@@ -77,12 +70,12 @@ async function handleOnSubmit(e){
 
     
      alert("Congrats! Welcome to the Wavform Family!!")
-     navigate("/profile")
+     navigate("/login")
  
     
     
    } catch (e) {
-       
+       console.log(e)
    }
 }
 
