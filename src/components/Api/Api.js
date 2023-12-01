@@ -5,6 +5,20 @@ function getUrl() {
     ? "http://localhost:3001"
     : "https://wavform-backend.onrender.com/";
 }
+//about api 
+
+async function getAllCreators() {
+  try {
+    let result = await Axios.get("/about");
+    return result.data;
+    //console.log(result.data);
+  } catch (e) {
+    alert(e.response.data.error);
+    return;
+  }
+}
+
+
 
 // Lessons api
 
@@ -68,7 +82,7 @@ const fetchTopicDetail = async (id) => {
   try {
     const response = await Axios.get(`/topics/topic/${id}`);
     return response.data;
-    // console.log(response.data)
+     //console.log(response.data)
   } catch (error) {
     console.log(error);
   }
@@ -82,4 +96,5 @@ export {
   fetchTopics,
   getSingleTopic,
   fetchTopicDetail,
+  getAllCreators,
 };
