@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Loader from "./components/Loader/Loader";
 
+const Footer = React.lazy(() => import("./components/Footer/Footer"));
 const About = React.lazy(() => import("./components/About/About"));
 const Login = React.lazy(() => import("./components/Login/Login"));
 const Signup = React.lazy(() => import("./components/Signup/Signup"));
@@ -39,30 +40,28 @@ function App() {
         <ToggleNavBar>
           <Nav />
         </ToggleNavBar>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/welcome" element={<Welcome />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/signup" element={<Signup />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/delay" element={<Delay />} />
-                    <Route path="/lessons" element={<Lessons />} />
-                    <Route path="/synth" element={<Synth />} />
-                    <Route path="/sampler" element={<Sampler />} />
-                    <Route path="/reverb" element={<Reverb />} />
-                    <Route path="/musictool" element={<MusicTool />} />
-                    <Route path="/sequencer" element={<Sequencer />} />
-                    <Route path="/piano" element={<Piano />} />
-                    <Route path="/topics/:lessonId" element={<Topics />} />
-                    <Route
-                        path="/topics/topic/:id"
-                        element={<TopicsDetails />}
-                    />   
-                    <Route path="/*" element={<FourOFour />} />
-                </Routes>
-            </Router>{" "}
-        </React.Suspense>
-    );
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/welcome" element={<Welcome />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/delay" element={<Delay />} />
+            <Route path="/lessons" element={<Lessons />} />
+            <Route path="/synth" element={<Synth />} />
+            <Route path="/sampler" element={<Sampler />} />
+            <Route path="/reverb" element={<Reverb />} />
+            <Route path="/musictool" element={<MusicTool />} />
+            <Route path="/sequencer" element={<Sequencer />} />
+            <Route path="/piano" element={<Piano />} />
+            <Route path="/topics/:lessonId" element={<Topics />} />
+            <Route path="/topics/topic/:id" element={<TopicsDetails />} />
+            <Route path="/*" element={<FourOFour />} />
+          </Routes>
+        <Footer />
+      </Router>{" "}
+    </React.Suspense>
+  );
 }
 
 export default App;
