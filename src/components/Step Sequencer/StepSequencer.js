@@ -13,7 +13,9 @@ function StepSequencer({
   grid,
   setGrid,
   handlePlayButton,
-  isSampler2
+  octave,
+  isSynth,
+  isSampler2,
 }) {
   // const [sequencer, setSequencer] = useState({
   //   beat: 0,
@@ -51,33 +53,45 @@ function StepSequencer({
     return rows;
   };
 
-  useEffect(() => {
-    if (isSampler2) {
-      let notes = sequencer.notes;
+  const octaveChange = (noteArray, octave) => {
+    let newNotes = [];
 
-      let newNotes = []
+    for (let i = 0; i < noteArray.length; i++) {
+      if (noteArray[i].length === 2) {
+        let newNoteString = noteArray[i][0];
 
-      for (let i = 0; i < notes.length; i++) {
-        if (notes[i].length === 2) {
-          let newNoteString = notes[i][0]
+        newNoteString =
+          newNoteString + String(Number(noteArray[i][1]) + Number(octave));
 
-          newNoteString = newNoteString + String(Number(notes[i][1]) - 1)
+        newNotes.push(newNoteString);
+      } else {
+        let newNoteString = noteArray[i][0] + noteArray[i][1];
 
-          newNotes.push(newNoteString)
-        } else {
-          let newNoteString = notes[i][0] + notes[i][1]
+        newNoteString =
+          newNoteString + String(Number(noteArray[i][2]) + Number(octave));
 
-          newNoteString = newNoteString + String(Number(notes[i][2]) - 1)
-
-          newNotes.push(newNoteString)
-        }
+        newNotes.push(newNoteString);
       }
+    }
+
+    return newNotes;
+  };
+
+  useEffect(() => {
+    let notes = sequencer.notes;
+
+    // setGrid(makeGrid(notes));
+
+    if (octave !== 0) {
+      let newNotes = octaveChange(notes, octave);
+
+      console.log(newNotes)
 
       setGrid(makeGrid(newNotes));
     } else {
-      setGrid(makeGrid(sequencer.notes));
+      setGrid(makeGrid(notes));
     }
-  }, []);
+  }, [octave, sequencer.notes]);
 
   // const makeSynths = (count) => {
   //     // each synth can only play one note at a time.
