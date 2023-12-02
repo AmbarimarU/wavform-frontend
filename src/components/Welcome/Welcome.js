@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useAuthHooks from '../Hooks/Auth/useAuthHooks'
 import "./Welcome.css";
 function Welcome() {
     const navigate = useNavigate();
+    const [user , ,] = useAuthHooks()
 
     function handleLessonsNav() {
         navigate("/lessons");
@@ -13,8 +15,12 @@ function Welcome() {
     }
 
     function handleSignupNav() {
-        navigate("/signup");
+        if(user){
+          navigate("/profile")
+        }else{
+      navigate("/signup")
     }
+  }
 
     return (
         <div className="button-container">
@@ -37,11 +43,11 @@ function Welcome() {
             </div>
             <div className="btn-group">
                 <button onClick={handleSignupNav} className="lm-button">
-                    Sign up
+                   {user ? ("Profile") : ("Sign-up") }
                 </button>
                 <p className="lm-button-on-hover">
                     {" "}
-                    Sign up to save music sequences and so much more!!{" "}
+                    {user ? ("Checkout Your Saved Sequences!!"):("Sign up to save music sequences and so much more!!")}{" "}
                 </p>
             </div>
         </div>
