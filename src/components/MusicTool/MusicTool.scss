@@ -59,3 +59,17 @@
         grid-area: delay;
     }
 }
+.tooltip-box {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+.tooltip-trigger {
+    cursor: pointer;
+}
