@@ -26,6 +26,7 @@ function StepSequencer({
   // });
 
   const [beat, setBeat] = useState(0);
+  const [container, setContainer] = useState({});
 
   const makeGrid = (notes) => {
     // our "notation" will consist of an array with 6 sub arrays
@@ -34,17 +35,34 @@ function StepSequencer({
     // declare the parent array to hold each row subarray
     const rows = [];
 
-    for (const note of notes) {
+    for (let i = 0; i < notes.length; i++) {
       // declare the subarray
       const row = [];
       // each subarray contains multiple objects that have an assigned note
       // and a boolean to flag whether they are active.
       // each element in the subarray corresponds to one eighth note.
-      for (let i = 0; i < 8; i++) {
-        row.push({
-          note: note,
-          isActive: false,
-        });
+      for (let j = 0; j < 8; j++) {
+        let combinedIndex = String(i) + String(j);
+
+        let noteObject = {
+          note: notes[i],
+          isActive: false
+        }
+
+        if (Object.keys(container).length > 1) {
+          if (container[combinedIndex]) {
+            noteObject = {
+              ...noteObject,
+              isActive: true
+            };
+
+            row.push(noteObject);
+          } else {
+            row.push(noteObject);
+          }
+        } else {
+          row.push(noteObject);
+        }
       }
       rows.push(row);
     }
@@ -82,15 +100,17 @@ function StepSequencer({
 
     // setGrid(makeGrid(notes));
 
+    console.log(container)
+
     if (octave !== 0) {
       let newNotes = octaveChange(notes, octave);
-
-      console.log(newNotes)
 
       setGrid(makeGrid(newNotes));
     } else {
       setGrid(makeGrid(notes));
     }
+
+    console.log(grid)
   }, [octave, sequencer.notes]);
 
   // const makeSynths = (count) => {
@@ -143,12 +163,12 @@ function StepSequencer({
   };
 
   useEffect(() => {
-    if (sequencer.started) {
+    if (sequencer.started && !sequencer.playing) {
       Tone.Transport.cancel();
       Tone.Transport.bpm.value = sequencer.tempo;
       Tone.Transport.scheduleRepeat(repeat, "8n");
     }
-  }, [instrumentArray]);
+  }, [instrumentArray, octave]);
 
   const handleNoteClick = (clickedRowIndex, clickedNoteIndex, e) => {
     // iterating through the grid
@@ -162,6 +182,11 @@ function StepSequencer({
           e.target["data-active"] = String(!note.isActive);
 
           note.isActive = !note.isActive;
+
+          setContainer({
+            ...container,
+            [String(rowIndex) + String(noteIndex)]: note.isActive
+          })
         }
       });
     });

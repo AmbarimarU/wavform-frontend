@@ -180,6 +180,14 @@ function MusicTool() {
     }
   };
 
+  useEffect(() => {
+    if (sequencer.started && sequencer.playing) {
+        Tone.Transport.stop();
+        Tone.Transport.start();
+    }
+  }, [octaves])
+  
+
   const handleTransposition = (e) => {
     let newNotes = [];
 
