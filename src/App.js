@@ -31,6 +31,7 @@ const PrivateRoute = React.lazy(() => import("./components/PrivateRoute/PrivateR
 const Topics = React.lazy(() => import("./components/Topics/Topics"));
 const TopicsDetails = React.lazy(() => import("./components/Topics/TopicsDetails"));
 const FourOFour = React.lazy(() => import("./components/FourOFour/FourOFour"));
+// const Sidebar = React.lazy(() => import("./components/Sidebar/Sidebar"));
 
 function App() {
 const [user, setUser] = useAuthHooks();
@@ -46,7 +47,9 @@ const [user, setUser] = useAuthHooks();
     <React.Suspense fallback={<Loader />}>
       <Router>
         <ToggleNavBar>
+          
           <Nav user={user} logout={logout}/>
+          {/* <Sidebar /> */}
         </ToggleNavBar>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -63,7 +66,7 @@ const [user, setUser] = useAuthHooks();
                     <Route path="/sequencer" element={<Sequencer />} />
                     <Route path="/piano" element={<Piano />} />
                     <Route path="/get-all-users" element={ <PrivateRoute> <GetAllUsers /> </PrivateRoute>} />
-                    <Route path="/profile" element={ <PrivateRoute> <Profile /> </PrivateRoute>} />
+                    <Route path="/profile" element={ <PrivateRoute> <Profile user={user} /> </PrivateRoute>} />
                     <Route path="/topics/:lessonId" element={<Topics />} />
                     <Route
                         path="/topics/topic/:id"

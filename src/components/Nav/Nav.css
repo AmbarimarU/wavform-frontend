@@ -1,18 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,300&family=Varela+Round&family=Young+Serif&display=swap');
+
 html,
 body {
     padding: 0;
     margin: 0;
 }
 .header-container {
-    background-color: #007ead;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 20px;
+    padding: 10px 10px;
+    background: #15171c;
+    height: 100px;
+/* // justify-content: flex-start; */
+
+
 }
 .logo img {
     width: 70px;
-    height: 80px;
+    height: 55px;
+    margin-left: 20px;
+
+    padding-bottom: 10px;
+    padding-top: 10px; 
+}
+.title{
+    text-align: center;
+    margin-left: auto;
+    color: white;
+    font-family: "Varela Round";
+    text-transform: uppercase;
 }
 .nav-links {
     list-style-type: none;

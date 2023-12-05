@@ -2,28 +2,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,300&family=Varela+Round&family=Young+Serif&display=swap');
 
 @keyframes wavform{
-    0%{color: #007ead;}
-    25%{color: #3d93b2;}
-    75%{color:  lightblue;}
+    0%{color: rgb(40, 40, 40);}
+    25%{color: darkgrey;}
+    75%{color:  grey;}
     100%{color: white;}
 
 }
 
 @keyframes statement {
-    from{color: #007ead;}
+    from{color: black;}
      to {color: white;}
 }
 
 html, body{
     margin: 0;
     padding: 0;
+    background-color: rgb(75, 75, 75);
+
 }
 .home{
-    /* background-image: url('../Images/3.png');
+    background-image: url('./7h5t.gif');
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed; */
+    background-attachment: fixed; 
     background-color: #007ead;
     display: flex;
     justify-content: center;
@@ -47,7 +49,7 @@ html, body{
  }
 
 
-h1{
+.home-heading{
     margin-top: auto;
     font-family: 'Varela Round';
     padding-top: 50px;
@@ -76,7 +78,7 @@ p{
     border-radius:  50%;
     cursor: pointer;
     background-color: white;
-    color: #007ead;
+    color: rgb(40, 40, 40);
    
 }
 
@@ -87,7 +89,6 @@ p{
     border: none;
     border-radius:  50%;
     cursor: pointer;
-    background-color: #007ead;
-    color: white;
+    color: #786bb1;
 
 }

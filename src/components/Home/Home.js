@@ -1,4 +1,5 @@
 import React from "react";
+//   import wavform from './7h5r .gif'
 import { FaPlay } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
@@ -9,10 +10,10 @@ function Homes() {
         navigate("/welcome");
     }
     return (
-        <div className="home" style={{ backgroundColor: "#007ead" }}>
+        <div className="home" style={{ backgroundColor: "rgb(40, 40, 40)" }}>
             <div className="container">
-                <img src="./7.png" />
-                <h1> WAVFORM </h1>
+                {/* <img src={wavform} alt="wavform" />
+                <h1 className="home-heading"> WAVFORM </h1> */}
                 <p>A New Tool For Music Production</p>
                 <button onClick={handleWelcomeNav} className="enter">
                     <FaPlay
