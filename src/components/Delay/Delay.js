@@ -13,9 +13,9 @@ function Delay({
 }) {
     const moreInfo = ["delay", "delay-time", "delay-feedback", "delay-amount"];
     const moreInfoFaqs = [
-        "Additional information goes here for delay!",
-        "Additional information goes here for delay time!",
-        "Additional information goes here for delay feedback!",
+        "Delay causes your sound to echo a certain amount of times. It can create some cool sounds!",
+        "Time is the amount of time (milliseconds) between each echo.",
+        "Feedback makes the echos happen more than once, creating a long 'tail' of sound.",
         "Additional information goes here for delay amount!",
     ];
     const initialDelayValues = {
@@ -155,33 +155,6 @@ function Delay({
                     ?
                 </span>
             </span>
-            <div className="delay_slider3">
-                <input
-                    type="range"
-                    min="-60"
-                    max="6"
-                    step="1"
-                    value={delayValues.dAmount}
-                    className="delay_slider"
-                    name="dAmount"
-                    onChange={(e) =>
-                        setDelayValues((prevFormData) => ({
-                            ...prevFormData,
-                            [e.target.name]: e.target.value,
-                        }))
-                    }
-                />
-            </div>
-            <span className="delay_amount">
-                Amount{" "}
-                <span
-                    className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("delay-amount")}
-                    onMouseOut={() => handleMouseOut("delay-amount")}
-                >
-                    ?
-                </span>
-            </span>
             <div className="delay_submit">
                 <button
                     className="delay_button"
@@ -192,9 +165,6 @@ function Delay({
                 >
                     Reset
                 </button>{" "}
-                <button className="delay_button" onClick={(e) => applyDelay(e)}>
-                    Apply
-                </button>
             </div>
         </div>
     );
