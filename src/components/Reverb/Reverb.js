@@ -13,10 +13,10 @@ function Reverb({
 }) {
     const moreInfo = ["reverb", "reverb-time", "reverb-size", "reverb-amount"];
     const moreInfoFaqs = [
-        "Additional information goes here for reverb!",
-        "Additional information goes here for reverb time!",
-        "Additional information goes here for reverb size!",
-        "Additional information goes here for reverb amount!",
+        "Reverb is what gives sound space. Make your instrument sound like it is inside a room or church using this.",
+        "Time is the amount of milliseconds before a sound reverberates, essentially like an echo.",
+        "Size is how big of a space the reverb is trying to emulate, lower = room or garage, higher = church or cave.",
+        "Amount is the ratio of reverb being used compared to the 'dry' signal, the sound with no reverb.",
     ];
     const initialValues = {
         timeValue: 1,
