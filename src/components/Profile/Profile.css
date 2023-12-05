@@ -1,0 +1,40 @@
+.table-heading{
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+
+.table-container {
+    max-width: 1200px;
+    margin: 100px auto;
+  }
+  
+  #profile {
+   
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #profile td,
+  #profile th {
+    border: 1px solid gray;
+    padding: 8px;
+  }
+  
+  #profile tr:nth-child(even) {
+    background-color: rgb(87, 86, 86)
+  }
+  
+  #profile tr:hover {
+    background-color: #786bb1;
+  }
+  
+  #profile th {
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:  gray;
+    color: black;
+  }

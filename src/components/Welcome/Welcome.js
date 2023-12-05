@@ -23,7 +23,12 @@ function Welcome() {
   }
 
     return (
-        <div className="button-container">
+       <>
+       <div className="welcome-heading">
+       <h2 className="welcome-h2">Welcome to Wavform</h2>
+       <p>Please Make A Selection</p>
+       </div>
+       <div className="button-container">
             <div className="btn-group">
                 <button onClick={handleLessonsNav} className="lm-button">
                     Lesson/Topics
@@ -51,6 +56,7 @@ function Welcome() {
                 </p>
             </div>
         </div>
+        </>
     );
 }
 
