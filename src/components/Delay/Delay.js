@@ -1,7 +1,23 @@
 import { useState, useEffect } from "react";
 import "./Delay.scss";
 import * as Tone from "tone";
-function Delay({ delay, setDelay, delayValues, setDelayValues }) {
+function Delay({
+    delay,
+    setDelay,
+    delayValues,
+    setDelayValues,
+    handleMouseOver,
+    handleMouseOut,
+    displayTooltip,
+    tooltipPosition,
+}) {
+    const moreInfo = ["delay", "delay-time", "delay-feedback", "delay-amount"];
+    const moreInfoFaqs = [
+        "Additional information goes here for delay!",
+        "Additional information goes here for delay time!",
+        "Additional information goes here for delay feedback!",
+        "Additional information goes here for delay amount!",
+    ];
     const initialDelayValues = {
         dTime: 0,
         dAmount: 0,
@@ -34,11 +50,13 @@ function Delay({ delay, setDelay, delayValues, setDelayValues }) {
         // } else {
         //     player.start();
         // }
-        delay.dispose()
-        setDelay(new Tone.FeedbackDelay({
-            delayTime: delayValues.dTime * 0.01,
-            feedback: delayValues.dFeedback * 0.01,
-        }))
+        delay.dispose();
+        setDelay(
+            new Tone.FeedbackDelay({
+                delayTime: delayValues.dTime * 0.01,
+                feedback: delayValues.dFeedback * 0.01,
+            })
+        );
     };
 
     // useEffect(() => {
@@ -51,7 +69,40 @@ function Delay({ delay, setDelay, delayValues, setDelayValues }) {
     }, [delayValues, delay.delayTime, delay.feedback]);
     return (
         <div className="delay">
-            <h2 className="delay_header">Delay</h2>
+            <h2 className="delay_header">
+                Delay{" "}
+                <span
+                    className="tooltip-trigger"
+                    onMouseOver={() => handleMouseOver("delay")}
+                    onMouseOut={() => handleMouseOut("delay")}
+                >
+                    ?
+                </span>
+            </h2>
+            {moreInfo &&
+                moreInfo.map((page, index) => (
+                    <div
+                        className="tooltip-box"
+                        id="tooltip-box"
+                        key={page}
+                        style={{
+                            display: `${
+                                displayTooltip[page] ? "block" : "none"
+                            }`,
+                            position: "absolute",
+                            backgroundColor: "#f9f9f9",
+                            border: "1px solid #ccc",
+                            padding: "10px",
+                            borderRadius: "5px",
+                            boxShadow: "0 0 5px rgba(0, 0, 0, 0.3)",
+                            zIndex: "9999",
+                            left: `${tooltipPosition.x}px`,
+                            top: `${tooltipPosition.y}px`,
+                        }}
+                    >
+                        <p>{moreInfoFaqs[index]}</p>
+                    </div>
+                ))}
             <div className="delay_slider1">
                 <input
                     type="range"
@@ -68,7 +119,16 @@ function Delay({ delay, setDelay, delayValues, setDelayValues }) {
                     }
                 />
             </div>
-            <span className="delay_time">Time</span>
+            <span className="delay_time">
+                Time{" "}
+                <span
+                    className="tooltip-trigger"
+                    onMouseOver={() => handleMouseOver("delay-time")}
+                    onMouseOut={() => handleMouseOut("delay-time")}
+                >
+                    ?
+                </span>
+            </span>
             <div className="delay_slider2">
                 <input
                     type="range"
@@ -85,7 +145,16 @@ function Delay({ delay, setDelay, delayValues, setDelayValues }) {
                     }
                 />
             </div>
-            <span className="delay_feedback">Feedback</span>
+            <span className="delay_feedback">
+                Feedback{" "}
+                <span
+                    className="tooltip-trigger"
+                    onMouseOver={() => handleMouseOver("delay-feedback")}
+                    onMouseOut={() => handleMouseOut("delay-feedback")}
+                >
+                    ?
+                </span>
+            </span>
             <div className="delay_slider3">
                 <input
                     type="range"
@@ -103,7 +172,16 @@ function Delay({ delay, setDelay, delayValues, setDelayValues }) {
                     }
                 />
             </div>
-            <span className="delay_amount">Amount</span>
+            <span className="delay_amount">
+                Amount{" "}
+                <span
+                    className="tooltip-trigger"
+                    onMouseOver={() => handleMouseOver("delay-amount")}
+                    onMouseOut={() => handleMouseOut("delay-amount")}
+                >
+                    ?
+                </span>
+            </span>
             <div className="delay_submit">
                 <button
                     className="delay_button"

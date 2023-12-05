@@ -10,6 +10,7 @@ import Loader from "./components/Loader/Loader";
 import useAuthHooks from "./components/Hooks/Auth/useAuthHooks";
 
 
+const Footer = React.lazy(() => import("./components/Footer/Footer"));
 const About = React.lazy(() => import("./components/About/About"));
 const Login = React.lazy(() => import("./components/Login/Login"));
 const Signup = React.lazy(() => import("./components/Signup/Signup"));
@@ -51,6 +52,7 @@ const [user, setUser] = useAuthHooks();
           <Nav user={user} logout={logout}/>
           {/* <Sidebar /> */}
         </ToggleNavBar>
+
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/welcome" element={<Welcome />} />

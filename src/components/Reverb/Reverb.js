@@ -1,7 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import * as Tone from "tone";
 import "./Reverb.scss";
-function Reverb({ setReverbValues, reverbValues, setReverb, reverb }) {
+function Reverb({
+    setReverbValues,
+    reverbValues,
+    setReverb,
+    reverb,
+    handleMouseOver,
+    handleMouseOut,
+    displayTooltip,
+    tooltipPosition,
+}) {
+    const moreInfo = ["reverb", "reverb-time", "reverb-size", "reverb-amount"];
+    const moreInfoFaqs = [
+        "Additional information goes here for reverb!",
+        "Additional information goes here for reverb time!",
+        "Additional information goes here for reverb size!",
+        "Additional information goes here for reverb amount!",
+    ];
     const initialValues = {
         timeValue: 1,
         sizeValue: 1,
@@ -12,12 +28,14 @@ function Reverb({ setReverbValues, reverbValues, setReverb, reverb }) {
 
     const applyReverb = () => {
         // Reverb effect
-        reverb.dispose()
-        setReverb(new Tone.Reverb({
-            decay: reverbValues?.timeValue / 10,
-            preDelay: reverbValues?.sizeValue / 10,
-            wet: reverbValues?.amountValue / 100,
-        }).toDestination());
+        reverb.dispose();
+        setReverb(
+            new Tone.Reverb({
+                decay: reverbValues?.timeValue / 10,
+                preDelay: reverbValues?.sizeValue / 10,
+                wet: reverbValues?.amountValue / 100,
+            }).toDestination()
+        );
 
         // Oscillator
         // const oscillator = new Tone.Oscillator(440, "sine").connect(reverb);
@@ -54,7 +72,40 @@ function Reverb({ setReverbValues, reverbValues, setReverb, reverb }) {
 
     return (
         <div className="reverb">
-            <h2 className="reverb-header">Reverb</h2>
+            <h2 className="reverb-header">
+                Reverb{" "}
+                <span
+                    className="tooltip-trigger"
+                    onMouseOver={() => handleMouseOver("reverb")}
+                    onMouseOut={() => handleMouseOut("reverb")}
+                >
+                    ?
+                </span>
+            </h2>
+            {moreInfo &&
+                moreInfo.map((page, index) => (
+                    <div
+                        className="tooltip-box"
+                        id="tooltip-box"
+                        key={page}
+                        style={{
+                            display: `${
+                                displayTooltip[page] ? "block" : "none"
+                            }`,
+                            position: "absolute",
+                            backgroundColor: "#f9f9f9",
+                            border: "1px solid #ccc",
+                            padding: "10px",
+                            borderRadius: "5px",
+                            boxShadow: "0 0 5px rgba(0, 0, 0, 0.3)",
+                            zIndex: "9999",
+                            left: `${tooltipPosition.x}px`,
+                            top: `${tooltipPosition.y}px`,
+                        }}
+                    >
+                        <p>{moreInfoFaqs[index]}</p>
+                    </div>
+                ))}
             <div className="reverb-header__timediv">
                 <input
                     type="range"
@@ -66,7 +117,16 @@ function Reverb({ setReverbValues, reverbValues, setReverb, reverb }) {
                     onChange={valueHandler}
                 />
             </div>
-            <span className="reverb-time">Time</span>
+            <span className="reverb-time">
+                Time{" "}
+                <span
+                    className="tooltip-trigger"
+                    onMouseOver={() => handleMouseOver("reverb-time")}
+                    onMouseOut={() => handleMouseOut("reverb-time")}
+                >
+                    ?
+                </span>
+            </span>
             <div className="reverb-header__sizediv">
                 <input
                     type="range"
@@ -78,7 +138,16 @@ function Reverb({ setReverbValues, reverbValues, setReverb, reverb }) {
                     onChange={valueHandler}
                 />
             </div>
-            <span className="reverb-size">Size</span>
+            <span className="reverb-size">
+                Size{" "}
+                <span
+                    className="tooltip-trigger"
+                    onMouseOver={() => handleMouseOver("reverb-size")}
+                    onMouseOut={() => handleMouseOut("reverb-size")}
+                >
+                    ?
+                </span>
+            </span>
             <div className="reverb-header__amountdiv">
                 <input
                     type="range"
@@ -90,7 +159,16 @@ function Reverb({ setReverbValues, reverbValues, setReverb, reverb }) {
                     onChange={valueHandler}
                 />
             </div>{" "}
-            <span className="reverb-amount">Amount</span>
+            <span className="reverb-amount">
+                Amount{" "}
+                <span
+                    className="tooltip-trigger"
+                    onMouseOver={() => handleMouseOver("reverb-amount")}
+                    onMouseOut={() => handleMouseOut("reverb-amount")}
+                >
+                    ?
+                </span>
+            </span>
             <div className="reverb-header__btndiv">
                 <button className="reverb-btn" onClick={resetValues}>
                     Reset

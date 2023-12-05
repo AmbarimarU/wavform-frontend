@@ -13,7 +13,9 @@ function StepSequencer({
   grid,
   setGrid,
   handlePlayButton,
-  isSampler2
+  octave,
+  isSynth,
+  isSampler2,
 }) {
   // const [sequencer, setSequencer] = useState({
   //   beat: 0,
@@ -24,6 +26,7 @@ function StepSequencer({
   // });
 
   const [beat, setBeat] = useState(0);
+  const [container, setContainer] = useState({});
 
   const makeGrid = (notes) => {
     // our "notation" will consist of an array with 6 sub arrays
@@ -32,17 +35,34 @@ function StepSequencer({
     // declare the parent array to hold each row subarray
     const rows = [];
 
-    for (const note of notes) {
+    for (let i = 0; i < notes.length; i++) {
       // declare the subarray
       const row = [];
       // each subarray contains multiple objects that have an assigned note
       // and a boolean to flag whether they are active.
       // each element in the subarray corresponds to one eighth note.
-      for (let i = 0; i < 8; i++) {
-        row.push({
-          note: note,
-          isActive: false,
-        });
+      for (let j = 0; j < 8; j++) {
+        let combinedIndex = String(i) + String(j);
+
+        let noteObject = {
+          note: notes[i],
+          isActive: false
+        }
+
+        if (Object.keys(container).length > 1) {
+          if (container[combinedIndex]) {
+            noteObject = {
+              ...noteObject,
+              isActive: true
+            };
+
+            row.push(noteObject);
+          } else {
+            row.push(noteObject);
+          }
+        } else {
+          row.push(noteObject);
+        }
       }
       rows.push(row);
     }
@@ -51,33 +71,47 @@ function StepSequencer({
     return rows;
   };
 
-  useEffect(() => {
-    if (isSampler2) {
-      let notes = sequencer.notes;
+  const octaveChange = (noteArray, octave) => {
+    let newNotes = [];
 
-      let newNotes = []
+    for (let i = 0; i < noteArray.length; i++) {
+      if (noteArray[i].length === 2) {
+        let newNoteString = noteArray[i][0];
 
-      for (let i = 0; i < notes.length; i++) {
-        if (notes[i].length === 2) {
-          let newNoteString = notes[i][0]
+        newNoteString =
+          newNoteString + String(Number(noteArray[i][1]) + Number(octave));
 
-          newNoteString = newNoteString + String(Number(notes[i][1]) - 1)
+        newNotes.push(newNoteString);
+      } else {
+        let newNoteString = noteArray[i][0] + noteArray[i][1];
 
-          newNotes.push(newNoteString)
-        } else {
-          let newNoteString = notes[i][0] + notes[i][1]
+        newNoteString =
+          newNoteString + String(Number(noteArray[i][2]) + Number(octave));
 
-          newNoteString = newNoteString + String(Number(notes[i][2]) - 1)
-
-          newNotes.push(newNoteString)
-        }
+        newNotes.push(newNoteString);
       }
+    }
+
+    return newNotes;
+  };
+
+  useEffect(() => {
+    let notes = sequencer.notes;
+
+    // setGrid(makeGrid(notes));
+
+    console.log(container)
+
+    if (octave !== 0) {
+      let newNotes = octaveChange(notes, octave);
 
       setGrid(makeGrid(newNotes));
     } else {
-      setGrid(makeGrid(sequencer.notes));
+      setGrid(makeGrid(notes));
     }
-  }, []);
+
+    console.log(grid)
+  }, [octave, sequencer.notes]);
 
   // const makeSynths = (count) => {
   //     // each synth can only play one note at a time.
@@ -129,12 +163,12 @@ function StepSequencer({
   };
 
   useEffect(() => {
-    if (sequencer.started) {
+    if (sequencer.started && !sequencer.playing) {
       Tone.Transport.cancel();
       Tone.Transport.bpm.value = sequencer.tempo;
       Tone.Transport.scheduleRepeat(repeat, "8n");
     }
-  }, [instrumentArray]);
+  }, [instrumentArray, octave]);
 
   const handleNoteClick = (clickedRowIndex, clickedNoteIndex, e) => {
     // iterating through the grid
@@ -148,6 +182,11 @@ function StepSequencer({
           e.target["data-active"] = String(!note.isActive);
 
           note.isActive = !note.isActive;
+
+          setContainer({
+            ...container,
+            [String(rowIndex) + String(noteIndex)]: note.isActive
+          })
         }
       });
     });
