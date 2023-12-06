@@ -361,12 +361,6 @@ function MusicTool() {
                 </select>
                 <select
                     onChange={(e) => {
-                        let oldSamplers = samplerArray1;
-
-                        for (let sampler of oldSamplers) {
-                            sampler.dispose();
-                        }
-
                         let newSamplers = [];
 
                         for (let i = 0; i < sequencer.notes.length; i++) {
@@ -389,14 +383,7 @@ function MusicTool() {
                 </select>
                 <select
                     onChange={(e) => {
-                        let oldSamplers = samplerArray2;
-
-                        for (let sampler of oldSamplers) {
-                            sampler.dispose();
-                        }
-
                         let newSamplers = [];
-
                         for (let i = 0; i < sequencer.notes.length; i++) {
                             let newSampler = new Tone.Sampler(
                                 samples[e.target.value.toLowerCase()]
