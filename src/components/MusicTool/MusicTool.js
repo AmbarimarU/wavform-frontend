@@ -126,36 +126,73 @@ function MusicTool() {
     const [samplerArray1, setSamplerArray1] = useState([]);
     const [samplerArray2, setSamplerArray2] = useState([]);
 
-    const samples = [
-        {
-            name: "Casio",
-            notes: ["A1", "A2", "B1", "C2", "D2"],
-            url: "https://tonejs.github.io/audio/casio/",
+    const samples = {
+        piano: {
+            A1: require("./audio/piano/A1.mp3"),
+            A2: require("./audio/piano/A2.mp3"),
+            A3: require("./audio/piano/A3.mp3"),
+            A4: require("./audio/piano/A4.mp3"),
+            A5: require("./audio/piano/A5.mp3"),
         },
-        {
-            name: "Salamander",
-            notes: ["A0", "A1", "A2", "A3", "A4"],
-            url: "https://tonejs.github.io/audio/salamander/",
+        epiano: {
+            A1: require("./audio/epiano/A1.mp3"),
+            A2: require("./audio/epiano/A2.mp3"),
+            A3: require("./audio/epiano/A3.mp3"),
+            A4: require("./audio/epiano/A4.mp3"),
+            A5: require("./audio/epiano/A5.mp3"),
         },
-    ];
+        bell: {
+            A1: require("./audio/bell/A1.mp3"),
+            A2: require("./audio/bell/A2.mp3"),
+            A3: require("./audio/bell/A3.mp3"),
+            A4: require("./audio/bell/A4.mp3"),
+            A5: require("./audio/bell/A5.mp3"),
+        },
+        harp: {
+            A1: require("./audio/harp/A1.mp3"),
+            A2: require("./audio/harp/A2.mp3"),
+            A3: require("./audio/harp/A3.mp3"),
+            A4: require("./audio/harp/A4.mp3"),
+            A5: require("./audio/harp/A5.mp3"),
+        },
+        vox: {
+            A1: require("./audio/vox/A1.mp3"),
+            A2: require("./audio/vox/A2.mp3"),
+            A3: require("./audio/vox/A3.mp3"),
+            A4: require("./audio/vox/A4.mp3"),
+            A5: require("./audio/vox/A5.mp3"),
+        },
+        808: {
+            F4: require("./audio/808/808 Clap.wav"),
+            "D#4": require("./audio/808/808 Hat.wav"),
+            D4: require("./audio/808/808 Kick.wav"),
+            C4: require("./audio/808/808 Maraca.wav"),
+            "A#3": require("./audio/808/808 Rimshot.wav"),
+            "G#3": require("./audio/808/808 Snare.wav"),
+            G3: require("./audio/808/808 Tom Hi.wav"),
+            F3: require("./audio/808/808 Tom Low.wav"),
+        },
+        909: {
+            F4: require("./audio/909/909 Clap.wav"),
+            "D#4": require("./audio/909/909 Hat Closed.wav"),
+            D4: require("./audio/909/909 Hat Open.wav"),
+            C4: require("./audio/909/909 Kick.wav"),
+            "A#3": require("./audio/909/909 Rim Shot.wav"),
+            "G#3": require("./audio/909/909 Snare.wav"),
+            G3: require("./audio/909/909 Tom Hi .wav"),
+            F3: require("./audio/909/909 Tom Low.wav"),
+        },
+    };
 
     const loadSamplers = (count) => {
-        let urlsObj = {};
-
-        samples[0].notes.forEach((note) => {
-            urlsObj[note] = `${note}.mp3`;
-        });
-
         let samplers = [];
 
         for (let i = 0; i < count; i++) {
-            let newSampler = new Tone.Sampler({
-                urls: urlsObj,
-
-                // baseUrl can only use for different instruments sound
-                // checking if the selectedSample is a boolean
-                baseUrl: samples[0] ? samples[0].url : null,
-            }).chain(delay, reverb, Tone.Destination);
+            let newSampler = new Tone.Sampler(samples.piano).chain(
+                delay,
+                reverb,
+                Tone.Destination
+            );
             samplers.push(newSampler);
         }
 
@@ -164,13 +201,11 @@ function MusicTool() {
         samplers = [];
 
         for (let i = 0; i < count; i++) {
-            let newSampler = new Tone.Sampler({
-                urls: urlsObj,
-
-                // baseUrl can only use for different instruments sound
-                // checking if the selectedSample is a boolean
-                baseUrl: samples[0] ? samples[0].url : null,
-            }).chain(delay, reverb, Tone.Destination);
+            let newSampler = new Tone.Sampler(samples.harp).chain(
+                delay,
+                reverb,
+                Tone.Destination
+            );
             samplers.push(newSampler);
         }
 
@@ -324,11 +359,61 @@ function MusicTool() {
                     <option>square</option>
                     <option>sawtooth</option>
                 </select>
-                <select>
-                    <option>Sampler</option>
+                <select
+                    onChange={(e) => {
+                        let oldSamplers = samplerArray1;
+
+                        for (let sampler of oldSamplers) {
+                            sampler.dispose();
+                        }
+
+                        let newSamplers = [];
+
+                        for (let i = 0; i < sequencer.notes.length; i++) {
+                            let newSampler = new Tone.Sampler(
+                                samples[e.target.value.toLowerCase()]
+                            ).chain(delay, reverb, Tone.Destination);
+                            newSamplers.push(newSampler);
+                        }
+                        setSamplerArray1(newSamplers);
+                    }}
+                    disabled={isPlaying ? 1 : 0}
+                >
+                    <option>Piano</option>
+                    <option>Bell</option>
+                    <option>Epiano</option>
+                    <option>Harp</option>
+                    <option>Vox</option>
+                    <option>808</option>
+                    <option>909</option>
                 </select>
-                <select>
-                    <option>Drums/Sounds</option>
+                <select
+                    onChange={(e) => {
+                        let oldSamplers = samplerArray2;
+
+                        for (let sampler of oldSamplers) {
+                            sampler.dispose();
+                        }
+
+                        let newSamplers = [];
+
+                        for (let i = 0; i < sequencer.notes.length; i++) {
+                            let newSampler = new Tone.Sampler(
+                                samples[e.target.value.toLowerCase()]
+                            ).chain(delay, reverb, Tone.Destination);
+                            newSamplers.push(newSampler);
+                        }
+                        setSamplerArray2(newSamplers);
+                    }}
+                    disabled={isPlaying ? 1 : 0}
+                >
+                    <option>Piano</option>
+                    <option>Bell</option>
+                    <option>Epiano</option>
+                    <option selected="selected">Harp</option>
+                    <option>Vox</option>
+                    <option>808</option>
+                    <option>909</option>
                 </select>
             </div>
             <div className="musictool_side">Notes / Sounds</div>
