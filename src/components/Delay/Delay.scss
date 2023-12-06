@@ -3,9 +3,11 @@
     padding-left: 5px;
     padding-bottom: 5px;
     margin: 10px;
-    border: 3px black solid;
-    border-radius: 25px;
+    border: 1px white solid;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     display: grid;
+    background-color: rgb(248, 249, 250);
     grid-template-areas:
         "header header"
         "slider1 time"
@@ -51,9 +53,10 @@
         }
     }
     &_button {
-        background-color: #2600ff;
-        border: none;
+        background-color: rgb(55, 154, 230);
+        border-radius: 5px;
         color: white;
+        border: 1px white solid;
         padding: 5px 25px;
         text-align: center;
         text-decoration: none;
