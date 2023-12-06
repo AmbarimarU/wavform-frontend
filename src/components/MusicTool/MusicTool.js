@@ -126,36 +126,73 @@ function MusicTool() {
     const [samplerArray1, setSamplerArray1] = useState([]);
     const [samplerArray2, setSamplerArray2] = useState([]);
 
-    const samples = [
-        {
-            name: "Casio",
-            notes: ["A1", "A2", "B1", "C2", "D2"],
-            url: "https://tonejs.github.io/audio/casio/",
+    const samples = {
+        piano: {
+            A1: require("./audio/piano/A1.mp3"),
+            A2: require("./audio/piano/A2.mp3"),
+            A3: require("./audio/piano/A3.mp3"),
+            A4: require("./audio/piano/A4.mp3"),
+            A5: require("./audio/piano/A5.mp3"),
         },
-        {
-            name: "Salamander",
-            notes: ["A0", "A1", "A2", "A3", "A4"],
-            url: "https://tonejs.github.io/audio/salamander/",
+        epiano: {
+            A1: require("./audio/epiano/A1.mp3"),
+            A2: require("./audio/epiano/A2.mp3"),
+            A3: require("./audio/epiano/A3.mp3"),
+            A4: require("./audio/epiano/A4.mp3"),
+            A5: require("./audio/epiano/A5.mp3"),
         },
-    ];
+        bell: {
+            A1: require("./audio/bell/A1.mp3"),
+            A2: require("./audio/bell/A2.mp3"),
+            A3: require("./audio/bell/A3.mp3"),
+            A4: require("./audio/bell/A4.mp3"),
+            A5: require("./audio/bell/A5.mp3"),
+        },
+        harp: {
+            A1: require("./audio/harp/A1.mp3"),
+            A2: require("./audio/harp/A2.mp3"),
+            A3: require("./audio/harp/A3.mp3"),
+            A4: require("./audio/harp/A4.mp3"),
+            A5: require("./audio/harp/A5.mp3"),
+        },
+        vox: {
+            A1: require("./audio/vox/A1.mp3"),
+            A2: require("./audio/vox/A2.mp3"),
+            A3: require("./audio/vox/A3.mp3"),
+            A4: require("./audio/vox/A4.mp3"),
+            A5: require("./audio/vox/A5.mp3"),
+        },
+        808: {
+            F4: require("./audio/808/808 Clap.wav"),
+            "D#4": require("./audio/808/808 Hat.wav"),
+            D4: require("./audio/808/808 Kick.wav"),
+            C4: require("./audio/808/808 Maraca.wav"),
+            "A#3": require("./audio/808/808 Rimshot.wav"),
+            "G#3": require("./audio/808/808 Snare.wav"),
+            G3: require("./audio/808/808 Tom Hi.wav"),
+            F3: require("./audio/808/808 Tom Low.wav"),
+        },
+        909: {
+            F4: require("./audio/909/909 Clap.wav"),
+            "D#4": require("./audio/909/909 Hat Closed.wav"),
+            D4: require("./audio/909/909 Hat Open.wav"),
+            C4: require("./audio/909/909 Kick.wav"),
+            "A#3": require("./audio/909/909 Rim Shot.wav"),
+            "G#3": require("./audio/909/909 Snare.wav"),
+            G3: require("./audio/909/909 Tom Hi .wav"),
+            F3: require("./audio/909/909 Tom Low.wav"),
+        },
+    };
 
     const loadSamplers = (count) => {
-        let urlsObj = {};
-
-        samples[0].notes.forEach((note) => {
-            urlsObj[note] = `${note}.mp3`;
-        });
-
         let samplers = [];
 
         for (let i = 0; i < count; i++) {
-            let newSampler = new Tone.Sampler({
-                urls: urlsObj,
-
-                // baseUrl can only use for different instruments sound
-                // checking if the selectedSample is a boolean
-                baseUrl: samples[0] ? samples[0].url : null,
-            }).chain(delay, reverb, Tone.Destination);
+            let newSampler = new Tone.Sampler(samples.piano).chain(
+                delay,
+                reverb,
+                Tone.Destination
+            );
             samplers.push(newSampler);
         }
 
@@ -164,13 +201,11 @@ function MusicTool() {
         samplers = [];
 
         for (let i = 0; i < count; i++) {
-            let newSampler = new Tone.Sampler({
-                urls: urlsObj,
-
-                // baseUrl can only use for different instruments sound
-                // checking if the selectedSample is a boolean
-                baseUrl: samples[0] ? samples[0].url : null,
-            }).chain(delay, reverb, Tone.Destination);
+            let newSampler = new Tone.Sampler(samples.harp).chain(
+                delay,
+                reverb,
+                Tone.Destination
+            );
             samplers.push(newSampler);
         }
 
@@ -197,7 +232,6 @@ function MusicTool() {
     const handlePlayButton = async (e) => {
         // toggle Tone.Trasport and the flag variable.
         if (sequencer.playing) {
-            e.target.innerText = "Play";
             Tone.Transport.stop();
             setSequencer({
                 ...sequencer,
@@ -205,8 +239,6 @@ function MusicTool() {
             });
             setIsPlaying(false);
         } else {
-            console.log("stop - playing");
-            e.target.innerText = "Stop";
             Tone.Transport.start();
             setSequencer({
                 ...sequencer,
@@ -222,107 +254,6 @@ function MusicTool() {
             Tone.Transport.start();
         }
     }, [octaves]);
-
-    const handleTransposition = (e) => {
-        let newNotes = [];
-
-        let notesCopy = sequencer.notes;
-
-        for (let i = 0; i < sequencer.notes.length; i++) {
-            switch (notesCopy[i]) {
-                case "A":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("G#");
-                    } else {
-                        newNotes.push("A#");
-                    }
-                    break;
-                case "A#":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("A");
-                    } else {
-                        newNotes.push("B");
-                    }
-                    break;
-                case "B":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("A#");
-                    } else {
-                        newNotes.push("C");
-                    }
-                    break;
-                case "C":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("B");
-                    } else {
-                        newNotes.push("C#");
-                    }
-                    break;
-                case "C#":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("C");
-                    } else {
-                        newNotes.push("D");
-                    }
-                    break;
-                case "D":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("C#");
-                    } else {
-                        newNotes.push("D#");
-                    }
-                    break;
-                case "D#":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("D");
-                    } else {
-                        newNotes.push("E");
-                    }
-                    break;
-                case "E":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("D#");
-                    } else {
-                        newNotes.push("F");
-                    }
-                    break;
-                case "F":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("E");
-                    } else {
-                        newNotes.push("F#");
-                    }
-                    break;
-                case "F#":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("F");
-                    } else {
-                        newNotes.push("G");
-                    }
-                    break;
-                case "G":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("F#");
-                    } else {
-                        newNotes.push("G#");
-                    }
-                    break;
-                case "G#":
-                    if (Number(e.target.value) < sequencer.transposition) {
-                        newNotes.push("G");
-                    } else {
-                        newNotes.push("A");
-                    }
-                    break;
-            }
-        }
-
-        setSequencer({
-            ...sequencer,
-            notes: newNotes,
-            transposition: e.target.value,
-        });
-    };
 
     const handleOctaveChange = (e) => {
         let id = e.target.id;
@@ -348,6 +279,68 @@ function MusicTool() {
     return (
         <div className="musictool">
             <div className="musictool_header">
+                <button
+                    className="musictool_selector"
+                    onClick={(e) => {
+                        let synthSequencer = document.getElementsByClassName(
+                            "musictool_sequencer"
+                        )[0];
+                        let sampler1Sequencer = document.getElementsByClassName(
+                            "musictool_sequencer2"
+                        )[0];
+                        let sampler2Sequencer = document.getElementsByClassName(
+                            "musictool_sequencer3"
+                        )[0];
+
+                        let synthOctave =
+                            document.getElementsByClassName("synth_octave")[0];
+                        let sampler1Octave =
+                            document.getElementsByClassName(
+                                "sampler1_octave"
+                            )[0];
+                        let sampler2Octave =
+                            document.getElementsByClassName(
+                                "sampler2_octave"
+                            )[0];
+
+                        if (e.target.innerText === "Synth") {
+                            e.target.innerText = "Sampler 1";
+
+                            synthSequencer.style.visibility = "hidden";
+                            sampler2Sequencer.style.visibility = "hidden";
+
+                            synthOctave.style.visibility = "hidden";
+                            sampler2Octave.style.visibility = "hidden";
+
+                            sampler1Sequencer.style.visibility = "visible";
+                            sampler1Octave.style.visibility = "visible";
+                        } else if (e.target.innerText === "Sampler 1") {
+                            e.target.innerText = "Sampler 2";
+
+                            synthSequencer.style.visibility = "hidden";
+                            sampler1Sequencer.style.visibility = "hidden";
+
+                            synthOctave.style.visibility = "hidden";
+                            sampler1Octave.style.visibility = "hidden";
+
+                            sampler2Sequencer.style.visibility = "visible";
+                            sampler2Octave.style.visibility = "visible";
+                        } else {
+                            e.target.innerText = "Synth";
+
+                            sampler1Sequencer.style.visibility = "hidden";
+                            sampler2Sequencer.style.visibility = "hidden";
+
+                            sampler1Octave.style.visibility = "hidden";
+                            sampler2Octave.style.visibility = "hidden";
+
+                            synthSequencer.style.visibility = "visible";
+                            synthOctave.style.visibility = "visible";
+                        }
+                    }}
+                >
+                    Synth
+                </button>
                 <select
                     onChange={(e) => {
                         synths = synthArray;
@@ -366,75 +359,53 @@ function MusicTool() {
                     <option>square</option>
                     <option>sawtooth</option>
                 </select>
-                <select>
-                    <option>Sampler</option>
+                <select
+                    onChange={(e) => {
+                        let newSamplers = [];
+
+                        for (let i = 0; i < sequencer.notes.length; i++) {
+                            let newSampler = new Tone.Sampler(
+                                samples[e.target.value.toLowerCase()]
+                            ).chain(delay, reverb, Tone.Destination);
+                            newSamplers.push(newSampler);
+                        }
+                        setSamplerArray1(newSamplers);
+                    }}
+                    disabled={isPlaying ? 1 : 0}
+                >
+                    <option>Piano</option>
+                    <option>Bell</option>
+                    <option>Epiano</option>
+                    <option>Harp</option>
+                    <option>Vox</option>
+                    <option>808</option>
+                    <option>909</option>
                 </select>
-                <select>
-                    <option>Drums/Sounds</option>
+                <select
+                    onChange={(e) => {
+                        let newSamplers = [];
+                        for (let i = 0; i < sequencer.notes.length; i++) {
+                            let newSampler = new Tone.Sampler(
+                                samples[e.target.value.toLowerCase()]
+                            ).chain(delay, reverb, Tone.Destination);
+                            newSamplers.push(newSampler);
+                        }
+                        setSamplerArray2(newSamplers);
+                    }}
+                    disabled={isPlaying ? 1 : 0}
+                >
+                    <option>Piano</option>
+                    <option>Bell</option>
+                    <option>Epiano</option>
+                    <option selected="selected">Harp</option>
+                    <option>Vox</option>
+                    <option>808</option>
+                    <option>909</option>
                 </select>
             </div>
             <div className="musictool_side">Notes / Sounds</div>
-            {/* <label htmlFor="transpose">Transpose</label>
-      <input type="number" id="transpose" min="-6" max="6" value={sequencer.transposition} onInput={(e) => handleTransposition(e)} /> */}
-            <button
-                className="musictool_selector"
-                onClick={(e) => {
-                    let synthSequencer = document.getElementsByClassName(
-                        "musictool_sequencer"
-                    )[0];
-                    let sampler1Sequencer = document.getElementsByClassName(
-                        "musictool_sequencer2"
-                    )[0];
-                    let sampler2Sequencer = document.getElementsByClassName(
-                        "musictool_sequencer3"
-                    )[0];
-
-                    let synthOctave =
-                        document.getElementsByClassName("synth_octave")[0];
-                    let sampler1Octave =
-                        document.getElementsByClassName("sampler1_octave")[0];
-                    let sampler2Octave =
-                        document.getElementsByClassName("sampler2_octave")[0];
-
-                    if (e.target.innerText === "Synth") {
-                        e.target.innerText = "Sampler 1";
-
-                        synthSequencer.style.visibility = "hidden";
-                        sampler2Sequencer.style.visibility = "hidden";
-
-                        synthOctave.style.visibility = "hidden";
-                        sampler2Octave.style.visibility = "hidden";
-
-                        sampler1Sequencer.style.visibility = "visible";
-                        sampler1Octave.style.visibility = "visible";
-                    } else if (e.target.innerText === "Sampler 1") {
-                        e.target.innerText = "Sampler 2";
-
-                        synthSequencer.style.visibility = "hidden";
-                        sampler1Sequencer.style.visibility = "hidden";
-
-                        synthOctave.style.visibility = "hidden";
-                        sampler1Octave.style.visibility = "hidden";
-
-                        sampler2Sequencer.style.visibility = "visible";
-                        sampler2Octave.style.visibility = "visible";
-                    } else {
-                        e.target.innerText = "Synth";
-
-                        sampler1Sequencer.style.visibility = "hidden";
-                        sampler2Sequencer.style.visibility = "hidden";
-
-                        sampler1Octave.style.visibility = "hidden";
-                        sampler2Octave.style.visibility = "hidden";
-
-                        synthSequencer.style.visibility = "visible";
-                        synthOctave.style.visibility = "visible";
-                    }
-                }}
-            >
-                Synth
-            </button>
             <div className="musictool_sequencer">
+                {" "}
                 <label htmlFor="synth-octave">Octave</label>
                 <input
                     id="synth-octave"
@@ -444,21 +415,19 @@ function MusicTool() {
                     max="2"
                     value={octaves.synth}
                     onInput={(e) => handleOctaveChange(e)}
+                    disabled={isPlaying ? 1 : 0}
                 />
                 <Sequencer
                     instrumentArray={synthArray}
                     sequencer={sequencer}
                     setSequencer={setSequencer}
-                    setIsPlaying={setIsPlaying}
                     grid={grid1}
                     setGrid={setGrid1}
-                    handlePlayButton={handlePlayButton}
                     octave={octaves.synth}
-                    isSynth={true}
-                    isSampler2={false}
                 />
             </div>
             <div className="musictool_sequencer2">
+                {" "}
                 <label htmlFor="sampler1-octave">Octave</label>
                 <input
                     id="sampler1-octave"
@@ -473,16 +442,13 @@ function MusicTool() {
                     instrumentArray={samplerArray1}
                     sequencer={sequencer}
                     setSequencer={setSequencer}
-                    setIsPlaying={setIsPlaying}
                     grid={grid2}
                     setGrid={setGrid2}
-                    handlePlayButton={handlePlayButton}
                     octave={octaves.sampler1}
-                    isSynth={false}
-                    isSampler2={false}
                 />
             </div>
             <div className="musictool_sequencer3">
+                {" "}
                 <label htmlFor="sampler2-octave">Octave</label>
                 <input
                     id="sampler2-octave"
@@ -497,25 +463,18 @@ function MusicTool() {
                     instrumentArray={samplerArray2}
                     sequencer={sequencer}
                     setSequencer={setSequencer}
-                    setIsPlaying={setIsPlaying}
                     grid={grid3}
                     setGrid={setGrid3}
-                    handlePlayButton={handlePlayButton}
                     octave={octaves.sampler2}
-                    isSynth={false}
-                    isSampler2={true}
                 />
             </div>
-            <div className="sequencer-bottom">
+            <div className="musictool_bottom">
                 <button
                     className="sequencer-button"
                     onClick={(e) => handlePlayButton(e)}
                 >
-                    Play
+                    {isPlaying ? "Stop" : "Play"}
                 </button>
-            </div>
-            <div className="musictool_effects">
-                <h3>Effects</h3>
             </div>
             <div className="musictool_reverb">
                 <Reverb
