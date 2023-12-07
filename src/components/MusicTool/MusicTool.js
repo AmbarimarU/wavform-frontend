@@ -303,105 +303,148 @@ function MusicTool() {
                                 "sampler2_octave"
                             )[0];
 
+                        let synthDropdown =
+                            document.getElementsByClassName(
+                                "synth_dropdown"
+                            )[0];
+                        let sampler1Dropdown =
+                            document.getElementsByClassName(
+                                "sampler1_dropdown"
+                            )[0];
+                        let sampler2Dropdown =
+                            document.getElementsByClassName(
+                                "sampler2_dropdown"
+                            )[0];
                         if (e.target.innerText === "Synth") {
                             e.target.innerText = "Sampler 1";
 
                             synthSequencer.style.visibility = "hidden";
-                            sampler2Sequencer.style.visibility = "hidden";
-
                             synthOctave.style.visibility = "hidden";
+                            synthDropdown.style.visibility = "hidden";
+
                             sampler2Octave.style.visibility = "hidden";
+                            sampler2Sequencer.style.visibility = "hidden";
+                            sampler2Dropdown.style.visibility = "hidden";
 
                             sampler1Sequencer.style.visibility = "visible";
                             sampler1Octave.style.visibility = "visible";
+                            sampler1Dropdown.style.visibility = "visible";
                         } else if (e.target.innerText === "Sampler 1") {
                             e.target.innerText = "Sampler 2";
 
                             synthSequencer.style.visibility = "hidden";
-                            sampler1Sequencer.style.visibility = "hidden";
-
                             synthOctave.style.visibility = "hidden";
+                            synthDropdown.style.visibility = "hidden";
+
+                            sampler1Sequencer.style.visibility = "hidden";
                             sampler1Octave.style.visibility = "hidden";
+                            sampler1Dropdown.style.visibility = "hidden";
 
                             sampler2Sequencer.style.visibility = "visible";
                             sampler2Octave.style.visibility = "visible";
+                            sampler2Dropdown.style.visibility = "visible";
                         } else {
                             e.target.innerText = "Synth";
 
                             sampler1Sequencer.style.visibility = "hidden";
-                            sampler2Sequencer.style.visibility = "hidden";
-
                             sampler1Octave.style.visibility = "hidden";
+                            sampler1Dropdown.style.visibility = "hidden";
+
+                            sampler2Sequencer.style.visibility = "hidden";
                             sampler2Octave.style.visibility = "hidden";
+                            sampler2Dropdown.style.visibility = "hidden";
 
                             synthSequencer.style.visibility = "visible";
                             synthOctave.style.visibility = "visible";
+                            synthDropdown.style.visibility = "visible";
                         }
                     }}
                 >
                     Synth
                 </button>
-                <select
-                    onChange={(e) => {
-                        synths = synthArray;
-                        for (let i = 0; i < synths.length; i++) {
-                            synths[i].set({
-                                oscillator: { type: e.target.value },
-                            });
-                        }
-                        setSynthArray(synths);
-                        setOscillatorType(e.target.value);
-                    }}
-                    disabled={isPlaying ? 1 : 0}
-                >
-                    <option>sine</option>
-                    <option>triangle</option>
-                    <option>square</option>
-                    <option>sawtooth</option>
-                </select>
-                <select
-                    onChange={(e) => {
-                        let newSamplers = [];
+                <div className="select-container">
+                    <select
+                        className="synth_dropdown"
+                        style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                        }}
+                        onChange={(e) => {
+                            synths = synthArray;
+                            for (let i = 0; i < synths.length; i++) {
+                                synths[i].set({
+                                    oscillator: { type: e.target.value },
+                                });
+                            }
+                            setSynthArray(synths);
+                            setOscillatorType(e.target.value);
+                        }}
+                        disabled={isPlaying ? 1 : 0}
+                    >
+                        <option>sine</option>
+                        <option>triangle</option>
+                        <option>square</option>
+                        <option>sawtooth</option>
+                    </select>
+                    <select
+                        style={{
+                            visibility: "hidden",
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                        }}
+                        className="sampler1_dropdown"
+                        onChange={(e) => {
+                            let newSamplers = [];
 
-                        for (let i = 0; i < sequencer.notes.length; i++) {
-                            let newSampler = new Tone.Sampler(
-                                samples[e.target.value.toLowerCase()]
-                            ).chain(delay, reverb, Tone.Destination);
-                            newSamplers.push(newSampler);
-                        }
-                        setSamplerArray1(newSamplers);
-                    }}
-                    disabled={isPlaying ? 1 : 0}
-                >
-                    <option>Piano</option>
-                    <option>Bell</option>
-                    <option>Epiano</option>
-                    <option>Harp</option>
-                    <option>Vox</option>
-                    <option>808</option>
-                    <option>909</option>
-                </select>
-                <select
-                    onChange={(e) => {
-                        let newSamplers = [];
-                        for (let i = 0; i < sequencer.notes.length; i++) {
-                            let newSampler = new Tone.Sampler(
-                                samples[e.target.value.toLowerCase()]
-                            ).chain(delay, reverb, Tone.Destination);
-                            newSamplers.push(newSampler);
-                        }
-                        setSamplerArray2(newSamplers);
-                    }}
-                    disabled={isPlaying ? 1 : 0}
-                >
-                    <option>Piano</option>
-                    <option>Bell</option>
-                    <option>Epiano</option>
-                    <option selected="selected">Harp</option>
-                    <option>Vox</option>
-                    <option>808</option>
-                    <option>909</option>
-                </select>
+                            for (let i = 0; i < sequencer.notes.length; i++) {
+                                let newSampler = new Tone.Sampler(
+                                    samples[e.target.value.toLowerCase()]
+                                ).chain(delay, reverb, Tone.Destination);
+                                newSamplers.push(newSampler);
+                            }
+                            setSamplerArray1(newSamplers);
+                        }}
+                        disabled={isPlaying ? 1 : 0}
+                    >
+                        <option>Piano</option>
+                        <option>Bell</option>
+                        <option>Epiano</option>
+                        <option>Harp</option>
+                        <option>Vox</option>
+                        <option>808</option>
+                        <option>909</option>
+                    </select>
+                    <select
+                        style={{
+                            visibility: "hidden",
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                        }}
+                        className="sampler2_dropdown"
+                        onChange={(e) => {
+                            let newSamplers = [];
+                            for (let i = 0; i < sequencer.notes.length; i++) {
+                                let newSampler = new Tone.Sampler(
+                                    samples[e.target.value.toLowerCase()]
+                                ).chain(delay, reverb, Tone.Destination);
+                                newSamplers.push(newSampler);
+                            }
+                            setSamplerArray2(newSamplers);
+                        }}
+                        disabled={isPlaying ? 1 : 0}
+                    >
+                        <option>Piano</option>
+                        <option>Bell</option>
+                        <option>Epiano</option>
+                        <option selected="selected">Harp</option>
+                        <option>Vox</option>
+                        <option>808</option>
+                        <option>909</option>
+                    </select>
+                </div>
             </div>
             <div className="musictool_side">Notes / Sounds</div>
             <div className="musictool_sequencer">
@@ -426,7 +469,10 @@ function MusicTool() {
                     octave={octaves.synth}
                 />
             </div>
-            <div className="musictool_sequencer2">
+            <div
+                className="musictool_sequencer2"
+                style={{ visibility: "hidden" }}
+            >
                 {" "}
                 <label htmlFor="sampler1-octave">Octave</label>
                 <input
@@ -447,7 +493,10 @@ function MusicTool() {
                     octave={octaves.sampler1}
                 />
             </div>
-            <div className="musictool_sequencer3">
+            <div
+                className="musictool_sequencer3"
+                style={{ visibility: "hidden" }}
+            >
                 {" "}
                 <label htmlFor="sampler2-octave">Octave</label>
                 <input

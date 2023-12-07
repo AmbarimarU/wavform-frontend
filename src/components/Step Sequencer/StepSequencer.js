@@ -143,9 +143,8 @@ function StepSequencer({
             }
         });
         // increment the counter
-
+        console.log("beat: " + currentBeat);
         currentBeat = (currentBeat + 1) % 8;
-        console.log("Beat: " + currentBeat);
     };
 
     const configLoop = (tempo) => {
