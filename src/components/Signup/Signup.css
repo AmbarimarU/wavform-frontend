@@ -1,89 +1,105 @@
+.sign-up {
+  background-color: #007ead;
+  font-family: sans-serif; /* IGNORE */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* // You can subtract the size of the header and even the footer if you wanted to,
+  // by using the built in CSS calc() function. */
+  min-height: calc(100vh - 100px);
+}
+
+/* // We're utilizing a width trick here, by using a width of 100% with a max-width
+// our element will still shrink on smaller screens */
+.sign-up__container {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* // I've moved the margin top to be padding in the parent container instead.
+// I then added a margin bottom that matches the padding size of the container for even spacing. */
+.sign-up__title {
+  color: #786bb1;
+  font-family: sans-serif; /* IGNORE */
+  font-size: 25px;
+  font-weight: bold; /* IGNORE */
+  margin: 0 0 2rem;
+  text-align: center;
+}
+
+.sign-up__login-cta {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.sign-up__login-cta a {
+  color: #786bb1;
+}
+
+/* // Using flex with a direction of column gives us access to the "gap" attribute for spacing out all elements at once.
+// Since this only affects direct children, just the "form-field" elements and the button are affected. */
 .form-container {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .form-h1 {
-    margin-top: 25px;
-    font-size: 25px;
-    color: #786bb1;
-    font-weight: 300;
-  }
-  
-  .form-div {
-    text-align: center;
-    background-color: white;
-    width: 650px;
-    height: 650px;
-    box-shadow: 10px 5px 5px black;
-  }
-  
-  .form-input-container .form-input {
-    width: 75%;
-    height: 35px;
-    border: none;
-    border-bottom: 1px solid black;
-    margin: 15px 0;
-  }
-  
-  .form-input-container .form-input:focus {
-    outline: none;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
 
-  
-  .clear {
-    clear: both;
-  }
-  
-  /* .gender-container {
-    margin-top: 5px;
-  }
-  
-  .radio-inline {
-    margin-right: 5px;
-  }
-  
-  .radio-inline input {
-    margin-right: 5px;
-  } */
-  
-  .button-container {
-    margin-top: 35px;
-  }
-  
-  .button-container .sign-up {
-    width: 250px;
-    padding: 10px 45px 10px;
-    border-radius: .75rem;
-    font-size: 21px;
-    background-color: #786bb1;
-    color: white;
-  }
-  
-  .button-container .sign-up:active {
-    transform: scale(0.98);
-    /* Scaling button to 0.98 to its original size */
-    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-    /* Lowering the shadow */
+/* // Let's use the same trick for the inputs and their error messages.
+// Right now all errors are showing, but this obviously won't be the case in your JSX. */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
-  }
-  .button-container .sign-up:disabled{
-    background-color: #007ead;
-    pointer-events: none;
-    border-radius: 0;
-  }
-  
-  /* Form Error */
-  .form-input-error {
-    border-bottom: 1px solid red !important;
-  }
-  .error-container {
-    max-width: 487.5px;
-    margin: 0 auto;
-  }
-  .error-container span {
-    color: red;
-  }
+/* // border-width follows the "top right bottom left" shorthand just like margin and padding!
+// We also don't need a width here since these are flex items now, they default to taking up the full space. */
+.form-input {
+  border: solid black;
+  border-width: 0 0 1px 0;
+  font-size: 1rem;
+  height: 35px;
+}
+
+/* // This is mostly taken care of by the flex properties in ".form-field", so all that's left to do is adjust the color. */
+.form-input-error {
+  color: red;
+}
+
+.form-button {
+  align-self: center;
+   /* // Flex attributes coming in handy here */
+  margin-top: 35px;
+
+  /* // All of this other stuff I think you have already I'm just trying to replicate it. */
+  background-color: #786bb1;
+  border-radius: 0.75rem;
+  border: 0;
+  box-shadow: none;
+  color: white;
+  cursor: pointer;
+  font-size: 21px;
+  padding: 10px 45px 10px;
+  width: 250px;
+}
+
+/* // A pretty verbose targeting structure here but it makes sure that only buttons that aren't disabled get the effects */
+.form-button:hover:not(:disabled),
+.form-button:active:not(:disabled),
+.form-button:focus:not(:disabled),
+.form-button:focus-visible:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+/* // I've adjusted this to more common disabled styling so the user can tell whats going on here */
+.form-button:disabled {
+  background-color: #ddd;
+  color: #777;
+  cursor: not-allowed;
+  pointer-events: none;
+}

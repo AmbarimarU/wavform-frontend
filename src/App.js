@@ -76,6 +76,12 @@ const [user, setUser] = useAuthHooks();
                     />   
                     <Route path="/*" element={<FourOFour />} />
                 </Routes>
+                <ToggleNavBar>
+          
+          <Footer/>
+          
+        </ToggleNavBar>
+
             </Router>{" "}
         </React.Suspense>
     );

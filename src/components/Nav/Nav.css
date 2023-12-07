@@ -16,6 +16,30 @@ body {
 
 
 }
+.nav-icon{
+    margin-left: 2rem;
+    font-size: 2rem;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #15171c;
+}
+.sidebar-nav{
+    background: #15171c;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: 350ms;
+    z-index: 10;
+}
+.sidebar-wrap{
+    width: 100%;
+}
 .logo img {
     width: 70px;
     height: 55px;
