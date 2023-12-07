@@ -39,7 +39,7 @@ const TopicsDetails = React.lazy(() =>
 const FourOFour = React.lazy(() => import("./components/FourOFour/FourOFour"));
 // const Sidebar = React.lazy(() => import("./components/Sidebar/Sidebar"));
 const MusicBar = React.lazy(() => import("./components/MusicBar/MusicBar"));
-// const MusicNotes = React.lazy(() => import("./components/MusicBar/MusicNotes"));
+const MusicNotes = React.lazy(() => import("./components/MusicBar/MusicNotes"));
 
 function App() {
   const [user, setUser] = useAuthHooks();
