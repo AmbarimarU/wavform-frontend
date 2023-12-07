@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loader from "./components/Loader/Loader";
 import useAuthHooks from "./components/Hooks/Auth/useAuthHooks";
 
-
 const Footer = React.lazy(() => import("./components/Footer/Footer"));
 const About = React.lazy(() => import("./components/About/About"));
 const Login = React.lazy(() => import("./components/Login/Login"));
@@ -17,7 +16,7 @@ const Signup = React.lazy(() => import("./components/Signup/Signup"));
 const Welcome = React.lazy(() => import("./components/Welcome/Welcome"));
 const Lessons = React.lazy(() => import("./components/Lessons/Lessons"));
 const Nav = React.lazy(() => import("./components/Nav/Nav"));
-const ToggleNavBar = React.lazy(() => import("./components/ToggleNavBar/ToggleNavBar"));
+const ToggleNavBar = React.lazy(() => import("./components/ToggleNav/ToggleNavBar"));
 const Home = React.lazy(() => import("./components/Home/Home"));
 const Synth = React.lazy(() => import("./components/Synth/Synth"));
 const MusicTool = React.lazy(() => import("./components/MusicTool/MusicTool"));
@@ -26,30 +25,36 @@ const Sequencer = React.lazy(() => import("./components/Step Sequencer/StepSeque
 const Delay = React.lazy(() => import("./components/Delay/Delay"));
 const Sampler = React.lazy(() => import("./components/Sampler/NotesSampler"));
 const Piano = React.lazy(() => import("./components/Piano/Piano"));
-const GetAllUsers = React.lazy(() => import("./components/GetAllUsers/GetAllUsers"));
+const GetAllUsers = React.lazy(() =>
+    import("./components/GetAllUsers/GetAllUsers")
+);
 const Profile = React.lazy(() => import("./components/Profile/Profile"));
-const PrivateRoute = React.lazy(() => import("./components/PrivateRoute/PrivateRoute"));
+const PrivateRoute = React.lazy(() =>
+    import("./components/PrivateRoute/PrivateRoute")
+);
 const Topics = React.lazy(() => import("./components/Topics/Topics"));
-const TopicsDetails = React.lazy(() => import("./components/Topics/TopicsDetails"));
+const TopicsDetails = React.lazy(() =>
+    import("./components/Topics/TopicsDetails")
+);
 const FourOFour = React.lazy(() => import("./components/FourOFour/FourOFour"));
 // const Sidebar = React.lazy(() => import("./components/Sidebar/Sidebar"));
+const MusicBar = React.lazy(() => import("./components/MusicBar/MusicBar"));
+const MusicNotes = React.lazy(() => import("./components/MusicBar/MusicNotes"));
 
 function App() {
-const [user, setUser] = useAuthHooks();
+  const [user, setUser] = useAuthHooks();
 
-    function logout(){
+  function logout() {
     window.localStorage.removeItem("jwtToken");
     setUser(null);
-    console.log("click me")
+    console.log("click me");
   }
-  
-  
-    return (
+
+  return (
     <React.Suspense fallback={<Loader />}>
       <Router>
         <ToggleNavBar>
-          
-          <Nav user={user} logout={logout}/>
+          <Nav user={user} logout={logout} />
           {/* <Sidebar /> */}
         </ToggleNavBar>
 
@@ -75,6 +80,8 @@ const [user, setUser] = useAuthHooks();
                         element={<TopicsDetails />}
                     />   
                     <Route path="/*" element={<FourOFour />} />
+                      <Route path="/musicbar" element={<MusicBar />} />
+                      // <Route path="/musicnotes" element={<MusicNotes />} />
                 </Routes>
                 <ToggleNavBar>
           
@@ -85,6 +92,7 @@ const [user, setUser] = useAuthHooks();
             </Router>{" "}
         </React.Suspense>
     );
+
 }
 
 export default App;
