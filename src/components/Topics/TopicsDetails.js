@@ -31,6 +31,7 @@ function TopicsDetails() {
     "Notes on the Piano and Octaves",
     "Intervals and Chords",
     "Scales",
+    "Piano Practice",
   ];
 
   const showPiano = pianoTopics.includes(singleTopic?.name);
@@ -62,6 +63,21 @@ function TopicsDetails() {
     }
   }
 
+  const randomNoteSequence = () => {
+    let notes = "CDEFGAB";
+
+    const chars = notes.split("");
+
+    for (let i = chars.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chars[i], chars[j]] = [chars[j], chars[i]]; 
+    }
+
+    const shuffledString = chars.join("");
+
+    return shuffledString;
+  };
+
   return (
     <div>
       {singleTopic && (
@@ -76,6 +92,7 @@ function TopicsDetails() {
             {/* <p dangerouslySetInnerHTML={{ __html: formattedDesc }}></p> */}
 
             {renderBulletPoints()}
+            {singleTopic.name === "Piano Practice" ? randomNoteSequence() : null}
           </div>
           <button onClick={handlePreview} disabled={currentIndex === 0}>
             &laquo; Prev

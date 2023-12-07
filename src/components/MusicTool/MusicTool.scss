@@ -3,15 +3,22 @@
     padding: 10px 10px;
     width: 90%;
     display: grid;
+    background-color: rgb(197, 209, 247);
     grid-template-areas:
-        "blank blank blank header header effects effects"
-        "side side2 sequencer sequencer sequencer effects effects"
-        "side side2 sequencer sequencer sequencer reverb reverb"
-        "side side2 sequencer sequencer sequencer delay delay";
+        "blank blank header effects"
+        "side side2 sequencer reverb"
+        "side side2 sequencer delay"
+        "side side2 bottom ebottom";
     &_header {
         grid-area: header;
         margin-left: 50px;
         margin-bottom: 20px;
+    }
+    &_bottom {
+        margin-top: 10px;
+        grid-area: bottom;
+        text-align: center;
+        width: 350px;
     }
     &_side {
         grid-area: side;
@@ -23,6 +30,7 @@
         width: 200px;
         padding-top: 26px;
         letter-spacing: 1vh;
+        border: 1px solid black;
         writing-mode: vertical-rl;
         text-orientation: upright;
     }
@@ -58,6 +66,15 @@
     &_delay {
         grid-area: delay;
     }
+    &_selector {
+        border-radius: 50px;
+        padding: 10px 30px;
+        width: 150px;
+        background-color: rgb(108, 139, 235);
+        color: white;
+        border-color: rgb(108, 139, 235);
+        border-style: solid;
+    }
 }
 .tooltip-box {
     display: none;
@@ -72,4 +89,9 @@
 
 .tooltip-trigger {
     cursor: pointer;
+}
+.select-container {
+    display: inline;
+    position: relative;
+    margin-left: 10px;
 }
