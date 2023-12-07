@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,300&family=Varela+Round&family=Young+Serif&display=swap');
 
-body{
-    background-color: rgb(75,75,75);
+.welcome{
+ background-color: rgb(75,75,75);
+
+
+ align-items: center;
+ justify-content: center;
+ min-height: calc(100vh - 100px);
+
 }
+
 .welcome-heading{
 text-align: center;
 justify-content: center;
@@ -15,6 +22,10 @@ justify-content: center;
     font-family: "Varela Round";
 }
 
+.welcome-heading p{
+    color: white;
+    font-size: 25px;
+}
 
 .button-container {
     padding-top: 300px;
@@ -27,7 +38,7 @@ justify-content: center;
     margin: 0 50px;
 }
 
-.lm-button{
+.welcome-buttons{
     width: 350px;
     height: 150px;
     border-radius: .75rem;
@@ -42,17 +53,17 @@ justify-content: center;
     transition: background-color 0.3s; 
 }
 
-.lm-button:hover{
+.welcome-button:hover{
     font-size: 24px;
     font-weight: bold;
     background-color: #007ead;
 }
 
-.lm-button:hover + .lm-button-on-hover{
+.welcome-button:hover + .welcome-button-on-hover{
     display: block;
 }
 
-.lm-button-on-hover{
+.welcome-button-on-hover{
     display: none;
     text-align: center;
     font-size: 20px;

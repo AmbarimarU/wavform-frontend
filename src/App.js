@@ -58,47 +58,41 @@ function App() {
           {/* <Sidebar /> */}
         </ToggleNavBar>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/welcome" element={<Welcome />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login setUser={setUser} />} />
-          <Route path="/delay" element={<Delay />} />
-          <Route path="/lessons" element={<Lessons />} />
-          <Route path="/synth" element={<Synth />} />
-          <Route path="/sampler" element={<Sampler />} />
-          <Route path="/reverb" element={<Reverb />} />
-          <Route path="/musictool" element={<MusicTool />} />
-          <Route path="/sequencer" element={<Sequencer />} />
-          <Route path="/piano" element={<Piano />} />
-          <Route
-            path="/get-all-users"
-            element={
-              <PrivateRoute>
-                {" "}
-                <GetAllUsers />{" "}
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                {" "}
-                <Profile />{" "}
-              </PrivateRoute>
-            }
-          />
-          <Route path="/topics/:lessonId" element={<Topics />} />
-          <Route path="/topics/topic/:id" element={<TopicsDetails />} />
-          <Route path="/*" element={<FourOFour />} />
-          <Route path="/musicbar" element={<MusicBar />} />
-          // <Route path="/musicnotes" element={<MusicNotes />} />
-        </Routes>
-      </Router>{" "}
-    </React.Suspense>
-  );
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/welcome" element={<Welcome />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/login" element={<Login setUser={setUser}/>} />
+                    <Route path="/delay" element={<Delay />} />
+                    <Route path="/lessons" element={<Lessons />} />
+                    <Route path="/synth" element={<Synth />} />
+                    <Route path="/sampler" element={<Sampler />} />
+                    <Route path="/reverb" element={<Reverb />} />
+                    <Route path="/musictool" element={<MusicTool />} />
+                    <Route path="/sequencer" element={<Sequencer />} />
+                    <Route path="/piano" element={<Piano />} />
+                    <Route path="/get-all-users" element={ <PrivateRoute> <GetAllUsers /> </PrivateRoute>} />
+                    <Route path="/profile" element={ <PrivateRoute> <Profile user={user} /> </PrivateRoute>} />
+                    <Route path="/topics/:lessonId" element={<Topics />} />
+                    <Route
+                        path="/topics/topic/:id"
+                        element={<TopicsDetails />}
+                    />   
+                    <Route path="/*" element={<FourOFour />} />
+                      <Route path="/musicbar" element={<MusicBar />} />
+                      // <Route path="/musicnotes" element={<MusicNotes />} />
+                </Routes>
+                <ToggleNavBar>
+          
+          <Footer/>
+          
+        </ToggleNavBar>
+
+            </Router>{" "}
+        </React.Suspense>
+    );
+
 }
 
 export default App;

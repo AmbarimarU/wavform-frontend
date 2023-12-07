@@ -81,16 +81,16 @@ async function handleOnSubmit(e){
 
   
   return (
-    <div className='form-container' style={{backgroundColor: "#007ead" }}>
-    <div className='form-div'>
-        <div className='form-h1'>
-            <h2>Sign Up Here!! </h2>
-        </div>
-        <form onSubmit={handleOnSubmit}>
+    <div className='sign-up'>
+    <div className='sign-up__container'>
+        
+            <h2 className='sign-up__title'>Sign Up Here!! </h2>
+        
+        <form className='sign-up__form' onSubmit={handleOnSubmit}>
             
      
-            <div className='form-input-container'>
-                <div>
+            <div className='form-container'>
+                <div className='form-field'>
                     <input className='form-input'
                     type="text"
                     name="email"
@@ -102,16 +102,16 @@ async function handleOnSubmit(e){
                     onBlur={()=> setEmailOnBlur(true)}
                     />
                 </div>
-                <div>
+                <span className='form-input-error'>
                 {emailError && (
                     <div className='error-container'>
                         <span>{emailError}</span>
                         </div>
                 )}
-                </div>
+                </span>
             </div>
-            <div className='form-input-container'>
-                <div>
+            <div className='form-container'>
+                <div className='form-field'>
                     <input className={`form-input ${passwordError ? "form-input-error" : undefined}`}
                     type={process.env.NODE_ENV === "production" ? "password" : "text"}
                     name="password"
@@ -123,16 +123,16 @@ async function handleOnSubmit(e){
                     onBlur={()=> setPasswordOnBlur(true)}
                     />
                 </div>
-                <div>
+                <span className='form-input-error'>
                 {passwordError && (
                     <div className='error-container'>
                         <span>{passwordError}</span>
                         </div>
                 )}
-                </div>
+                </span>
             </div>
-            <div className='form-input-container'>
-                <div>
+            <div className='form-container'>
+                <div className='form-field'>
                    <input 
                    className={`form-input ${ passwordError ? "form-input-error" : undefined}`}
                    type={process.env.NODE_ENV === "production" ? "password" : "text"}
@@ -141,15 +141,17 @@ async function handleOnSubmit(e){
                    onChange={(e) => setConfirmPassword(e.target.value)}
                    />
                 </div>
+                <span className='form-input-error'>
                 {passwordError && (
                     <div className='error-container'>
                         <span>{passwordError}</span>
                         </div>
                 )}
+                </span>
             </div>
-            <div className='form-input-container'>
-                <div>
-                    <input className={`form-input ${passwordError ? "form-input-error" : undefined}`}
+            <div className='form-container'>
+                <div className='form-field'>
+                    <input className={`form-input ${usernameError ? "form-input-error" : undefined}`}
                     type="text"
                     name="username"
                     id="username"
@@ -161,23 +163,24 @@ async function handleOnSubmit(e){
                     />
                 </div>
                 <div>
+                <span className='form-input-error'>
                 {usernameError && (
                     <div className='error-container'>
                         <span>{usernameError}</span>
                         </div>
                 )}
+                </span>
                 </div>
             
  
-             <div className='clear'></div>
-                <div className='button-container'>
-                 <button disabled={emailButtonState || usernameButtonState || passwordButtonState} className='sign-up'>Submit</button>
-            </div>
-            <div className='nav-to-login'>
-              <small>Already Signed up? <Link to="/login">click here</Link></small>
-            </div>
+                 <button disabled={emailButtonState || usernameButtonState || passwordButtonState} className='form-button'>Submit</button>
+            
+          
             </div>
         </form>
+        <div className='sign-up__login-cta'>
+              <small>Already Signed up? <Link to="/login">click here</Link></small>
+            </div>
     </div>
 </div>
   )

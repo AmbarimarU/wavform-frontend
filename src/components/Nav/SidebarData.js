@@ -10,21 +10,7 @@ export const SidebarData = [
 		path: "/welcome",
 		icon: <AiIcons.AiFillHome />,
 		
-        // iconClosed: <RiIcons.RiArrowDownSFill />,
-		// iconOpened: <RiIcons.RiArrowUpSFill />,
 
-		// subNav: [
-		// 	{
-		// 		title: "Our Aim",
-		// 		path: "/about-us/aim",
-		// 		icon: <IoIcons.IoIosPaper />,
-		// 	},
-		// 	{
-		// 		title: "Our Vision",
-		// 		path: "/about-us/vision",
-		// 		icon: <IoIcons.IoIosPaper />,
-		// 	},
-		// ],
 	},
 	{
 		title: "Lessons",
