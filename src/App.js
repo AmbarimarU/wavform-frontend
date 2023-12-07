@@ -37,9 +37,8 @@ const TopicsDetails = React.lazy(() =>
     import("./components/Topics/TopicsDetails")
 );
 const FourOFour = React.lazy(() => import("./components/FourOFour/FourOFour"));
-// const Sidebar = React.lazy(() => import("./components/Sidebar/Sidebar"));
 const MusicBar = React.lazy(() => import("./components/MusicBar/MusicBar"));
-const MusicNotes = React.lazy(() => import("./components/MusicBar/MusicNotes"));
+// const MusicNotes = React.lazy(() => import("./components/MusicBar/MusicNotes"));
 
 function App() {
   const [user, setUser] = useAuthHooks();
@@ -55,7 +54,7 @@ function App() {
       <Router>
         <ToggleNavBar>
           <Nav user={user} logout={logout} />
-          {/* <Sidebar /> */}
+          
         </ToggleNavBar>
 
                 <Routes>
@@ -81,7 +80,7 @@ function App() {
                     />   
                     <Route path="/*" element={<FourOFour />} />
                       <Route path="/musicbar" element={<MusicBar />} />
-                      // <Route path="/musicnotes" element={<MusicNotes />} />
+                      {/* // <Route path="/musicnotes" element={<MusicNotes />} /> */}
                 </Routes>
                 <ToggleNavBar>
           
