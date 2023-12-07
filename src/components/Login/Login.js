@@ -51,16 +51,16 @@ function Login({ setUser }) {
   
   
   return (
-    <div className='form-container' style={{backgroundColor: "#007ead" }} >
-    <div className='form-div'>
-        <div className='form-h1'>
-            <h2>Log in</h2>
-        </div>
-        <form onSubmit={handleOnSubmit} >
+    <div className='login'>
+    <div className='login__container'>
+        
+            <h2 className='login__title'>Log in</h2>
+        
+        <form onSubmit={handleOnSubmit} className='login__form'>
             
             
-            <div className='form-input-container'>
-                <div>
+            <div className='form-container'>
+                <div className='form-field'>
                     <input className='form-input'
                     type="text"
                     name="email"
@@ -73,8 +73,8 @@ function Login({ setUser }) {
                 </div>
             
             </div>
-            <div className='form-input-container'>
-                <div>
+            <div className='form-container'>
+                <div className='form-field'>
                     <input className='form-input'
                     type={process.env.NODE_ENV === "production" ? "password" : "text"}
                     name="password"
@@ -88,8 +88,8 @@ function Login({ setUser }) {
                 
             </div>
             
-            <div className='form-input-container'>
-                <div>
+            <div className='form-container'>
+                <div className='form-field'>
                     <input className='form-input'
                     type="text"
                     name="username"
@@ -101,12 +101,11 @@ function Login({ setUser }) {
                     />
                 </div>
                
+                <button className='login-button'>Submit</button>
+
             </div>
            
-             
-                <div className='button-container'>
-                 <button className='login'>Submit</button>
-            </div>
+            
         </form>
     </div>
 </div>
