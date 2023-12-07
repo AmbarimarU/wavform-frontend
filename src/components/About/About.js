@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 import { getAllCreators } from "../Api/Api";
 import "./About.css";
 
@@ -37,6 +39,10 @@ function About() {
 
   return (
     <div>
+      <div className="app-description">
+        <p>About Wavform</p>
+      </div>
+
       <div className="carousel">
         <div className="carousel-inner">
           {creatorsArray
@@ -48,7 +54,16 @@ function About() {
                   index === 0 ? "carousel-item active" : "carousel-item"
                 }
               >
+                <img src={creator.picture} alt="" />
                 <p>{creator.name}</p>
+                <p>{creator.description}</p>
+                <a href={creator.github}>
+                  <FaGithub />
+                </a>
+                {"   "}
+                <a href={creator.linkin}>
+                  <FaLinkedin />
+                </a>
               </div>
             ))}
         </div>
