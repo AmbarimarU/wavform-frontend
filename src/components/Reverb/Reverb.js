@@ -76,7 +76,7 @@ function Reverb({
                 Reverb{" "}
                 <span
                     className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("reverb")}
+                    onMouseOver={(e) => handleMouseOver("reverb", e)}
                     onMouseOut={() => handleMouseOut("reverb")}
                 >
                     ?
@@ -121,7 +121,7 @@ function Reverb({
                 Time{" "}
                 <span
                     className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("reverb-time")}
+                    onMouseOver={(e) => handleMouseOver("reverb-time", e)}
                     onMouseOut={() => handleMouseOut("reverb-time")}
                 >
                     ?
@@ -142,7 +142,7 @@ function Reverb({
                 Size{" "}
                 <span
                     className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("reverb-size")}
+                    onMouseOver={(e) => handleMouseOver("reverb-size", e)}
                     onMouseOut={() => handleMouseOut("reverb-size")}
                 >
                     ?
@@ -163,7 +163,7 @@ function Reverb({
                 Amount{" "}
                 <span
                     className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("reverb-amount")}
+                    onMouseOver={(e) => handleMouseOver("reverb-amount", e)}
                     onMouseOut={() => handleMouseOut("reverb-amount")}
                 >
                     ?

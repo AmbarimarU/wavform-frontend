@@ -10,21 +10,12 @@ const Sampler = React.lazy(() => import("../Sampler/NotesSampler"));
 function MusicTool() {
     const [displayTooltip, setDisplayTooltip] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-    const handleMouseMove = (e) => {
+
+    const handleMouseOver = (section, e) => {
         const offsetX = -150;
-        const offsetY = -100;
+        const offsetY = -120;
 
         setTooltipPosition({ x: e.pageX + offsetX, y: e.pageY + offsetY });
-    };
-
-    useEffect(() => {
-        document.addEventListener("mousemove", handleMouseMove);
-
-        return () => {
-            document.removeEventListener("mousemove", handleMouseMove);
-        };
-    }, []);
-    const handleMouseOver = (section) => {
         setDisplayTooltip((prevState) => ({
             ...prevState,
             [section]: true,
@@ -483,6 +474,7 @@ function MusicTool() {
                     max="2"
                     value={octaves.sampler1}
                     onInput={(e) => handleOctaveChange(e)}
+                    disabled={isPlaying ? 1 : 0}
                 />
                 <Sequencer
                     instrumentArray={samplerArray1}
@@ -507,6 +499,7 @@ function MusicTool() {
                     max="2"
                     value={octaves.sampler2}
                     onInput={(e) => handleOctaveChange(e)}
+                    disabled={isPlaying ? 1 : 0}
                 />
                 <Sequencer
                     instrumentArray={samplerArray2}

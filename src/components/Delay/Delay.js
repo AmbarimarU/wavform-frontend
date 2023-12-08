@@ -73,7 +73,7 @@ function Delay({
                 Delay{" "}
                 <span
                     className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("delay")}
+                    onMouseOver={(e) => handleMouseOver("delay", e)}
                     onMouseOut={() => handleMouseOut("delay")}
                 >
                     ?
@@ -123,7 +123,7 @@ function Delay({
                 Time{" "}
                 <span
                     className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("delay-time")}
+                    onMouseOver={(e) => handleMouseOver("delay-time", e)}
                     onMouseOut={() => handleMouseOut("delay-time")}
                 >
                     ?
@@ -149,7 +149,7 @@ function Delay({
                 Feedback{" "}
                 <span
                     className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("delay-feedback")}
+                    onMouseOver={(e) => handleMouseOver("delay-feedback", e)}
                     onMouseOut={() => handleMouseOut("delay-feedback")}
                 >
                     ?

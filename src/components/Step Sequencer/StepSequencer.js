@@ -143,7 +143,6 @@ function StepSequencer({
             }
         });
         // increment the counter
-        console.log("beat: " + currentBeat);
         currentBeat = (currentBeat + 1) % 8;
     };
 
