@@ -59,6 +59,7 @@ function About() {
                             >
                                 <img
                                     height="400px"
+                                    width="400px"
                                     src={creator.picture}
                                     alt=""
                                 />

@@ -125,7 +125,15 @@ const loginUsers = async (userData) => {
         console.error(error);
     }
 };
-
+async function getSession() {
+    try {
+        let result = await Axios.get("/session");
+        return result.data;
+    } catch (e) {
+        alert(e.response.data.error);
+        return;
+    }
+}
 export {
     getAllLessons,
     getUrl,
@@ -139,4 +147,5 @@ export {
     createUsers,
     loginUsers,
     fetchAllUsers,
+    getSession,
 };

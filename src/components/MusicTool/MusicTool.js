@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./MusicTool.scss";
 import * as Tone from "tone";
-const Synth = React.lazy(() => import("../Synth/Synth"));
 const Reverb = React.lazy(() => import("../Reverb/Reverb"));
 const Sequencer = React.lazy(() => import("../Step Sequencer/StepSequencer"));
 const Delay = React.lazy(() => import("../Delay/Delay"));
-const Sampler = React.lazy(() => import("../Sampler/NotesSampler"));
 
 function MusicTool() {
     const [displayTooltip, setDisplayTooltip] = useState(false);
@@ -108,6 +106,7 @@ function MusicTool() {
         createSynths(8);
         loadSamplers(8);
     }, []);
+    // eslint-disable-next-line
 
     //   useEffect(() => {
     //     setSynthArray([]);
@@ -219,6 +218,7 @@ function MusicTool() {
         samplerArray2,
         oscillatorType,
     ]);
+    // eslint-disable-next-line
 
     const handlePlayButton = async (e) => {
         // toggle Tone.Trasport and the flag variable.
@@ -245,6 +245,7 @@ function MusicTool() {
             Tone.Transport.start();
         }
     }, [octaves]);
+    // eslint-disable-next-line
 
     const handleOctaveChange = (e) => {
         let id = e.target.id;
@@ -426,11 +427,12 @@ function MusicTool() {
                             setSamplerArray2(newSamplers);
                         }}
                         disabled={isPlaying ? 1 : 0}
+                        defaultValue="Harp"
                     >
                         <option>Piano</option>
                         <option>Bell</option>
                         <option>Epiano</option>
-                        <option selected="selected">Harp</option>
+                        <option>Harp</option>
                         <option>Vox</option>
                         <option>808</option>
                         <option>909</option>
