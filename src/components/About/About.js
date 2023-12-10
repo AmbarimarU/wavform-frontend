@@ -7,7 +7,8 @@ import "./About.css";
 function About() {
     const [creatorsArray, setCreatorsArray] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
-    const [creatorPerPage, setCreatorPerPage] = useState(1);
+
+    const creatorPerPage = 1;
 
     useEffect(() => {
         async function fetchData() {

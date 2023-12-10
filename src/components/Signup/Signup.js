@@ -181,12 +181,18 @@ function Signup() {
                                 )}
                             </span>
                         </div>
-                        {/* disabled={
+                        <button
+                            className="form-button"
+                            disabled={
                                 emailButtonState ||
                                 usernameButtonState ||
                                 passwordButtonState
-                            }*/}
-                        <button className="form-button">Submit</button>
+                                    ? 0
+                                    : 0
+                            }
+                        >
+                            Submit
+                        </button>
                     </div>
                 </form>
                 <div className="sign-up__login-cta">
