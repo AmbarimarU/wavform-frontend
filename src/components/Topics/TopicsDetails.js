@@ -3,11 +3,10 @@ import { useParams } from "react-router-dom";
 import { fetchTopicDetail } from "../Api/Api";
 import Piano from "../Piano/Piano";
 
-function TopicsDetails() {
+function TopicsDetails({ user }) {
     const [singleTopic, setSingleTopic] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const { id } = useParams();
-
     useEffect(() => {
         const fetchSingleTopic = async () => {
             try {
@@ -94,7 +93,18 @@ function TopicsDetails() {
                         {singleTopic.name === "Piano Practice" && (
                             <>
                                 {randomNoteSequence()} <br />
-                                <br /> Played Sequence:
+                                <br /> Played Sequence: <br /> <br />{" "}
+                                {user ? (
+                                    <>
+                                        {user.id}
+                                        <br />
+                                    </>
+                                ) : (
+                                    <>
+                                        Please make an account to keep track of
+                                        your progress
+                                    </>
+                                )}
                             </>
                         )}
                     </div>

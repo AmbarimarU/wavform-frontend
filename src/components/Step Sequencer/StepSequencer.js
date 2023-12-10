@@ -21,7 +21,7 @@ function StepSequencer({
     //   tempo: 120,
     // });
 
-    const [beat, setBeat] = useState(0);
+    //const [beat, setBeat] = useState(0);
     const [container, setContainer] = useState({});
 
     const makeGrid = (notes) => {
