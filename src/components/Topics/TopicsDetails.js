@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchTopicDetail } from "../Api/Api";
+import { fetchTopicDetail, fetchKeys } from "../Api/Api";
 import Piano from "../Piano/Piano";
 
 function TopicsDetails({ user }) {
     const [singleTopic, setSingleTopic] = useState(null);
+    const [strokes, setStrokes] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [sequence, setSequence] = useState("");
+    const [keyStrokes, setKeyStrokes] = useState([]);
+    let newKeys = "";
     const { id } = useParams();
     useEffect(() => {
         const fetchSingleTopic = async () => {
@@ -18,9 +22,39 @@ function TopicsDetails({ user }) {
                 console.log(error);
             }
         };
-
+        console.log("ID" + id);
         fetchSingleTopic();
+        if (id === "4") {
+            const randomNoteSequence = () => {
+                let notes = "AWSEDFTGYHUJK";
+                let lengthN = 8;
+                const chars = notes.split("");
+
+                for (let i = chars.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [chars[i], chars[j]] = [chars[j], chars[i]];
+                }
+
+                const shuffledString = chars.slice(0, lengthN).join("");
+
+                return shuffledString;
+            };
+            setSequence(randomNoteSequence());
+        }
     }, [id]);
+
+    useEffect(() => {
+        const fetchStrokeKeys = async () => {
+            try {
+                const res = await fetchKeys(user.id);
+                setKeyStrokes(res);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchStrokeKeys();
+    }, [user, strokes, setKeyStrokes]);
 
     // Format description to the next line
     // const formattedDesc = singleTopic?.description.replace(/\n/g, "<br />");
@@ -64,20 +98,6 @@ function TopicsDetails({ user }) {
         }
     }
 
-    const randomNoteSequence = () => {
-        let notes = "AWSEDFTGYHUJK";
-        let lengthN = 8;
-        const chars = notes.split("");
-
-        for (let i = chars.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [chars[i], chars[j]] = [chars[j], chars[i]];
-        }
-
-        const shuffledString = chars.slice(0, lengthN).join("");
-
-        return shuffledString;
-    };
     return (
         <div>
             {singleTopic && (
@@ -86,17 +106,50 @@ function TopicsDetails({ user }) {
                         <h1>{singleTopic.name}</h1>
                     </div>
 
-                    <div>{showPiano && <Piano />}</div>
+                    <div>
+                        {showPiano && (
+                            <Piano
+                                user={user}
+                                setStrokes={setStrokes}
+                                strokes={strokes}
+                                setKeyStrokes={setKeyStrokes}
+                            />
+                        )}
+                    </div>
 
                     <div>
                         {renderBulletPoints()}
                         {singleTopic.name === "Piano Practice" && (
                             <>
-                                {randomNoteSequence()} <br />
-                                <br /> Played Sequence: <br /> <br />{" "}
+                                {sequence} <br />
+                                <br /> Played Sequence: <br />{" "}
                                 {user ? (
                                     <>
-                                        {user.id}
+                                        <br />
+                                        {keyStrokes.length > 0 &&
+                                            keyStrokes.forEach((key) => {
+                                                newKeys += key.key_press;
+                                                // return (
+                                                //     <div
+                                                //         key={key.time_logged}
+                                                //         style={{
+                                                //             display:
+                                                //                 "inline-block",
+                                                //         }}
+                                                //     >
+                                                //         {key.key_press}
+                                                //     </div>
+                                                // );
+                                            })}
+                                        {newKeys}
+                                        {sequence === newKeys.slice(0, 8) && (
+                                            <>
+                                                <br />
+                                                <br />
+                                                You have successfully played the
+                                                sequence
+                                            </>
+                                        )}
                                         <br />
                                     </>
                                 ) : (
@@ -108,18 +161,24 @@ function TopicsDetails({ user }) {
                             </>
                         )}
                     </div>
-                    <button
-                        onClick={handlePreview}
-                        disabled={currentIndex === 0}
-                    >
-                        &laquo; Prev
-                    </button>
-                    <button
-                        onClick={handleNext}
-                        disabled={currentIndex >= bulletPoint.length - 1}
-                    >
-                        Next &raquo;
-                    </button>
+                    {!sequence && (
+                        <>
+                            <button
+                                onClick={handlePreview}
+                                disabled={currentIndex === 0}
+                            >
+                                &laquo; Prev
+                            </button>
+                            <button
+                                onClick={handleNext}
+                                disabled={
+                                    currentIndex >= bulletPoint.length - 1
+                                }
+                            >
+                                Next &raquo;
+                            </button>
+                        </>
+                    )}
                 </div>
             )}
         </div>

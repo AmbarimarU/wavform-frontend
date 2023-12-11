@@ -134,6 +134,33 @@ async function getSession() {
         return;
     }
 }
+async function insertKey(note, user) {
+    try {
+        let result = await Axios.post("/keys", { user: user, key_press: note });
+        return result.data;
+    } catch (e) {
+        alert(e.response.data.error);
+        return;
+    }
+}
+async function deleteKey(user) {
+    try {
+        await Axios.delete("/keys", { data: { user: user } });
+        //return result.data;
+    } catch (e) {
+        alert(e.response.data.error);
+        return;
+    }
+}
+async function fetchKeys(user) {
+    try {
+        let result = await Axios.get(`/keys/${user}`);
+        return result.data;
+    } catch (e) {
+        //alert(e.response.data.error);
+        return;
+    }
+}
 export {
     getAllLessons,
     getUrl,
@@ -148,4 +175,7 @@ export {
     loginUsers,
     fetchAllUsers,
     getSession,
+    insertKey,
+    deleteKey,
+    fetchKeys,
 };
