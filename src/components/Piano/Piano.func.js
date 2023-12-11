@@ -36,8 +36,10 @@ const keyboard = {
 
 const synth = new Tone.Synth().toDestination();
 const playNote = (note) => {
-    document.getElementById(note).style.backgroundColor = "blue";
-    synth.triggerAttack(note, "8n");
+    if (document.getElementById(note)) {
+        document.getElementById(note).style.backgroundColor = "blue";
+        synth.triggerAttack(note, "8n");
+    }
 };
 
 const releaseNote = (index) => {
@@ -47,7 +49,8 @@ const releaseNote = (index) => {
 
 const releaseKey = () => {
     for (let i = 0; i < keyboard.notes.length; i++) {
-        document.getElementById(keyboard.notes[i]).style = "";
+        if (document.getElementById(keyboard.notes[i]))
+            document.getElementById(keyboard.notes[i]).style = "";
     }
     synth.triggerRelease(".0001");
 };

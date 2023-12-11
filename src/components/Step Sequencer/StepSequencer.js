@@ -98,8 +98,6 @@ function StepSequencer({
   };
 
   useEffect(() => {
-    // setGrid(makeGrid(notes));
-    // setBeat(beat + 1)
     setFlag(!flag);
 
     if (octave !== 0) {
@@ -167,11 +165,6 @@ function StepSequencer({
       setEventId(Tone.Transport.scheduleRepeat(repeat, "8n"));
     }
   }, [instrumentArray, flag]);
-
-  // useEffect(() => {
-  //   setBeat(currentBeat)
-  // }, [currentBeat])
-  
 
   const handleNoteClick = (clickedRowIndex, clickedNoteIndex, e) => {
     // iterating through the grid

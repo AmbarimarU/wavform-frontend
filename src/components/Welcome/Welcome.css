@@ -1,48 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,300&family=Varela+Round&family=Young+Serif&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,300&family=Varela+Round&family=Young+Serif&display=swap");
 
-.welcome{
- background-color: rgb(75,75,75);
-
-
- align-items: center;
- justify-content: center;
- min-height: calc(100vh - 100px);
-
+.welcome {
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 100px);
 }
 
-.welcome-heading{
-text-align: center;
-justify-content: center;
+.welcome-heading {
+    text-align: center;
+    justify-content: center;
 }
 
-.welcome-h2{
+.welcome-h2 {
     font-weight: bold;
     font-size: 75px;
     text-transform: uppercase;
     font-family: "Varela Round";
 }
 
-.welcome-heading p{
+.welcome-heading p {
     color: white;
     font-size: 25px;
 }
 
 .button-container {
-    padding-top: 300px;
-   
     display: flex;
     justify-content: center;
 }
-.btn-group{
+.btn-group {
     text-align: center;
     margin: 0 50px;
 }
 
-.welcome-buttons{
+.welcome-buttons {
     width: 350px;
     height: 150px;
-    border-radius: .75rem;
-    background-color: rgb(40,40,40); 
+    border-radius: 0.75rem;
+    background-color: rgb(40, 40, 40);
     color: white;
     font-size: 20px;
     text-transform: capitalize;
@@ -50,20 +44,21 @@ justify-content: center;
     margin-bottom: 20px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s; 
+    transition: background-color 0.3s;
 }
 
-.welcome-button:hover{
+.welcome-button:hover {
     font-size: 24px;
     font-weight: bold;
     background-color: #007ead;
 }
 
-.welcome-button:hover + .welcome-button-on-hover{
+.welcome-button:hover,
+.welcome-button-on-hover {
     display: block;
 }
 
-.welcome-button-on-hover{
+.welcome-button-on-hover {
     display: none;
     text-align: center;
     font-size: 20px;

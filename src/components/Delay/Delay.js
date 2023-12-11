@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./Delay.scss";
-import * as Tone from "tone";
+//import * as Tone from "tone";
 function Delay({
     delay,
     setDelay,
@@ -41,23 +41,23 @@ function Delay({
     // });
     // player.connect(feedbackDelay);
     // feedbackDelay.toDestination();
-    const applyDelay = (e) => {
-        e.preventDefault();
-        // if (Tone.context.state === "suspended") {
-        //     Tone.context.resume().then(() => {
-        //         player.start();
-        //     });
-        // } else {
-        //     player.start();
-        // }
-        delay.dispose();
-        setDelay(
-            new Tone.FeedbackDelay({
-                delayTime: delayValues.dTime * 0.01,
-                feedback: delayValues.dFeedback * 0.01,
-            })
-        );
-    };
+    // const applyDelay = (e) => {
+    //     e.preventDefault();
+    //     // if (Tone.context.state === "suspended") {
+    //     //     Tone.context.resume().then(() => {
+    //     //         player.start();
+    //     //     });
+    //     // } else {
+    //     //     player.start();
+    //     // }
+    //     delay.dispose();
+    //     setDelay(
+    //         new Tone.FeedbackDelay({
+    //             delayTime: delayValues.dTime * 0.01,
+    //             feedback: delayValues.dFeedback * 0.01,
+    //         })
+    //     );
+    // };
 
     // useEffect(() => {
     //     loadAudio();
@@ -73,7 +73,7 @@ function Delay({
                 Delay{" "}
                 <span
                     className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("delay")}
+                    onMouseOver={(e) => handleMouseOver("delay", e)}
                     onMouseOut={() => handleMouseOut("delay")}
                 >
                     ?
@@ -123,7 +123,7 @@ function Delay({
                 Time{" "}
                 <span
                     className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("delay-time")}
+                    onMouseOver={(e) => handleMouseOver("delay-time", e)}
                     onMouseOut={() => handleMouseOut("delay-time")}
                 >
                     ?
@@ -149,7 +149,7 @@ function Delay({
                 Feedback{" "}
                 <span
                     className="tooltip-trigger"
-                    onMouseOver={() => handleMouseOver("delay-feedback")}
+                    onMouseOver={(e) => handleMouseOver("delay-feedback", e)}
                     onMouseOut={() => handleMouseOut("delay-feedback")}
                 >
                     ?

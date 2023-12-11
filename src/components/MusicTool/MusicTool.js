@@ -1,30 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "./MusicTool.scss";
 import * as Tone from "tone";
-const Synth = React.lazy(() => import("../Synth/Synth"));
 const Reverb = React.lazy(() => import("../Reverb/Reverb"));
 const Sequencer = React.lazy(() => import("../Step Sequencer/StepSequencer"));
 const Delay = React.lazy(() => import("../Delay/Delay"));
-const Sampler = React.lazy(() => import("../Sampler/NotesSampler"));
 
 function MusicTool() {
     const [displayTooltip, setDisplayTooltip] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-    const handleMouseMove = (e) => {
+
+    const handleMouseOver = (section, e) => {
         const offsetX = -150;
-        const offsetY = -100;
+        const offsetY = -120;
 
         setTooltipPosition({ x: e.pageX + offsetX, y: e.pageY + offsetY });
-    };
 
-    // useEffect(() => {
-    //     document.addEventListener("mousemove", handleMouseMove);
-
-    //     return () => {
-    //         document.removeEventListener("mousemove", handleMouseMove);
-    //     };
-    // }, []);
-    const handleMouseOver = (section) => {
         setDisplayTooltip((prevState) => ({
             ...prevState,
             [section]: true,
@@ -124,6 +114,7 @@ function MusicTool() {
         createSynths(8);
         loadSamplers(8);
     }, []);
+    // eslint-disable-next-line
 
     //   useEffect(() => {
     //     setSynthArray([]);
@@ -236,6 +227,7 @@ function MusicTool() {
         oscillatorType,
         octaves
     ]);
+    // eslint-disable-next-line
 
     const handlePlayButton = async (e) => {
         // toggle Tone.Trasport and the flag variable.
@@ -258,12 +250,7 @@ function MusicTool() {
         }
     };
 
-    // useEffect(() => {
-    //     if (sequencer.started && sequencer.playing) {
-    //         Tone.Transport.stop();
-    //         Tone.Transport.start();
-    //     }
-    // }, [octaves]);
+    // eslint-disable-next-line
 
     const handleOctaveChange = (e) => {
         let id = e.target.id;
@@ -285,12 +272,6 @@ function MusicTool() {
             });
         }
     };
-
-    // useEffect(() => {
-    //     if (sequencer.started && !sequencer.playing) {
-    //         Tone.Transport.cancel();
-    //     }
-    // }, [synthArray, samplerArray1, samplerArray2]);
 
     return (
         <div className="musictool">
@@ -471,11 +452,12 @@ function MusicTool() {
                             })
                         }}
                         disabled={isPlaying ? 1 : 0}
+                        defaultValue="Harp"
                     >
                         <option>Piano</option>
                         <option>Bell</option>
                         <option>Epiano</option>
-                        <option selected="selected">Harp</option>
+                        <option>Harp</option>
                         <option>Vox</option>
                         <option>808</option>
                         <option>909</option>
@@ -522,6 +504,7 @@ function MusicTool() {
                     max="2"
                     value={octaves.sampler1}
                     onInput={(e) => handleOctaveChange(e)}
+                    disabled={isPlaying ? 1 : 0}
                 />
                 <Sequencer
                     instrumentArray={samplerArray1}
@@ -550,6 +533,7 @@ function MusicTool() {
                     max="2"
                     value={octaves.sampler2}
                     onInput={(e) => handleOctaveChange(e)}
+                    disabled={isPlaying ? 1 : 0}
                 />
                 <Sequencer
                     instrumentArray={samplerArray2}
