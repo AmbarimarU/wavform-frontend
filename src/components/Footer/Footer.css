@@ -1,9 +1,21 @@
 
 .footer {
-    background-color: #007ead;
-    display: flex;
-    justify-content: space-between;
+    background-color: #15171c;
+    /* display: flex;
+    justify-content: space-between; */
     align-items: center;
     padding: 20px;
     margin-top: auto;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right:0;
+    color:white;
+  
 }
+
+footer{
+   float: right;
+}
+  
+  

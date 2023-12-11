@@ -47,53 +47,56 @@ function Login({ setUser }) {
     }
 
     return (
-        <div className="form-container" style={{ backgroundColor: "#007ead" }}>
-            <div className="form-div">
-                <div className="form-h1">
-                    <h2>Log in</h2>
-                </div>
-                <form onSubmit={handleOnSubmit}>
-                    <div className="form-input-container">
-                        <input
-                            className="form-input"
-                            type="text"
-                            name="email"
-                            id="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
+        <div className="login">
+            <div className="login__container">
+                <h2 className="login__title">Log in</h2>
+
+                <form onSubmit={handleOnSubmit} className="login__form">
+                    <div className="form-container">
+                        <div className="form-field">
+                            <input
+                                className="form-input"
+                                type="text"
+                                name="email"
+                                id="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
                     </div>
-                    <div className="form-input-container">
-                        <input
-                            className="form-input"
-                            type={
-                                process.env.NODE_ENV === "production"
-                                    ? "password"
-                                    : "text"
-                            }
-                            name="password"
-                            id="password"
-                            placeholder="Passsword"
-                            value={password}
-                            onChange={(e) => setpassword(e.target.value)}
-                        />
+                    <div className="form-container">
+                        <div className="form-field">
+                            <input
+                                className="form-input"
+                                type={
+                                    process.env.NODE_ENV === "production"
+                                        ? "password"
+                                        : "text"
+                                }
+                                name="password"
+                                id="password"
+                                placeholder="Passsword"
+                                value={password}
+                                onChange={(e) => setpassword(e.target.value)}
+                            />
+                        </div>
                     </div>
 
-                    <div className="form-input-container">
-                        <input
-                            className="form-input"
-                            type="text"
-                            name="username"
-                            id="username"
-                            placeholder="Username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </div>
+                    <div className="form-container">
+                        <div className="form-field">
+                            <input
+                                className="form-input"
+                                type="text"
+                                name="username"
+                                id="username"
+                                placeholder="Username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                        </div>
 
-                    <div className="button-container">
-                        <button className="login">Submit</button>
+                        <button className="login-button">Submit</button>
                     </div>
                 </form>
             </div>

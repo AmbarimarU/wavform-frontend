@@ -1,4 +1,20 @@
 import * as Tone from "tone";
+import { insertKey } from "../Api/Api";
+
+
+const pianoSamples = 
+    {
+        name: "Casio",
+        notes: ["A1", "A2", "B1", "C2", "D2"],
+        url: "https://tonejs.github.io/audio/casio/",
+    };
+
+let urlsObj = {};
+
+pianoSamples.notes.forEach((note) => {
+    urlsObj[note] = `${note}.mp3`;
+});
+
 
 const keyboard = {
     notes: [
@@ -22,9 +38,31 @@ const keyboard = {
 };
 
 const synth = new Tone.Synth().toDestination();
-const playNote = (note) => {
-    document.getElementById(note).style.backgroundColor = "blue";
-    synth.triggerAttack(note, "8n");
+async function insertNote(note, user) {
+    try {
+        insertKey(note, user);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+const playNote = async (
+    note,
+    user = null,
+    index = null,
+    strokes,
+    setStrokes
+) => {
+    if (document.getElementById(note)) {
+        document.getElementById(note).style.backgroundColor = "blue";
+        synth.triggerAttack(note, "8n");
+        if (user) {
+            let stroke = strokes;
+            stroke++;
+            setStrokes(stroke);
+            await insertNote(keyboard.letters[index], user);
+        }
+    }
 };
 
 const releaseNote = (index) => {
@@ -34,15 +72,16 @@ const releaseNote = (index) => {
 
 const releaseKey = () => {
     for (let i = 0; i < keyboard.notes.length; i++) {
-        document.getElementById(keyboard.notes[i]).style = "";
+        if (document.getElementById(keyboard.notes[i]))
+            document.getElementById(keyboard.notes[i]).style = "";
     }
     synth.triggerRelease(".0001");
 };
 
-const playKey = (event) => {
+const playKey = (event, user = null, strokes, setStrokes) => {
     for (let i = 0; i < keyboard.notes.length; i++) {
         if (event.keyCode === keyboard.keys[i]) {
-            playNote(keyboard.notes[i]);
+            playNote(keyboard.notes[i], user, i, strokes, setStrokes);
         }
     }
 };

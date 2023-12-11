@@ -10,11 +10,11 @@ function Homes() {
         navigate("/welcome");
     }
     return (
-        <div className="home" style={{ backgroundColor: "rgb(40, 40, 40)" }}>
+        <div className="home" >
             <div className="container">
                 {/* <img src={wavform} alt="wavform" />
                 <h1 className="home-heading"> WAVFORM </h1> */}
-                <p>A New Tool For Music Production</p>
+                <p className="home-statement">A New Tool For Music Production</p>
                 <button onClick={handleWelcomeNav} className="enter">
                     <FaPlay
                         style={{
