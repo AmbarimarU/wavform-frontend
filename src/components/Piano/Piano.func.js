@@ -1,21 +1,33 @@
 import * as Tone from "tone";
 import { insertKey } from "../Api/Api";
 
-
-const pianoSamples = 
-    {
-        name: "Casio",
-        notes: ["A1", "A2", "B1", "C2", "D2"],
-        url: "https://tonejs.github.io/audio/casio/",
-    };
+const pianoSamples = {
+    name: "Casio",
+    notes: ["A1", "A2", "B1", "C2", "D2"],
+    url: "https://tonejs.github.io/audio/casio/",
+};
 
 let urlsObj = {};
 
 pianoSamples.notes.forEach((note) => {
     urlsObj[note] = `${note}.mp3`;
 });
-
-
+/*
+notes: [
+        "C4",
+        "Db4",
+        "D4",
+        "Eb4",
+        "E4",
+        "F4",
+        "Gb4",
+        "G4",
+        "Ab4",
+        "A4",
+        "Bb4",
+        "B4",
+        "C5",
+    ]*/
 const keyboard = {
     notes: [
         "C4",
@@ -56,7 +68,7 @@ const playNote = async (
     if (document.getElementById(note)) {
         document.getElementById(note).style.backgroundColor = "blue";
         synth.triggerAttack(note, "8n");
-        if (user) {
+        if (user !== null) {
             let stroke = strokes;
             stroke++;
             setStrokes(stroke);
