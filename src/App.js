@@ -30,17 +30,18 @@ const Delay = React.lazy(() => import("./components/Delay/Delay"));
 const Sampler = React.lazy(() => import("./components/Sampler/NotesSampler"));
 const Piano = React.lazy(() => import("./components/Piano/Piano"));
 const GetAllUsers = React.lazy(() =>
-    import("./components/GetAllUsers/GetAllUsers")
+  import("./components/GetAllUsers/GetAllUsers")
 );
 const Profile = React.lazy(() => import("./components/Profile/Profile"));
 const PrivateRoute = React.lazy(() =>
-    import("./components/PrivateRoute/PrivateRoute")
+  import("./components/PrivateRoute/PrivateRoute")
 );
 const Topics = React.lazy(() => import("./components/Topics/Topics"));
 const TopicsDetails = React.lazy(() =>
-    import("./components/Topics/TopicsDetails")
+  import("./components/Topics/TopicsDetails")
 );
 const FourOFour = React.lazy(() => import("./components/FourOFour/FourOFour"));
+// const Sidebar = React.lazy(() => import("./components/Sidebar/Sidebar"));
 const MusicBar = React.lazy(() => import("./components/MusicBar/MusicBar"));
 // const MusicNotes = React.lazy(() => import("./components/MusicBar/MusicNotes"));
 
@@ -54,7 +55,6 @@ function App() {
     }
 
     const [sidebar, setSidebar] = useState(false);
-
     const showSidebar = () => setSidebar(!sidebar);
     return (
         <React.Suspense fallback={<Loader />}>
@@ -114,7 +114,6 @@ function App() {
                             element={<TopicsDetails user={user} />}
                         />
                         <Route path="/*" element={<FourOFour />} />
-                        <Route path="/musicbar" element={<MusicBar />} />
                         {/* // <Route path="/musicnotes" element={<MusicNotes />} /> */}
                     </Routes>
                 </div>

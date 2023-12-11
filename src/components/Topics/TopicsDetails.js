@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchTopicDetail, fetchKeys } from "../Api/Api";
 import Piano from "../Piano/Piano";
+import BarsAndNotesLesson from "../LessonsImages/BarsAndNotesLesson";
+import TempoLessonImage from "../LessonsImages/TempoLessonImage";
 
 function TopicsDetails({ user }) {
     const [singleTopic, setSingleTopic] = useState(null);
@@ -22,7 +24,6 @@ function TopicsDetails({ user }) {
                 console.log(error);
             }
         };
-        console.log("ID" + id);
         fetchSingleTopic();
         if (id === "4") {
             const randomNoteSequence = () => {
@@ -66,9 +67,11 @@ function TopicsDetails({ user }) {
         "Scales",
         "Piano Practice",
     ];
-
+    const barAndNoteTopic = ["Bars and Types of Notes"];
+    const tempoTopic = ["Tempo"];
     const showPiano = pianoTopics.includes(singleTopic?.name);
-
+    const showBarAndNotesImg = barAndNoteTopic.includes(singleTopic?.name);
+    const showTempo = tempoTopic.includes(singleTopic?.name);
     const bulletPoint = singleTopic?.description.split("\n") || [];
 
     const handleNext = () => {
@@ -116,7 +119,8 @@ function TopicsDetails({ user }) {
                             />
                         )}
                     </div>
-
+                    <div>{showBarAndNotesImg && <BarsAndNotesLesson />}</div>
+                    <div>{showTempo && <TempoLessonImage />}</div>
                     <div>
                         {renderBulletPoints()}
                         {singleTopic.name === "Piano Practice" && (
