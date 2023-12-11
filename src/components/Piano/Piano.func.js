@@ -1,5 +1,18 @@
 import * as Tone from "tone";
 
+const pianoSamples = 
+    {
+        name: "Casio",
+        notes: ["A1", "A2", "B1", "C2", "D2"],
+        url: "https://tonejs.github.io/audio/casio/",
+    };
+
+let urlsObj = {};
+
+pianoSamples.notes.forEach((note) => {
+    urlsObj[note] = `${note}.mp3`;
+});
+
 const keyboard = {
     notes: [
         "C4",
