@@ -13,8 +13,7 @@ function StepSequencer({
   setGrid,
   octave,
   instrumentChanges1,
-  instrumentChanges2,
-  currentBeat
+  instrumentChanges2
 }) {
   // const [sequencer, setSequencer] = useState({
   //   beat: 0,
@@ -29,6 +28,8 @@ function StepSequencer({
   const [flag2, setFlag2] = useState(true)
   const [container, setContainer] = useState({});
   const [notes, setNotes] = useState(sequencer.notes)
+
+  let currentBeat = 0
 
   const makeGrid = (notes) => {
     // our "notation" will consist of an array with 6 sub arrays
@@ -145,7 +146,7 @@ function StepSequencer({
       }
     });
     // increment the counter
-    console.log("beat: " + beat);
+    console.log("beat: " + currentBeat);
     currentBeat = (currentBeat + 1) % 8;
   };
 
@@ -158,13 +159,20 @@ function StepSequencer({
 
   const [eventId, setEventId] = useState(null)
 
+  // useEffect(() => {
+  //   if (sequencer.started && !sequencer.playing) {
+  //     testBeat = 0
+  //   }
+  // }, [instrumentArray, flag, instrumentChanges1, instrumentChanges2]);
+
   useEffect(() => {
     if (sequencer.started && !sequencer.playing) {
-      Tone.Transport.clear(eventId)
+      currentBeat = 0;
+      Tone.Transport.clear(eventId);
       Tone.Transport.bpm.value = sequencer.tempo;
       setEventId(Tone.Transport.scheduleRepeat(repeat, "8n"));
     }
-  }, [instrumentArray, flag]);
+  }, [instrumentArray, flag, instrumentChanges1, instrumentChanges2]);
 
   const handleNoteClick = (clickedRowIndex, clickedNoteIndex, e) => {
     // iterating through the grid

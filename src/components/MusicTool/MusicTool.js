@@ -87,7 +87,6 @@ function MusicTool() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [oscillatorType, setOscillatorType] = useState("sine");
     let synths = [];
-    let currentBeat = sequencer.beat;
 
     const createSynths = (count) => {
         synths = [];
@@ -487,7 +486,6 @@ function MusicTool() {
                     octave={octaves.synth}
                     instrumentChanges1={instrumentChanges.sampler1}
                     instrumentChanges2={instrumentChanges.sampler2}
-                    currentBeat={currentBeat}
                 />
             </div>
             <div
@@ -514,9 +512,7 @@ function MusicTool() {
                     setGrid={setGrid2}
                     octave={octaves.sampler1}
                     instrumentChanges1={instrumentChanges.synth}
-                    instrumentChanges2={instrumentChanges.sampler2}
-                    currentBeat={currentBeat}
-                    
+                    instrumentChanges2={instrumentChanges.sampler2}                    
                 />
             </div>
             <div
@@ -544,7 +540,6 @@ function MusicTool() {
                     octave={octaves.sampler2}
                     instrumentChanges1={instrumentChanges.synth}
                     instrumentChanges2={instrumentChanges.sampler1}
-                    currentBeat={currentBeat}
                 />
             </div>
             <div className="musictool_bottom">
