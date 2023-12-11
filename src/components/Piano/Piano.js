@@ -12,7 +12,11 @@ import {
 function Piano({ user, setStrokes, strokes, setKeyStrokes }) {
     useEffect(() => {
         const handleKeyDown = (event) => {
-            playKey(event, user.id, strokes, setStrokes);
+            if (user) {
+                playKey(event, user.id, strokes, setStrokes);
+            } else {
+                playKey(event, null, strokes, setStrokes);
+            }
         };
 
         const handleKeyUp = (event) => {
@@ -31,7 +35,7 @@ function Piano({ user, setStrokes, strokes, setKeyStrokes }) {
             await deleteKey(user.id);
         }
         setKeyStrokes([]);
-        deleteKeys();
+        if (user) deleteKeys();
     }, [user]);
 
     return (
@@ -47,15 +51,25 @@ function Piano({ user, setStrokes, strokes, setKeyStrokes }) {
                             key={note}
                             id={note}
                             className={key}
-                            onMouseDown={() =>
-                                playNote(
-                                    note,
-                                    user.id,
-                                    index,
-                                    strokes,
-                                    setStrokes
-                                )
-                            }
+                            onMouseDown={() => {
+                                if (user) {
+                                    playNote(
+                                        note,
+                                        user.id,
+                                        index,
+                                        strokes,
+                                        setStrokes
+                                    );
+                                } else {
+                                    playNote(
+                                        note,
+                                        null,
+                                        index,
+                                        strokes,
+                                        setStrokes
+                                    );
+                                }
+                            }}
                             onMouseUp={() => releaseNote(index)}
                         >
                             {keyboard.letters[index]}
