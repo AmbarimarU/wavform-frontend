@@ -11,6 +11,7 @@ import {
 } from "../Hooks/Validation/Index";
 
 function Signup() {
+
     const [
         email,
         setEmail,
@@ -44,11 +45,12 @@ function Signup() {
 
     const [, , checkToken] = useAuthHooks();
 
-    useEffect(() => {
-        if (checkToken()) {
-            navigate("/get-all-users");
-        }
-    }, []);
+
+    if(checkToken()){
+      navigate("/get-all-users")
+    
+  }
+}, [checkToken, navigate])
 
     async function handleOnSubmit(e) {
         e.preventDefault();
@@ -200,6 +202,7 @@ function Signup() {
                         Already Signed up? <Link to="/login">click here</Link>
                     </small>
                 </div>
+
             </div>
         </div>
     );

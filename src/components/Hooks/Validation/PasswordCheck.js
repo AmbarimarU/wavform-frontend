@@ -21,7 +21,7 @@ function PasswordCheck() {
         setpasswordButtonState(false);
       }
     }
-  }, [input, confirmPassword]);
+  }, [input, confirmPassword, onBlur, onFocus]);
 
   useEffect(() => {
     if (onBlur || (onFocus && input.length > 1)) {

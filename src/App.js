@@ -59,6 +59,7 @@ function App() {
     return (
         <React.Suspense fallback={<Loader />}>
             <Router>
+
                 <ToggleNavBar>
                     <Nav
                         user={user}
