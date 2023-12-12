@@ -486,6 +486,8 @@ function MusicTool() {
                     octave={octaves.synth}
                     instrumentChanges1={instrumentChanges.sampler1}
                     instrumentChanges2={instrumentChanges.sampler2}
+                    octaveChanges1={octaves.sampler1}
+                    octaveChanges2={octaves.sampler2}
                 />
             </div>
             <div
@@ -512,7 +514,9 @@ function MusicTool() {
                     setGrid={setGrid2}
                     octave={octaves.sampler1}
                     instrumentChanges1={instrumentChanges.synth}
-                    instrumentChanges2={instrumentChanges.sampler2}                    
+                    instrumentChanges2={instrumentChanges.sampler2}       
+                    octaveChanges1={octaves.synth}
+                    octaveChanges2={octaves.sampler2}             
                 />
             </div>
             <div
@@ -540,6 +544,8 @@ function MusicTool() {
                     octave={octaves.sampler2}
                     instrumentChanges1={instrumentChanges.synth}
                     instrumentChanges2={instrumentChanges.sampler1}
+                    octaveChanges1={octaves.sampler1}
+                    octaveChanges2={octaves.synth}
                 />
             </div>
             <div className="musictool_bottom">
