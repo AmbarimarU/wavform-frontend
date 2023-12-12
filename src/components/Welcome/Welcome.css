@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,300&family=Varela+Round&family=Young+Serif&display=swap");
 
 .welcome {
-    background-color: rgb(75, 75, 75);
     align-items: center;
     justify-content: center;
     min-height: calc(100vh - 100px);

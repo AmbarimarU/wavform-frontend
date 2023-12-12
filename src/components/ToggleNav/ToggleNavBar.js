@@ -7,7 +7,7 @@ function ToggleNavBar({ children }) {
     const [showNavBar, setShowNavBar] = useState(false);
 
     useEffect(() => {
-        console.log("This location:", location);
+        //console.log("This location:", location);
         if (location.pathname === "/") {
             setShowNavBar(false);
         } else {
