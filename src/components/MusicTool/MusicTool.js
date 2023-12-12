@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
+import {useNavigate} from 'react-router-dom'
 import "./MusicTool.scss";
 import * as Tone from "tone";
 const Reverb = React.lazy(() => import("../Reverb/Reverb"));
 const Sequencer = React.lazy(() => import("../Step Sequencer/StepSequencer"));
 const Delay = React.lazy(() => import("../Delay/Delay"));
 
+
 function MusicTool() {
     const [displayTooltip, setDisplayTooltip] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-
+    const navigate = useNavigate()
+    
     const handleMouseOver = (section, e) => {
         const offsetX = -150;
         const offsetY = -120;
@@ -272,9 +275,14 @@ function MusicTool() {
         }
     };
 
+
+    const navToMusicHelp = () => {
+             navigate('/musictoolhelp')
+    }
     return (
         <div className="musictool">
             <div className="musictool_header">
+                
                 <button
                     className="musictool_selector"
                     onClick={(e) => {
@@ -462,7 +470,10 @@ function MusicTool() {
                         <option>909</option>
                     </select>
                 </div>
+            
+               
             </div>
+            
             <div className="musictool_side">Notes / Sounds</div>
             <div className="musictool_sequencer">
                 {" "}
@@ -477,6 +488,7 @@ function MusicTool() {
                     onInput={(e) => handleOctaveChange(e)}
                     disabled={isPlaying ? 1 : 0}
                 />
+                  
                 <Sequencer
                     instrumentArray={synthArray}
                     sequencer={sequencer}
@@ -519,6 +531,7 @@ function MusicTool() {
                     octaveChanges2={octaves.sampler2}             
                 />
             </div>
+            
             <div
                 className="musictool_sequencer3"
                 style={{ visibility: "hidden" }}
@@ -555,6 +568,14 @@ function MusicTool() {
                 >
                     {isPlaying ? "Stop" : "Play"}
                 </button>
+
+                <button 
+                className="musictool_help"
+                onClick={navToMusicHelp}>
+                   Help?
+                </button>
+            
+               
             </div>
             <div className="musictool_reverb">
                 <Reverb
