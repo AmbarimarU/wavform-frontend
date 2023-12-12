@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./MusicTool.scss";
 import * as Tone from "tone";
-const Synth = React.lazy(() => import("../Synth/Synth"));
 const Reverb = React.lazy(() => import("../Reverb/Reverb"));
 const Sequencer = React.lazy(() => import("../Step Sequencer/StepSequencer"));
 const Delay = React.lazy(() => import("../Delay/Delay"));
-const Sampler = React.lazy(() => import("../Sampler/NotesSampler"));
 
 function MusicTool() {
     const [displayTooltip, setDisplayTooltip] = useState(false);
@@ -16,6 +14,7 @@ function MusicTool() {
         const offsetY = -120;
 
         setTooltipPosition({ x: e.pageX + offsetX, y: e.pageY + offsetY });
+
         setDisplayTooltip((prevState) => ({
             ...prevState,
             [section]: true,
@@ -37,10 +36,16 @@ function MusicTool() {
         transposition: 0,
     });
 
+    const [instrumentChanges, setInstrumentChanges] = useState({
+        synth: 0,
+        sampler1: 0,
+        sampler2: 0
+    })
+
     const [octaves, setOctaves] = useState({
         synth: 0,
         sampler1: 0,
-        sampler2: -1,
+        sampler2: 0,
     });
 
     const [grid1, setGrid1] = useState([]);
@@ -108,6 +113,7 @@ function MusicTool() {
         createSynths(8);
         loadSamplers(8);
     }, []);
+    // eslint-disable-next-line
 
     //   useEffect(() => {
     //     setSynthArray([]);
@@ -218,7 +224,9 @@ function MusicTool() {
         samplerArray1,
         samplerArray2,
         oscillatorType,
+        octaves
     ]);
+    // eslint-disable-next-line
 
     const handlePlayButton = async (e) => {
         // toggle Tone.Trasport and the flag variable.
@@ -227,9 +235,11 @@ function MusicTool() {
             setSequencer({
                 ...sequencer,
                 playing: false,
+                beat: 0
             });
             setIsPlaying(false);
         } else {
+            // currentBeat = sequencer.beat
             Tone.Transport.start();
             setSequencer({
                 ...sequencer,
@@ -239,12 +249,7 @@ function MusicTool() {
         }
     };
 
-    useEffect(() => {
-        if (sequencer.started && sequencer.playing) {
-            Tone.Transport.stop();
-            Tone.Transport.start();
-        }
-    }, [octaves]);
+    // eslint-disable-next-line
 
     const handleOctaveChange = (e) => {
         let id = e.target.id;
@@ -367,9 +372,13 @@ function MusicTool() {
                                 synths[i].set({
                                     oscillator: { type: e.target.value },
                                 });
-                            }
+                            };
                             setSynthArray(synths);
                             setOscillatorType(e.target.value);
+
+                            setInstrumentChanges({
+                                synth: instrumentChanges.synth + 1
+                            })
                         }}
                         disabled={isPlaying ? 1 : 0}
                     >
@@ -387,15 +396,26 @@ function MusicTool() {
                         }}
                         className="sampler1_dropdown"
                         onChange={(e) => {
+                            // let samplers = samplerArray1;
+                            // for (let i = 0; i < samplers.length; i++) {
+                            //     samplers[i].dispose()
+                            // };
+
                             let newSamplers = [];
 
                             for (let i = 0; i < sequencer.notes.length; i++) {
                                 let newSampler = new Tone.Sampler(
                                     samples[e.target.value.toLowerCase()]
                                 ).chain(delay, reverb, Tone.Destination);
+                                
                                 newSamplers.push(newSampler);
-                            }
-                            setSamplerArray1(newSamplers);
+                            };
+
+                            setSamplerArray1(newSamplers)
+
+                            setInstrumentChanges({
+                                sampler1: instrumentChanges.sampler1 + 1
+                            })
                         }}
                         disabled={isPlaying ? 1 : 0}
                     >
@@ -423,14 +443,20 @@ function MusicTool() {
                                 ).chain(delay, reverb, Tone.Destination);
                                 newSamplers.push(newSampler);
                             }
+                     
                             setSamplerArray2(newSamplers);
+
+                            setInstrumentChanges({
+                                sampler2: instrumentChanges.sampler2 + 1
+                            })
                         }}
                         disabled={isPlaying ? 1 : 0}
+                        defaultValue="Harp"
                     >
                         <option>Piano</option>
                         <option>Bell</option>
                         <option>Epiano</option>
-                        <option selected="selected">Harp</option>
+                        <option>Harp</option>
                         <option>Vox</option>
                         <option>808</option>
                         <option>909</option>
@@ -458,6 +484,10 @@ function MusicTool() {
                     grid={grid1}
                     setGrid={setGrid1}
                     octave={octaves.synth}
+                    instrumentChanges1={instrumentChanges.sampler1}
+                    instrumentChanges2={instrumentChanges.sampler2}
+                    octaveChanges1={octaves.sampler1}
+                    octaveChanges2={octaves.sampler2}
                 />
             </div>
             <div
@@ -483,6 +513,10 @@ function MusicTool() {
                     grid={grid2}
                     setGrid={setGrid2}
                     octave={octaves.sampler1}
+                    instrumentChanges1={instrumentChanges.synth}
+                    instrumentChanges2={instrumentChanges.sampler2}       
+                    octaveChanges1={octaves.synth}
+                    octaveChanges2={octaves.sampler2}             
                 />
             </div>
             <div
@@ -508,6 +542,10 @@ function MusicTool() {
                     grid={grid3}
                     setGrid={setGrid3}
                     octave={octaves.sampler2}
+                    instrumentChanges1={instrumentChanges.synth}
+                    instrumentChanges2={instrumentChanges.sampler1}
+                    octaveChanges1={octaves.sampler1}
+                    octaveChanges2={octaves.synth}
                 />
             </div>
             <div className="musictool_bottom">

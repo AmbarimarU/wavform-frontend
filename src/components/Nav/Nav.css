@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,300&family=Varela+Round&family=Young+Serif&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,300&family=Varela+Round&family=Young+Serif&display=swap");
 
 html,
 body {
@@ -12,11 +12,9 @@ body {
     padding: 10px 10px;
     background: #15171c;
     height: 100px;
-/* // justify-content: flex-start; */
-
-
+    /* // justify-content: flex-start; */
 }
-.nav-icon{
+.nav-icon {
     margin-left: 2rem;
     font-size: 2rem;
     height: 80px;
@@ -25,7 +23,7 @@ body {
     align-items: center;
     background-color: #15171c;
 }
-.sidebar-nav{
+.sidebar-nav {
     background: #15171c;
     width: 250px;
     height: 100vh;
@@ -37,7 +35,7 @@ body {
     transition: 350ms;
     z-index: 10;
 }
-.sidebar-wrap{
+.sidebar-wrap {
     width: 100%;
 }
 .logo img {
@@ -46,9 +44,9 @@ body {
     margin-left: 20px;
 
     padding-bottom: 10px;
-    padding-top: 10px; 
+    padding-top: 10px;
 }
-.title{
+.title {
     text-align: center;
     margin-left: auto;
     color: white;
@@ -73,4 +71,25 @@ body {
 .active-nav-link {
     font-weight: 600;
     color: #786bb1;
+}
+.linkStyle {
+    display: flex;
+    color: #e1e9fc;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    list-style: none;
+    height: 60px;
+    text-decoration: none;
+    font-size: 18px;
+
+    &:hover {
+        background-color: #007ead;
+        border-left: 4px solid #007ead;
+        cursor: pointer;
+    }
+}
+.links {
+    color: white;
+    text-decoration: none;
 }
