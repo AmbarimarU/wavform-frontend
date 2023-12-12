@@ -44,6 +44,7 @@ const FourOFour = React.lazy(() => import("./components/FourOFour/FourOFour"));
 // const Sidebar = React.lazy(() => import("./components/Sidebar/Sidebar"));
 const MusicBar = React.lazy(() => import("./components/MusicBar/MusicBar"));
 // const MusicNotes = React.lazy(() => import("./components/MusicBar/MusicNotes"));
+const MusicToolHelp = React.lazy(() => import("./components/MusicToolHelp/MusicToolHelp"))
 
 function App() {
     const [user, setUser] = useAuthHooks();
@@ -59,7 +60,6 @@ function App() {
     return (
         <React.Suspense fallback={<Loader />}>
             <Router>
-
                 <ToggleNavBar>
                     <Nav
                         user={user}
@@ -116,6 +116,7 @@ function App() {
                         />
                         <Route path="/*" element={<FourOFour />} />
                         {/* // <Route path="/musicnotes" element={<MusicNotes />} /> */}
+                        <Route path="/musictoolhelp" element={<MusicToolHelp/>} />
                     </Routes>
                 </div>
                 <ToggleNavBar>

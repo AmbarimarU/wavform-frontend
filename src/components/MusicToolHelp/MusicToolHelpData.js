@@ -1,3 +1,4 @@
+
 export const MusicToolHelpData = [
     {  
         id: 1,
@@ -44,38 +45,43 @@ export const MusicToolHelpData = [
     },
     {
         id: 9,
+        title: "What is a Sampler?",
+        content: " A sampler is a device or software application that is used to digitally record, store, and reproduce audio samples. These samples can be short snippets of pre-recorded sounds, such as instruments or vocals. Musicians and producers use samplers to create new compositions by combining and manipulating these samples. Our Waveform Music tool plays two samplers simultaneously just press the Synth Button to switch samplers. With our sampler you can select from, piano, bell, harp, epiano(electric piano), vox(voice), and drum machines: 808 (known for its deep and booming sound), and 909( a punchy and more realistic kick drum sound compared to the 808.),   ",
+    },
+    {
+        id: 10,
         title: "What is delay?",
         content: "Delay is a time-based audio effect that captures an incoming audio signal and plays it back after an allotted period of time."
     } ,
     {
-        id: 10,
+        id: 11,
         title: "How does time affect delay?",
         content: "A brief delay time results in a merged sound for the listener, while a longer delay time begins to resemble a distinct echo",
 
     },
     {
-        id: 11,
+        id: 12,
         title: "What is the purpose of feedback in a delay effect?",
         content: "feedback in a delay effect controls how many times the delayed sound is repeated and how long it continues after the initial input. Higher feedback settings result in more repetitions and a longer-lasting, decaying echo effect."
 
     }, 
     {
-        id: 12,
+        id: 13,
         title: "What is reverb?",
         content: "serves to modify the audio we perceive, enhancing the spatial and dimensional qualities of any instrument it is applied to. To illustrate, consider the distinction between experiencing your favorite song in a live performance versus its studio version, or shouting in a room compared to shouting in a vast wooded area. Reverb effectively transports the listener into a specific acoustic environment or space alongside the instrument"
     }, 
     {
-        id: 13,
+        id: 14,
         title: "how does time affect reverb?",
         content: "The time setting in a reverb effect determines the duration or length of the reverberation, impacting the perception of space and distance in the sound. Short reverb times emphasize early reflections, creating a sense of proximity and intimacy. Longer reverb times result in a more extended decay, producing a spacious and immersive sound.",
     },
     {
-        id: 14,
+        id: 15,
         title: "How does adjusting the size parameter in a reverb effect influence the audio outcome?",
         content: "In a time based effect that deals with space size matter, the smaller the size produces a shorter decay time creating a feel of a small space, while a larger reverb size create a longer decay time makes the space feel larger"
     },
     {
-        id: 15,
+        id: 16,
         title: "the amount of reverb",
         content: "You can decide how much reverb you would like to add to your sound this process is called the wet effects. The wet signal is the processed or affected part of the sound, while the dry signal is the original or unaffected part. so if you add reverb to 50% of the sound, the sound would be consider 50% wet"
     }
