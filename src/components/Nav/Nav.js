@@ -28,7 +28,7 @@ return (
                     <div className='sidebar-wrap'>
                      <button onClick={showSidebar} className='nav-icon'>
 	                 <AiIcons.AiOutlineClose />
-	              </button>
+	                 </button>
                      {SidebarData.map((item, index) => {
                             return (
                                 <SubMenu

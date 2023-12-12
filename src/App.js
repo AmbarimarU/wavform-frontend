@@ -80,7 +80,7 @@ function App() {
                     />   
                     <Route path="/*" element={<FourOFour />} />
                       <Route path="/musicbar" element={<MusicBar />} />
-                      {/* // <Route path="/musicnotes" element={<MusicNotes />} /> */}
+                     {/* // <Route path="/musicnotes" element={<MusicNotes />} /> */}
                 </Routes>
                 <ToggleNavBar>
           

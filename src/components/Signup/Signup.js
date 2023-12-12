@@ -20,7 +20,7 @@ function Signup() {
     emailError,
     setEmailOnFocus,
     setEmailOnBlur,
-    emailButtonState
+
 ] = EmailCheck();
 
   const [
@@ -31,7 +31,7 @@ function Signup() {
    setPasswordOnBlur,
    confirmPassword, 
    setConfirmPassword,
-   passwordButtonState,
+   
 ] = PasswordCheck()
 
 const [
@@ -40,7 +40,7 @@ const [
   usernameError, 
   setUsernameOnFocus, 
   setUsernameOnBlur,
-  usernameButtonState
+  
 ] = UsernameCheck();
 
 const navigate =  useNavigate()
@@ -53,7 +53,7 @@ useEffect(() => {
       navigate("/get-all-users")
     
   }
-}, [])
+}, [checkToken, navigate])
 
 
 async function handleOnSubmit(e){
@@ -173,13 +173,13 @@ async function handleOnSubmit(e){
                 </div>
             
  
-                 <button disabled={emailButtonState || usernameButtonState || passwordButtonState} className='form-button'>Submit</button>
+                 <button className='form-button'>Submit</button>
             
           
             </div>
         </form>
         <div className='sign-up__login-cta'>
-              <small>Already Signed up? <Link to="/login">click here</Link></small>
+              <small>Already Signed up? <Link to="/login">click here to login</Link></small>
             </div>
     </div>
 </div>

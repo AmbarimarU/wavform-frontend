@@ -15,10 +15,20 @@ function Login({ setUser }) {
     const navigate = useNavigate();
 
     useEffect(() => {
+       try {
         if (checkToken()) {
             navigate("/get-all-users");
         }
-    }, []);
+       } catch (error) {
+       if (error.response && error.response.status === 401) {
+            console.log("Authentication failed: Invalid credentials");
+            
+        } else {
+            console.error("An error occurred:", error);
+            
+        }
+       }
+    }, [checkToken, navigate]);
 
     async function handleOnSubmit(e) {
         e.preventDefault();

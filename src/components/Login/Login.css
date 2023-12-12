@@ -1,4 +1,3 @@
-
 .login {
   background-color: #007ead;
   font-family: sans-serif; /* IGNORE */
@@ -20,7 +19,6 @@
 .login__title {
   color: #786bb1;
   font-size: 25px;
-  font-weight: 800;
   margin: 0 0 2rem;
   text-align: center;
 }
@@ -47,10 +45,7 @@
   
 .login-button {
   align-self: center;
-  
   margin-top: 35px;
-
-
   background-color: #786bb1;
   border-radius: 0.75rem;
   border: 0;
@@ -61,4 +56,3 @@
   padding: 10px 45px 10px;
   width: 250px;
 }
-

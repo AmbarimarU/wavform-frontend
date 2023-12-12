@@ -1,0 +1,51 @@
+.help{
+    margin-left: 175px;
+    margin-right: 175px;
+    margin-top: 50px;
+  }
+  .help-heading{
+    text-align: center;
+  }
+  .pageNumbers-container{
+    padding-top: 50px;
+    justify-content: center;
+    width: 100%;
+  }
+  .pageNumbers {
+    list-style: none;
+    display: flex;
+    
+  }
+  
+  .pageNumbers li {
+    padding: 10px;
+    border: 1px solid white;
+    cursor: pointer;
+  }
+  
+  .pageNumbers li.active {
+    background-color: white;
+    color: #007ead;
+  }
+  
+  .pageNumbers li button {
+    background-color: transparent;
+    border: none;
+    font-size: 1 rem;
+    cursor: pointer;
+  }
+  .pageNumbers li button:hover {
+    background-color: #007ead;
+    color: white;
+    border-radius: .75rem;
+  }
+  .pageNumbers li button:focus {
+    outline: none;
+  }
+ 
+  .MusicToolHelp h3{
+    text-transform: capitalize;
+
+  }
+
+  
