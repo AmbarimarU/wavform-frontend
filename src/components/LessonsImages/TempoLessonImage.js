@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Tempo from "./tempo/Bullet Point 1 - tempo.gif";
 import PulsingSpeaker from "./tempo/Bullet Point 2 - pulsing speaker.gif";
 
-function TempoLessonImage() {
+import "./TempoLessonImage.scss"
+
+function TempoLessonImage({ currentIndex }) {
   const tempoImg = [Tempo, PulsingSpeaker];
   const [currentTempoImgIndex, setCurrentTempoImgIndex] = useState(0);
 
@@ -18,11 +20,15 @@ function TempoLessonImage() {
     }
   };
 
+  useEffect(() => {
+    setCurrentTempoImgIndex(currentIndex);
+}, [currentIndex])
+
   const isPrevDisable = currentTempoImgIndex === 0;
   const isNextDisable = currentTempoImgIndex >= tempoImg.length - 1;
 
   return (
-    <div>
+    <div className="image-container">
       <img src={tempoImg[currentTempoImgIndex]} alt="" />
 
       <div>

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Bar from "./Bars-And-Types-Of-Notes/Bullet Point 1 - Bar.png";
 import TimeSignature from "./Bars-And-Types-Of-Notes/Bullet Point 2 - Time Signature.png";
 import TypesOfNotes from "./Bars-And-Types-Of-Notes/Bullet Point 3 - Different Types Of Notes.jpeg";
 import QuarterAndEighthNotes from "./Bars-And-Types-Of-Notes/Bullet Point 4 - Quarter Notes and Eighth Notes.png";
 
-function BarsAndNotesLesson() {
+import "./BarsAndNotesLesson.scss"
+
+function BarsAndNotesLesson({ currentIndex }) {
   // an array to store the images
   const barAndNotesImg = [
     Bar,
@@ -29,8 +31,13 @@ function BarsAndNotesLesson() {
     }
   };
 
+  useEffect(() => {
+      setCurrentImageIndex(currentIndex);
+  }, [currentIndex])
+  
+
   return (
-    <div>
+    <div className="image-container">
       {/* <img src={Bar} alt="" />
       <img src={TimeSignature} alt="" />
       <img src={TypesOfNotes} alt="" />
