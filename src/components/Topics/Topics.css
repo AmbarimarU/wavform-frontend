@@ -1,0 +1,30 @@
+.topics-ul {
+    text-align: center;
+    padding: 10px 20px;
+    margin: auto;
+    width: 30%;
+}
+
+li {
+    padding: 10px 20px;
+    color: white;
+    border-style: solid; 
+    border-radius: 50px;
+    border-color: rgb(64, 105, 229);
+    background-color: rgb(64, 105, 229);
+    list-style: none; /* Remove default list styles */
+    margin-bottom: 10px; /* Add space between list items */
+}
+
+.topics-link {
+text-decoration: none;
+color: white;
+font-weight: 700;
+font-size: larger;
+}
+
+
+.topics-h1 {
+padding: 40px;
+text-align: center;
+}

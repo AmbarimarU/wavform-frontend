@@ -4,6 +4,7 @@ import { fetchTopicDetail, fetchKeys } from "../Api/Api";
 import Piano from "../Piano/Piano";
 import BarsAndNotesLesson from "../LessonsImages/BarsAndNotesLesson";
 import TempoLessonImage from "../LessonsImages/TempoLessonImage";
+import './TopicsDetails.css';
 
 function TopicsDetails({ user }) {
     const [singleTopic, setSingleTopic] = useState(null);
@@ -91,12 +92,16 @@ function TopicsDetails({ user }) {
         if (multiBulletPoints.length > 1) {
             // return a new array of bullet point
             return multiBulletPoints.map((item, index) => (
-                <p key={index} dangerouslySetInnerHTML={{ __html: item }}></p>
+              <p
+                key={index}
+                dangerouslySetInnerHTML={{ __html: item }}
+                
+              ></p>
             ));
         } else {
             // return a single bullet point only
             return (
-                <p dangerouslySetInnerHTML={{ __html: currentBulletPoint }}></p>
+                <p dangerouslySetInnerHTML={{ __html: currentBulletPoint }} className="topic"></p>
             );
         }
     }
@@ -167,25 +172,40 @@ function TopicsDetails({ user }) {
                     </div>
                     {!sequence && (
                         <>
-                            <button
-                                onClick={handlePreview}
-                                disabled={currentIndex === 0}
-                            >
-                                &laquo; Prev
-                            </button>
-                            <button
-                                onClick={handleNext}
-                                disabled={
-                                    currentIndex >= bulletPoint.length - 1
-                                }
-                            >
-                                Next &raquo;
-                            </button>
+                          <br />
+                          <br />
+                          You have successfully played the sequence
                         </>
-                    )}
-                </div>
+                      )}
+                      <br />
+                    </>
+                  ) : (
+                    <>Please make an account to keep track of your progress</>
+                  )}
+                </>
+              )}
+            </div>
+            {!sequence && (
+              <div className="topics-btns">
+                <button
+                  className="topics-btn"
+                  onClick={handlePreview}
+                  disabled={currentIndex === 0}
+                >
+                  &laquo; Prev
+                </button>
+                <button
+                  className="topics-btn"
+                  onClick={handleNext}
+                  disabled={currentIndex >= bulletPoint.length - 1}
+                >
+                  Next &raquo;
+                </button>
+              </div>
             )}
-        </div>
+          </div>
+        )}
+      </div>
     );
 }
 
