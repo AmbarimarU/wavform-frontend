@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
+import {useNavigate} from 'react-router-dom'
 import "./MusicTool.scss";
 import * as Tone from "tone";
 const Reverb = React.lazy(() => import("../Reverb/Reverb"));
 const Sequencer = React.lazy(() => import("../Step Sequencer/StepSequencer"));
 const Delay = React.lazy(() => import("../Delay/Delay"));
 
+
 function MusicTool() {
     const [displayTooltip, setDisplayTooltip] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-
+    const navigate = useNavigate()
+    
     const handleMouseOver = (section, e) => {
         const offsetX = -150;
         const offsetY = -120;
@@ -87,7 +90,6 @@ function MusicTool() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [oscillatorType, setOscillatorType] = useState("sine");
     let synths = [];
-    let currentBeat = sequencer.beat;
 
     const createSynths = (count) => {
         synths = [];
@@ -273,9 +275,14 @@ function MusicTool() {
         }
     };
 
+
+    const navToMusicHelp = () => {
+             navigate('/musictoolhelp')
+    }
     return (
         <div className="musictool">
             <div className="musictool_header">
+                
                 <button
                     className="musictool_selector"
                     onClick={(e) => {
@@ -463,7 +470,10 @@ function MusicTool() {
                         <option>909</option>
                     </select>
                 </div>
+            
+               
             </div>
+            
             <div className="musictool_side">Notes / Sounds</div>
             <div className="musictool_sequencer">
                 {" "}
@@ -478,6 +488,7 @@ function MusicTool() {
                     onInput={(e) => handleOctaveChange(e)}
                     disabled={isPlaying ? 1 : 0}
                 />
+                  
                 <Sequencer
                     instrumentArray={synthArray}
                     sequencer={sequencer}
@@ -487,7 +498,8 @@ function MusicTool() {
                     octave={octaves.synth}
                     instrumentChanges1={instrumentChanges.sampler1}
                     instrumentChanges2={instrumentChanges.sampler2}
-                    currentBeat={currentBeat}
+                    octaveChanges1={octaves.sampler1}
+                    octaveChanges2={octaves.sampler2}
                 />
             </div>
             <div
@@ -514,11 +526,12 @@ function MusicTool() {
                     setGrid={setGrid2}
                     octave={octaves.sampler1}
                     instrumentChanges1={instrumentChanges.synth}
-                    instrumentChanges2={instrumentChanges.sampler2}
-                    currentBeat={currentBeat}
-                    
+                    instrumentChanges2={instrumentChanges.sampler2}       
+                    octaveChanges1={octaves.synth}
+                    octaveChanges2={octaves.sampler2}             
                 />
             </div>
+            
             <div
                 className="musictool_sequencer3"
                 style={{ visibility: "hidden" }}
@@ -544,7 +557,8 @@ function MusicTool() {
                     octave={octaves.sampler2}
                     instrumentChanges1={instrumentChanges.synth}
                     instrumentChanges2={instrumentChanges.sampler1}
-                    currentBeat={currentBeat}
+                    octaveChanges1={octaves.sampler1}
+                    octaveChanges2={octaves.synth}
                 />
             </div>
             <div className="musictool_bottom">
@@ -554,6 +568,14 @@ function MusicTool() {
                 >
                     {isPlaying ? "Stop" : "Play"}
                 </button>
+
+                <button 
+                className="musictool_help"
+                onClick={navToMusicHelp}>
+                   Help?
+                </button>
+            
+               
             </div>
             <div className="musictool_reverb">
                 <Reverb

@@ -48,7 +48,8 @@ function Signup() {
         if (checkToken()) {
             navigate("/get-all-users");
         }
-    }, []);
+    }, [checkToken, navigate]);
+
 
     async function handleOnSubmit(e) {
         e.preventDefault();

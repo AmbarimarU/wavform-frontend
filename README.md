@@ -61,6 +61,15 @@ npm start
 - [axios](https://www.npmjs.com/package/axios) - HTTP client
 - [sass](https://www.npmjs.com/package/sass) - CSS extension language
 - [tone.js](https://www.npmjs.com/package/tone) - Web Audio framework for creating interactive music in the browser
+- [react-icons](https://www.npmjs.com/package/react-icons) - A comprehensive library of popluar icons
+- [react-burger-menu](https://www.npmjs.com/package/react-burger-menu) - A flexible and customizible component that can create various sidebar menu.
+- [react-avatar](https://www.npmjs.com/package/react-avatar) - Display a user profile in square or circular picture
+- [styled-components](https://www.npmjs.com/package/styled-components) - 
+A library that allows to write CSS in JavaScript 
+- [validator](https://www.npmjs.com/package/validator) - 
+A library makes data validation authenticate the user.
+- [jwt-decode](https://www.npmjs.com/package/jwt-decode) - A JavaScript library that is used to decode JSON Web Tokens.
+
 
 ### Additional Notes
 

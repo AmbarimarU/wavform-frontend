@@ -107,51 +107,70 @@ function TopicsDetails({ user }) {
     }
 
     return (
-      <div>
-        {singleTopic && (
-          <div>
-            <div>
-              <h1>{singleTopic.name}</h1>
-            </div>
+        <div>
+            {singleTopic && (
+                <div>
+                    <div>
+                        <h1>{singleTopic.name}</h1>
+                    </div>
 
-            <div>
-              {showPiano && (
-                <Piano
-                  user={user}
-                  setStrokes={setStrokes}
-                  strokes={strokes}
-                  setKeyStrokes={setKeyStrokes}
-                />
-              )}
-            </div>
-            <div>{showBarAndNotesImg && <BarsAndNotesLesson />}</div>
-            <div>{showTempo && <TempoLessonImage />}</div>
-            <div>
-              {renderBulletPoints()}
-              {singleTopic.name === "Piano Practice" && (
-                <>
-                  {sequence} <br />
-                  <br /> Played Sequence: <br />{" "}
-                  {user ? (
-                    <>
-                      <br />
-                      {keyStrokes.length > 0 &&
-                        keyStrokes.forEach((key) => {
-                          newKeys += key.key_press;
-                          // return (
-                          //     <div
-                          //         key={key.time_logged}
-                          //         style={{
-                          //             display:
-                          //                 "inline-block",
-                          //         }}
-                          //     >
-                          //         {key.key_press}
-                          //     </div>
-                          // );
-                        })}
-                      {newKeys}
-                      {sequence === newKeys.slice(0, 8) && (
+                    <div>
+                        {showPiano && (
+                            <Piano
+                                user={user}
+                                setStrokes={setStrokes}
+                                strokes={strokes}
+                                setKeyStrokes={setKeyStrokes}
+                            />
+                        )}
+                    </div>
+                    <div>{showBarAndNotesImg && <BarsAndNotesLesson currentIndex={currentIndex}/>}</div>
+                    <div>{showTempo && <TempoLessonImage currentIndex={currentIndex}/>}</div>
+                    <div>
+                        {renderBulletPoints()}
+                        {singleTopic.name === "Piano Practice" && (
+                            <>
+                                {sequence} <br />
+                                <br /> Played Sequence: <br />{" "}
+                                {user ? (
+                                    <>
+                                        <br />
+                                        {keyStrokes.length > 0 &&
+                                            keyStrokes.forEach((key) => {
+                                                newKeys += key.key_press;
+                                                // return (
+                                                //     <div
+                                                //         key={key.time_logged}
+                                                //         style={{
+                                                //             display:
+                                                //                 "inline-block",
+                                                //         }}
+                                                //     >
+                                                //         {key.key_press}
+                                                //     </div>
+                                                // );
+                                            })}
+                                        {newKeys}
+                                        {sequence === newKeys.slice(0, 8) && (
+                                            <>
+                                                <br />
+                                                <br />
+                                                You have successfully played the
+                                                sequence
+                                            </>
+                                        )}
+                                        <br />
+                                    </>
+                                ) : (
+                                    <>
+                                        Please make an account to keep track of
+                                        your progress
+                                    </>
+                                )}
+                            </>
+                        )}
+                    </div>
+                    {!sequence && (
                         <>
                           <br />
                           <br />

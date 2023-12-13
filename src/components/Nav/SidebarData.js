@@ -36,7 +36,7 @@ export const SidebarData = [
 		],
 	},
 	{
-		title: "Step Sequencer",
+		title: "Music Tool",
 		path: "/musictool",
 		icon: <FaIcons.FaHeadphones />,
 	},
