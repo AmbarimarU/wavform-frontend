@@ -44,6 +44,7 @@ const FourOFour = React.lazy(() => import("./components/FourOFour/FourOFour"));
 // const Sidebar = React.lazy(() => import("./components/Sidebar/Sidebar"));
 // const MusicBar = React.lazy(() => import("./components/MusicBar/MusicBar"));
 // const MusicNotes = React.lazy(() => import("./components/MusicBar/MusicNotes"));
+const MusicToolHelp = React.lazy(() => import("./components/MusicToolHelp/MusicToolHelp"))
 
 function App() {
   const [user, setUser] = useAuthHooks();
@@ -54,72 +55,77 @@ function App() {
     console.log("click me");
   }
 
-  const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
-  return (
-    <React.Suspense fallback={<Loader />}>
-      <Router>
-        <ToggleNavBar>
-          <Nav
-            user={user}
-            logout={logout}
-            showSidebar={showSidebar}
-            sidebar={sidebar}
-            setSidebar={setSidebar}
-          />
-        </ToggleNavBar>
-        <div
-          onClick={() => {
-            setSidebar(false);
-          }}
-        >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/welcome" element={<Welcome />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login setUser={setUser} />} />
-            <Route path="/delay" element={<Delay />} />
-            <Route path="/lessons" element={<Lessons />} />
-            <Route path="/synth" element={<Synth />} />
-            <Route path="/sampler" element={<Sampler />} />
-            <Route path="/reverb" element={<Reverb />} />
-            <Route path="/musictool" element={<MusicTool />} />
-            <Route path="/sequencer" element={<Sequencer />} />
-            <Route path="/piano" element={<Piano />} />
-            <Route
-              path="/get-all-users"
-              element={
-                <PrivateRoute>
-                  {" "}
-                  <GetAllUsers />{" "}
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <PrivateRoute>
-                  {" "}
-                  <Profile user={user} />{" "}
-                </PrivateRoute>
-              }
-            />
-            <Route path="/topics/:lessonId" element={<Topics />} />
-            <Route
-              path="/topics/topic/:id"
-              element={<TopicsDetails user={user} />}
-            />
-            <Route path="/*" element={<FourOFour />} />
-            {/* // <Route path="/musicnotes" element={<MusicNotes />} /> */}
-          </Routes>
-        </div>
-        <ToggleNavBar>
-          <Footer />
-        </ToggleNavBar>
-      </Router>{" "}
-    </React.Suspense>
-  );
+
+    const [sidebar, setSidebar] = useState(false);
+    const showSidebar = () => setSidebar(!sidebar);
+    return (
+        <React.Suspense fallback={<Loader />}>
+            <Router>
+                <ToggleNavBar>
+                    <Nav
+                        user={user}
+                        logout={logout}
+                        showSidebar={showSidebar}
+                        sidebar={sidebar}
+                        setSidebar={setSidebar}
+                    />
+                </ToggleNavBar>
+                <div
+                    onClick={() => {
+                        setSidebar(false);
+                    }}
+                >
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/welcome" element={<Welcome />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/signup" element={<Signup />} />
+                        <Route
+                            path="/login"
+                            element={<Login setUser={setUser} />}
+                        />
+                        <Route path="/delay" element={<Delay />} />
+                        <Route path="/lessons" element={<Lessons />} />
+                        <Route path="/synth" element={<Synth />} />
+                        <Route path="/sampler" element={<Sampler />} />
+                        <Route path="/reverb" element={<Reverb />} />
+                        <Route path="/musictool" element={<MusicTool />} />
+                        <Route path="/sequencer" element={<Sequencer />} />
+                        <Route path="/piano" element={<Piano />} />
+                        <Route
+                            path="/get-all-users"
+                            element={
+                                <PrivateRoute>
+                                    {" "}
+                                    <GetAllUsers />{" "}
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
+                            path="/profile"
+                            element={
+                                <PrivateRoute>
+                                    {" "}
+                                    <Profile user={user} />{" "}
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route path="/topics/:lessonId" element={<Topics />} />
+                        <Route
+                            path="/topics/topic/:id"
+                            element={<TopicsDetails user={user} />}
+                        />
+                        <Route path="/*" element={<FourOFour />} />
+                        {/* // <Route path="/musicnotes" element={<MusicNotes />} /> */}
+                        <Route path="/musictoolhelp" element={<MusicToolHelp/>} />
+                    </Routes>
+                </div>
+                <ToggleNavBar>
+                    <Footer />
+                </ToggleNavBar>
+            </Router>{" "}
+        </React.Suspense>
+    );
 }
 
 export default App;

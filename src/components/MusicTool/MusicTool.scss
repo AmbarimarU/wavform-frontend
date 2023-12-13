@@ -20,6 +20,19 @@
         text-align: center;
         width: 350px;
     }
+    &_help{
+        border-radius: 50px;
+        margin-left: 15px;
+        padding: 10px 30px;
+        background-color: rgb(108, 139, 235);
+        color: white;
+        border-color: rgb(108, 139, 235);
+        border-style: solid;
+        justify-content: center;
+        text-align: center;
+        font-weight: 800;
+      
+    }
     &_side {
         grid-area: side;
         writing-mode: vertical-rl;
