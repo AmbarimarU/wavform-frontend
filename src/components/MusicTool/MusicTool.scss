@@ -8,19 +8,28 @@
         "blank blank header effects"
         "side side2 sequencer reverb"
         "side side2 sequencer delay"
-        "side side2 bottom ebottom";
+        "side side2 bottom ebottom"
+        "side side2 bottom2 ebottom";
     &_header {
         grid-area: header;
         margin-left: 50px;
         margin-bottom: 20px;
     }
     &_bottom {
-        margin-top: 10px;
+        margin-left: -107px;
+        margin-top: 5px;
         grid-area: bottom;
+        text-align: center;
+        letter-spacing: 20px;
+        width: 450px;
+    }
+    &_bottom2 {
+        margin-top: 10px;
+        grid-area: bottom2;
         text-align: center;
         width: 350px;
     }
-    &_help{
+    &_help {
         border-radius: 50px;
         margin-left: 15px;
         padding: 10px 30px;
@@ -31,7 +40,6 @@
         justify-content: center;
         text-align: center;
         font-weight: 800;
-      
     }
     &_side {
         grid-area: side;
@@ -42,20 +50,18 @@
         grid-area: side2;
         width: 200px;
         padding-top: 26px;
-        letter-spacing: 1vh;
-        border: 1px solid black;
-        writing-mode: vertical-rl;
-        text-orientation: upright;
+        line-height: 55px;
+        text-align: right;
     }
     &_sequencer {
-        margin-left: -50px;
+        margin-left: -120px;
         padding: 0;
         width: fit-content;
         grid-area: sequencer;
         z-index: 2;
     }
     &_sequencer2 {
-        margin-left: -50px;
+        margin-left: -120px;
         padding: 0;
         width: fit-content;
         grid-area: sequencer;
@@ -63,7 +69,7 @@
         visibility: hidden;
     }
     &_sequencer3 {
-        margin-left: -50px;
+        margin-left: -120px;
         padding: 0;
         width: fit-content;
         grid-area: sequencer;
@@ -107,4 +113,17 @@
     display: inline;
     position: relative;
     margin-left: 10px;
+}
+.redBeat {
+    color: red;
+    display: inline-block;
+    white-space: nowrap;
+}
+.beat {
+    display: inline-block;
+    white-space: nowrap;
+}
+.redBeat:not(:last-child),
+.beat:not(:last-child) {
+    margin-right: 25px;
 }

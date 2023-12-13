@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import "./MusicTool.scss";
 import * as Tone from "tone";
 const Reverb = React.lazy(() => import("../Reverb/Reverb"));
 const Sequencer = React.lazy(() => import("../Step Sequencer/StepSequencer"));
 const Delay = React.lazy(() => import("../Delay/Delay"));
 
-
 function MusicTool() {
     const [displayTooltip, setDisplayTooltip] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
+
+    const [beat, setBeat] = useState(0);
     const handleMouseOver = (section, e) => {
         const offsetX = -150;
         const offsetY = -120;
@@ -42,8 +42,8 @@ function MusicTool() {
     const [instrumentChanges, setInstrumentChanges] = useState({
         synth: 0,
         sampler1: 0,
-        sampler2: 0
-    })
+        sampler2: 0,
+    });
 
     const [octaves, setOctaves] = useState({
         synth: 0,
@@ -183,7 +183,6 @@ function MusicTool() {
             F3: require("./audio/909/909 Tom Low.wav"),
         },
     };
-
     const loadSamplers = (count) => {
         let samplers = [];
 
@@ -227,18 +226,19 @@ function MusicTool() {
         samplerArray1,
         samplerArray2,
         oscillatorType,
-        octaves
+        octaves,
     ]);
     // eslint-disable-next-line
 
     const handlePlayButton = async (e) => {
+        setBeat(0);
         // toggle Tone.Trasport and the flag variable.
         if (sequencer.playing) {
             Tone.Transport.stop();
             setSequencer({
                 ...sequencer,
                 playing: false,
-                beat: 0
+                beat: 0,
             });
             setIsPlaying(false);
         } else {
@@ -256,33 +256,158 @@ function MusicTool() {
 
     const handleOctaveChange = (e) => {
         let id = e.target.id;
-
         if (id === "synth-octave") {
             setOctaves({
                 ...octaves,
                 synth: e.target.value,
             });
         } else if (id === "sampler1-octave") {
-            setOctaves({
-                ...octaves,
-                sampler1: e.target.value,
-            });
+            if (
+                samplerType1.slice(0, 1) !== "8" &&
+                samplerType1.slice(0, 1) !== "9"
+            ) {
+                setOctaves({
+                    ...octaves,
+                    sampler1: e.target.value,
+                });
+            } else {
+                setOctaves({
+                    ...octaves,
+                    sampler1: 0,
+                });
+            }
         } else {
-            setOctaves({
-                ...octaves,
-                sampler2: e.target.value,
-            });
+            if (
+                samplerType2.slice(0, 1) !== "8" &&
+                samplerType2.slice(0, 1) !== "9"
+            ) {
+                setOctaves({
+                    ...octaves,
+                    sampler2: e.target.value,
+                });
+            } else {
+                setOctaves({
+                    ...octaves,
+                    sampler2: 0,
+                });
+            }
         }
     };
 
-
     const navToMusicHelp = () => {
-             navigate('/musictoolhelp')
-    }
+        navigate("/musictoolhelp");
+    };
+    const notes = {
+        "octave-2": ["F2", "D#2", "D2", "C2", "A#1", "G#1", "G1", "F1"],
+        "octave-1": ["F3", "D#3", "D3", "C3", "A#2", "G#2", "G2", "F2"],
+        octave0: ["F4", "D#4", "D4", "C4", "A#3", "G#3", "G3", "F3"],
+        octave1: ["F5", "D#5", "D5", "C5", "A#4", "G#4", "G4", "F4"],
+        octave2: ["F6", "D#6", "D6", "C6", "A#5", "G#5", "G5", "F5"],
+        drums0: [
+            "Clap",
+            "Hat Closed",
+            "Hat Open",
+            "Kick",
+            "Rim Shot",
+            "Snare",
+            "Tom Hi",
+            "Tom Low",
+        ],
+    };
+
+    const [activeSequencer, setActiveSequencer] = useState("Synth");
+    const [samplerType1, setSamplerType1] = useState("Piano");
+    const [samplerType2, setSamplerType2] = useState("Harp");
+
+    const renderNotes = () => {
+        if (activeSequencer === "Synth") {
+            const octave = octaves.synth; // Replace this with your desired octave
+            const synthKey = "octave" + octave;
+            if (notes[synthKey]) {
+                return notes[synthKey].map((note, index) => (
+                    <span key={index}>
+                        {note}
+                        <br />
+                    </span>
+                ));
+            }
+        } else if (activeSequencer === "Sampler1") {
+            if (
+                samplerType1.slice(0, 1) !== "8" &&
+                samplerType1.slice(0, 1) !== "9"
+            ) {
+                const octave = octaves.sampler1;
+                const synthKey = "octave" + octave;
+                if (notes[synthKey]) {
+                    return notes[synthKey].map((note, index) => (
+                        <span key={index}>
+                            {note}
+                            <br />
+                        </span>
+                    ));
+                }
+            } else {
+                const octave = 0;
+                const synthKey = "drums" + octave;
+                if (notes[synthKey]) {
+                    return notes[synthKey].map((note, index) => (
+                        <span key={index}>
+                            {note}
+                            <br />
+                        </span>
+                    ));
+                }
+            }
+        } else {
+            if (
+                samplerType2.slice(0, 1) !== "8" &&
+                samplerType2.slice(0, 1) !== "9"
+            ) {
+                const octave = octaves.sampler2;
+                const synthKey = "octave" + octave;
+                if (notes[synthKey]) {
+                    return notes[synthKey].map((note, index) => (
+                        <span key={index}>
+                            {note}
+                            <br />
+                        </span>
+                    ));
+                }
+            } else {
+                const octave = 0;
+                const synthKey = "drums" + octave;
+                if (notes[synthKey]) {
+                    return notes[synthKey].map((note, index) => (
+                        <span key={index}>
+                            {note}
+                            <br />
+                        </span>
+                    ));
+                }
+            }
+        }
+    };
+    const renderBeat = () => {
+        const arrayOfBeats = [1, 2, 3, 4, 5, 6, 7, 8];
+        return arrayOfBeats.map((note) => {
+            if (beat + 1 === note) {
+                return (
+                    <div key={note} className="redBeat">
+                        {note}
+                    </div>
+                );
+            } else {
+                return (
+                    <div key={note} className="beat">
+                        {note}
+                    </div>
+                );
+            }
+        });
+    };
     return (
         <div className="musictool">
             <div className="musictool_header">
-                
                 <button
                     className="musictool_selector"
                     onClick={(e) => {
@@ -321,7 +446,7 @@ function MusicTool() {
                             )[0];
                         if (e.target.innerText === "Synth") {
                             e.target.innerText = "Sampler 1";
-
+                            setActiveSequencer("Sampler1");
                             synthSequencer.style.visibility = "hidden";
                             synthOctave.style.visibility = "hidden";
                             synthDropdown.style.visibility = "hidden";
@@ -335,7 +460,7 @@ function MusicTool() {
                             sampler1Dropdown.style.visibility = "visible";
                         } else if (e.target.innerText === "Sampler 1") {
                             e.target.innerText = "Sampler 2";
-
+                            setActiveSequencer("Sampler2");
                             synthSequencer.style.visibility = "hidden";
                             synthOctave.style.visibility = "hidden";
                             synthDropdown.style.visibility = "hidden";
@@ -349,7 +474,7 @@ function MusicTool() {
                             sampler2Dropdown.style.visibility = "visible";
                         } else {
                             e.target.innerText = "Synth";
-
+                            setActiveSequencer("Synth");
                             sampler1Sequencer.style.visibility = "hidden";
                             sampler1Octave.style.visibility = "hidden";
                             sampler1Dropdown.style.visibility = "hidden";
@@ -380,13 +505,13 @@ function MusicTool() {
                                 synths[i].set({
                                     oscillator: { type: e.target.value },
                                 });
-                            };
+                            }
                             setSynthArray(synths);
                             setOscillatorType(e.target.value);
 
                             setInstrumentChanges({
-                                synth: instrumentChanges.synth + 1
-                            })
+                                synth: instrumentChanges.synth + 1,
+                            });
                         }}
                         disabled={isPlaying ? 1 : 0}
                     >
@@ -415,15 +540,15 @@ function MusicTool() {
                                 let newSampler = new Tone.Sampler(
                                     samples[e.target.value.toLowerCase()]
                                 ).chain(delay, reverb, Tone.Destination);
-                                
+
                                 newSamplers.push(newSampler);
-                            };
+                            }
 
-                            setSamplerArray1(newSamplers)
-
+                            setSamplerArray1(newSamplers);
+                            setSamplerType1(e.target.value);
                             setInstrumentChanges({
-                                sampler1: instrumentChanges.sampler1 + 1
-                            })
+                                sampler1: instrumentChanges.sampler1 + 1,
+                            });
                         }}
                         disabled={isPlaying ? 1 : 0}
                     >
@@ -451,12 +576,12 @@ function MusicTool() {
                                 ).chain(delay, reverb, Tone.Destination);
                                 newSamplers.push(newSampler);
                             }
-                     
-                            setSamplerArray2(newSamplers);
 
+                            setSamplerArray2(newSamplers);
+                            setSamplerType2(e.target.value);
                             setInstrumentChanges({
-                                sampler2: instrumentChanges.sampler2 + 1
-                            })
+                                sampler2: instrumentChanges.sampler2 + 1,
+                            });
                         }}
                         disabled={isPlaying ? 1 : 0}
                         defaultValue="Harp"
@@ -470,11 +595,8 @@ function MusicTool() {
                         <option>909</option>
                     </select>
                 </div>
-            
-               
             </div>
-            
-            <div className="musictool_side">Notes / Sounds</div>
+            <div className="musictool_side2">{renderNotes()}</div>
             <div className="musictool_sequencer">
                 {" "}
                 <label htmlFor="synth-octave">Octave</label>
@@ -488,7 +610,6 @@ function MusicTool() {
                     onInput={(e) => handleOctaveChange(e)}
                     disabled={isPlaying ? 1 : 0}
                 />
-                  
                 <Sequencer
                     instrumentArray={synthArray}
                     sequencer={sequencer}
@@ -500,6 +621,7 @@ function MusicTool() {
                     instrumentChanges2={instrumentChanges.sampler2}
                     octaveChanges1={octaves.sampler1}
                     octaveChanges2={octaves.sampler2}
+                    setBeat={setBeat}
                 />
             </div>
             <div
@@ -526,12 +648,13 @@ function MusicTool() {
                     setGrid={setGrid2}
                     octave={octaves.sampler1}
                     instrumentChanges1={instrumentChanges.synth}
-                    instrumentChanges2={instrumentChanges.sampler2}       
+                    instrumentChanges2={instrumentChanges.sampler2}
                     octaveChanges1={octaves.synth}
-                    octaveChanges2={octaves.sampler2}             
+                    octaveChanges2={octaves.sampler2}
+                    setBeat={setBeat}
                 />
             </div>
-            
+
             <div
                 className="musictool_sequencer3"
                 style={{ visibility: "hidden" }}
@@ -559,9 +682,11 @@ function MusicTool() {
                     instrumentChanges2={instrumentChanges.sampler1}
                     octaveChanges1={octaves.sampler1}
                     octaveChanges2={octaves.synth}
+                    setBeat={setBeat}
                 />
             </div>
-            <div className="musictool_bottom">
+            <div className="musictool_bottom">{renderBeat(3)}</div>
+            <div className="musictool_bottom2">
                 <button
                     className="sequencer-button"
                     onClick={(e) => handlePlayButton(e)}
@@ -569,13 +694,9 @@ function MusicTool() {
                     {isPlaying ? "Stop" : "Play"}
                 </button>
 
-                <button 
-                className="musictool_help"
-                onClick={navToMusicHelp}>
-                   Help?
+                <button className="musictool_help" onClick={navToMusicHelp}>
+                    Help?
                 </button>
-            
-               
             </div>
             <div className="musictool_reverb">
                 <Reverb
