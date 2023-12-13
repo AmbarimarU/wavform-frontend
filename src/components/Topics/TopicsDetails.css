@@ -1,0 +1,26 @@
+.topic {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: 700;
+    font-size: larger;
+}
+
+.topics-btn {
+    margin-top: 10px;
+    text-align: center;
+    width: 150px;
+    border-radius: 50px;
+    padding: 10px 30px;
+    background-color: rgb(64, 105, 229);
+    color: white;
+    border-color: rgb(64, 105, 229);
+    border-style: solid; 
+    
+}
+
+.topics-btns {
+    padding-top: 100px;
+    align-items: center;
+    margin: auto;
+    width: 18%;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchTopics } from "../Api/Api";
+import './Topics.css';
 
 function Topics() {
   const { lessonId } = useParams();
@@ -24,15 +25,16 @@ function Topics() {
 
   return (
     <div>
-      <h1>Topics</h1>
+      <h1 className="topics-h1">Topics</h1>
 
       {topicsArray.map((topic) => {
         return (
-          <ul key={topic.id}>
+          <ul key={topic.id} className="topics-ul">
             <li>
-              <Link to={`/topics/topic/${topic.id}`}>{topic.name}</Link>
+              <Link className="topics-link" to={`/topics/topic/${topic.id}`}>{topic.name}</Link>
             </li>
           </ul>
+        
         );
       })}
     </div>
