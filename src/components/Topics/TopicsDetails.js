@@ -119,8 +119,8 @@ function TopicsDetails({ user }) {
                             />
                         )}
                     </div>
-                    <div>{showBarAndNotesImg && <BarsAndNotesLesson />}</div>
-                    <div>{showTempo && <TempoLessonImage />}</div>
+                    <div>{showBarAndNotesImg && <BarsAndNotesLesson currentIndex={currentIndex}/>}</div>
+                    <div>{showTempo && <TempoLessonImage currentIndex={currentIndex}/>}</div>
                     <div>
                         {renderBulletPoints()}
                         {singleTopic.name === "Piano Practice" && (
