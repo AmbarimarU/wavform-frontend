@@ -1,19 +1,15 @@
-import React,{useState} from 'react';
-import profile from './profile.png'
-import Avatar from 'react-avatar'
-import './Profile.css'
+import React, { useState } from "react";
+import profile from "./profile.png";
+import Avatar from "react-avatar";
+import "./Profile.css";
 
-function Profile({user}) {
-   
+function Profile({ user }) {
   const [file, setFile] = useState();
-    
-    function handleChange(e) {
-        console.log(e.target.files);
-        setFile(URL.createObjectURL(e.target.files[0]));
-    }
- 
 
-
+  function handleChange(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
 
   return (
     <div>
@@ -41,7 +37,6 @@ function Profile({user}) {
      </table>
           
        </div>
-      
     </div>
   );
 }
