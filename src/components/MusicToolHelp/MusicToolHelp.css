@@ -1,51 +1,49 @@
-.help{
+.help {
     margin-left: 175px;
     margin-right: 175px;
     margin-top: 50px;
-  }
-  .help-heading{
+    max-height: 70vh; /* Limiting height to viewport height */
+    overflow-y: auto;
+}
+.help-heading {
     text-align: center;
-  }
-  .pageNumbers-container{
+}
+.pageNumbers-container {
     padding-top: 50px;
     justify-content: center;
     width: 100%;
-  }
-  .pageNumbers {
+}
+.pageNumbers {
     list-style: none;
     display: flex;
-    
-  }
-  
-  .pageNumbers li {
+}
+
+.pageNumbers li {
     padding: 10px;
     border: 1px solid white;
     cursor: pointer;
-  }
-  
-  .pageNumbers li.active {
+}
+
+.pageNumbers li.active {
     background-color: white;
     color: #007ead;
-  }
-  
-  .pageNumbers li button {
+}
+
+.pageNumbers li button {
     background-color: transparent;
     border: none;
     font-size: 1 rem;
     cursor: pointer;
-  }
-  .pageNumbers li button:hover {
+}
+.pageNumbers li button:hover {
     background-color: #007ead;
     color: white;
-    border-radius: .75rem;
-  }
-  .pageNumbers li button:focus {
+    border-radius: 0.75rem;
+}
+.pageNumbers li button:focus {
     outline: none;
-  }
- 
-  .MusicToolHelp h3{
+}
+
+.MusicToolHelp h3 {
     text-transform: capitalize;
-
-  }
-
-  
+}
