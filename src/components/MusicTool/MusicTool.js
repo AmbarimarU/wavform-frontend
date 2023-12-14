@@ -11,7 +11,7 @@ function MusicTool() {
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
     const navigate = useNavigate();
 
-    const [beat, setBeat] = useState(0);
+    //const [beat, setBeat] = useState(0);
     const handleMouseOver = (section, e) => {
         const offsetX = -150;
         const offsetY = -120;
@@ -117,7 +117,6 @@ function MusicTool() {
         loadSamplers(8);
         // eslint-disable-next-line
     }, []);
-
 
     //   useEffect(() => {
     //     setSynthArray([]);
@@ -231,9 +230,8 @@ function MusicTool() {
         octaves,
     ]);
 
-
     const handlePlayButton = async (e) => {
-        setBeat(0);
+        //setBeat(0);
         // toggle Tone.Trasport and the flag variable.
         if (sequencer.playing) {
             Tone.Transport.stop();
@@ -392,19 +390,19 @@ function MusicTool() {
     const renderBeat = () => {
         const arrayOfBeats = [1, 2, 3, 4, 5, 6, 7, 8];
         return arrayOfBeats.map((note) => {
-            if (beat + 1 === note) {
+            /*if (beat + 1 === note) {
                 return (
                     <div key={note} className="redBeat">
                         {note}
                     </div>
                 );
-            } else {
-                return (
-                    <div key={note} className="beat">
-                        {note}
-                    </div>
-                );
-            }
+            } else {*/
+            return (
+                <div key={note} className="beat">
+                    {note}
+                </div>
+            );
+            //}
         });
     };
     return (
@@ -623,7 +621,7 @@ function MusicTool() {
                     instrumentChanges2={instrumentChanges.sampler2}
                     octaveChanges1={octaves.sampler1}
                     octaveChanges2={octaves.sampler2}
-                    setBeat={setBeat}
+                    //setBeat={setBeat}
                 />
             </div>
             <div
@@ -653,7 +651,7 @@ function MusicTool() {
                     instrumentChanges2={instrumentChanges.sampler2}
                     octaveChanges1={octaves.synth}
                     octaveChanges2={octaves.sampler2}
-                    setBeat={setBeat}
+                    //setBeat={setBeat}
                 />
             </div>
 
@@ -684,7 +682,7 @@ function MusicTool() {
                     instrumentChanges2={instrumentChanges.sampler1}
                     octaveChanges1={octaves.sampler1}
                     octaveChanges2={octaves.synth}
-                    setBeat={setBeat}
+                    //setBeat={setBeat}
                 />
             </div>
             <div className="musictool_bottom">{renderBeat(3)}</div>
