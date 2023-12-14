@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MusicToolHelpData } from "./MusicToolHelpData";
 import MusicToolHelpPage from "./MusicToolHelpPage";
 import "./MusicToolHelp.css";
@@ -10,6 +10,7 @@ function MusicToolHelp() {
     const [pageNumberLimit] = useState(15);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(15);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
+    const topRef = useRef(null);
 
     useEffect(() => {
         const getPage = async () => {
@@ -18,7 +19,11 @@ function MusicToolHelp() {
         };
         getPage();
     }, []);
-
+    useEffect(() => {
+        if (topRef.current) {
+            topRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [currentPage]);
     const indexOfLastPost = currentPage * itemsPerPage;
     const indexOfFirstPost = indexOfLastPost - itemsPerPage;
     const currentPosts = page.slice(indexOfFirstPost, indexOfLastPost);
@@ -77,7 +82,9 @@ function MusicToolHelp() {
 
     return (
         <div className="help">
-            <h1 className="help-heading">Music Tool Help</h1>
+            <h1 className="help-heading" ref={topRef}>
+                Music Tool Help
+            </h1>
             <MusicToolHelpPage page={currentPosts} />
 
             <div className="pageNumbers-container">
