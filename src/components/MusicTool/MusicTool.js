@@ -115,8 +115,9 @@ function MusicTool() {
     useEffect(() => {
         createSynths(8);
         loadSamplers(8);
+        // eslint-disable-next-line
     }, []);
-    // eslint-disable-next-line
+
 
     //   useEffect(() => {
     //     setSynthArray([]);
@@ -219,6 +220,7 @@ function MusicTool() {
                 samplerArray2[i].chain(delay, reverb, Tone.Destination);
             }
         }
+        // eslint-disable-next-line
     }, [
         reverb,
         delay,
@@ -228,7 +230,7 @@ function MusicTool() {
         oscillatorType,
         octaves,
     ]);
-    // eslint-disable-next-line
+
 
     const handlePlayButton = async (e) => {
         setBeat(0);

@@ -27,8 +27,9 @@ function StepSequencer({
     // });
 
     const [flag, setFlag] = useState(true);
-    const [flag2, setFlag2] = useState(true);
+    // const [flag2, setFlag2] = useState(true);
     const [container, setContainer] = useState({});
+        // eslint-disable-next-line
     const [notes, setNotes] = useState(sequencer.notes);
 
     let currentBeat = 0;
@@ -103,6 +104,7 @@ function StepSequencer({
 
     useEffect(() => {
         setFlag(!flag);
+            // eslint-disable-next-line
         currentBeat = 0;
         if (octave !== 0) {
             let newNotes = octaveChange(notes, octave);
@@ -170,6 +172,7 @@ function StepSequencer({
 
     useEffect(() => {
         if (sequencer.started && !sequencer.playing) {
+                // eslint-disable-next-line
             currentBeat = 0;
             Tone.Transport.clear(eventId);
             Tone.Transport.bpm.value = sequencer.tempo;
@@ -222,7 +225,9 @@ function StepSequencer({
                 ...sequencer,
                 started: true,
             });
+                // eslint-disable-next-line
         }
+            // eslint-disable-next-line
     }, [sequencer]);
 
     // const handlePlayButton = async (e) => {

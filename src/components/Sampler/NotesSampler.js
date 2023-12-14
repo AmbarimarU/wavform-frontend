@@ -63,6 +63,7 @@ function NotesSampler({ inputSamples }) {
 
   useEffect(() => {
     loadSampler();
+        // eslint-disable-next-line
   }, [selectedSample]);
 
   // select option of different notes
