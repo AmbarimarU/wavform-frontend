@@ -36,6 +36,7 @@ function Piano({ user, setStrokes, strokes, setKeyStrokes }) {
         }
         setKeyStrokes([]);
         if (user) deleteKeys();
+            // eslint-disable-next-line
     }, [user]);
 
     return (
