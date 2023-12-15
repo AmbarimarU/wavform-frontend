@@ -8,37 +8,37 @@ function TempoLessonImage({ currentIndex }) {
   const tempoImg = [Tempo, PulsingSpeaker];
   const [currentTempoImgIndex, setCurrentTempoImgIndex] = useState(0);
 
-  const handleTempoPrev = () => {
-    if (currentTempoImgIndex > 0) {
-      setCurrentTempoImgIndex(currentTempoImgIndex - 1);
-    }
-  };
+  // const handleTempoPrev = () => {
+  //   if (currentTempoImgIndex > 0) {
+  //     setCurrentTempoImgIndex(currentTempoImgIndex - 1);
+  //   }
+  // };
 
-  const handleTempoNext = () => {
-    if (currentTempoImgIndex < tempoImg.length - 1) {
-      setCurrentTempoImgIndex(currentTempoImgIndex + 1);
-    }
-  };
+  // const handleTempoNext = () => {
+  //   if (currentTempoImgIndex < tempoImg.length - 1) {
+  //     setCurrentTempoImgIndex(currentTempoImgIndex + 1);
+  //   }
+  // };
 
   useEffect(() => {
     setCurrentTempoImgIndex(currentIndex);
 }, [currentIndex])
 
-  const isPrevDisable = currentTempoImgIndex === 0;
-  const isNextDisable = currentTempoImgIndex >= tempoImg.length - 1;
+  // const isPrevDisable = currentTempoImgIndex === 0;
+  // const isNextDisable = currentTempoImgIndex >= tempoImg.length - 1;
 
   return (
     <div className="image-container">
       <img src={tempoImg[currentTempoImgIndex]} alt="" />
 
-      <div>
+      {/* <div>
         <button onClick={handleTempoPrev} disabled={isPrevDisable}>
           &laquo;
         </button>
         <button onClick={handleTempoNext} disabled={isNextDisable}>
           &raquo;
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
