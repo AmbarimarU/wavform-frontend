@@ -74,3 +74,8 @@ A library makes data validation authenticate the user.
 ### Additional Notes
 
 Since this is a skeleton, the `.env` file is included in the repository. This is not recommended for production applications. The `.env` file should be added to the `.gitignore` file and the environment variables should be set in the production environment.
+
+
+### Frontend Page
+
+https://wavform.netlify.app/
