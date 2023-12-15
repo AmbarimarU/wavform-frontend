@@ -17,19 +17,19 @@ function BarsAndNotesLesson({ currentIndex }) {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const handleImagePrev = () => {
-    // if the prev is equal to 0, return the image.length - 1 else return the prev - 1 (decrement)
-    if (currentImageIndex > 0) {
-      setCurrentImageIndex(currentImageIndex - 1);
-    }
-  };
+  // const handleImagePrev = () => {
+  //   // if the prev is equal to 0, return the image.length - 1 else return the prev - 1 (decrement)
+  //   if (currentImageIndex > 0) {
+  //     setCurrentImageIndex(currentImageIndex - 1);
+  //   }
+  // };
 
-  const handleImageNext = () => {
-    // if the next is equal to the image.length - 1, return 0 else return next + 1 (increament 1)
-    if (currentImageIndex < barAndNotesImg.length - 1) {
-      setCurrentImageIndex(currentImageIndex + 1);
-    }
-  };
+  // const handleImageNext = () => {
+  //   // if the next is equal to the image.length - 1, return 0 else return next + 1 (increament 1)
+  //   if (currentImageIndex < barAndNotesImg.length - 1) {
+  //     setCurrentImageIndex(currentImageIndex + 1);
+  //   }
+  // };
 
   useEffect(() => {
       setCurrentImageIndex(currentIndex);
@@ -45,7 +45,7 @@ function BarsAndNotesLesson({ currentIndex }) {
 
       <img src={barAndNotesImg[currentImageIndex]} alt="" />
 
-      <div>
+      {/* <div>
         <button onClick={handleImagePrev} disabled={currentImageIndex === 0}>
           &laquo;
         </button>
@@ -56,7 +56,7 @@ function BarsAndNotesLesson({ currentIndex }) {
         >
           &raquo;
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
