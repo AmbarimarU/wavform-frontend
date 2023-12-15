@@ -9,6 +9,7 @@ function Lessons() {
             try {
                 let res = await fetchLessons();
                 setlessonsArray(res);
+                console.log("res: ", res)
             } catch (e) {
                 console.log(e);
             }
