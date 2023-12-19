@@ -14,16 +14,28 @@ function TopicsDetails({ user }) {
     let newKeys = "";
     const { id } = useParams();
     useEffect(() => {
+        // const fetchSingleTopic = async () => {
+        //     try {
+        //         const res = await fetchTopicDetail(id);
+        //         console.log(res);
+
+        //         setSingleTopic(res);
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // };
+
         const fetchSingleTopic = async () => {
             try {
                 const res = await fetchTopicDetail(id);
-                // console.log(res);
+                console.log(res);
 
                 setSingleTopic(res);
             } catch (error) {
                 console.log(error);
             }
         };
+        
         fetchSingleTopic();
         if (id === "4") {
             const randomNoteSequence = () => {

@@ -22,52 +22,45 @@
     font-size: 25px;
 }
 
-/* .button-container {
+.button-container {
     display: flex;
     justify-content: center;
-} */
-/* .btn-group {
+}
+.btn-group {
     text-align: center;
     margin: 0 50px;
-} */
+}
 
-/* .welcome-buttons {
+.welcome-buttons {
     width: 350px;
     height: 150px;
     border-radius: 0.75rem;
     background-color: rgb(40, 40, 40);
     color: white;
     font-size: 20px;
-    text-transform: capitalize; */
+    text-transform: capitalize;
     /* margin: 0 80px;  */
-    /* margin-bottom: 20px;
+    margin-bottom: 20px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
-} */
+}
 
-/* .welcome-button:hover {
+.welcome-button:hover {
     font-size: 24px;
     font-weight: bold;
     background-color: #007ead;
-} */
+}
 
-/* .welcome-button:hover,
+.welcome-button:hover,
 .welcome-button-on-hover {
     display: block;
-} */
+}
 
-/* .welcome-button-on-hover {
+.welcome-button-on-hover {
     display: none;
     text-align: center;
     font-size: 20px;
     color: #007ead;
     margin-top: 10px;
-} */
-
-.topic-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr; 
 }
-
-.topic-container{}
