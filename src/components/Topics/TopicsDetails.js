@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchTopicDetail, fetchKeys } from "../Api/Api";
 import Piano from "../Piano/Piano";
 import BarsAndNotesLesson from "../LessonsImages/BarsAndNotesLesson";
@@ -101,99 +101,95 @@ function TopicsDetails({ user }) {
         }
     }
 
-    return (
-        <div>
-            {singleTopic && (
-                <div>
-                    <div>
-                        <h1>{singleTopic.name}</h1>
-                    </div>
+   
 
-                    <div>
-                        {showPiano && (
-                            <Piano
-                                user={user}
-                                setStrokes={setStrokes}
-                                strokes={strokes}
-                                setKeyStrokes={setKeyStrokes}
-                            />
-                        )}
-                    </div>
-                    <div>
-                        {showBarAndNotesImg && (
-                            <BarsAndNotesLesson currentIndex={currentIndex} />
-                        )}
-                    </div>
-                    <div>
-                        {showTempo && (
-                            <TempoLessonImage currentIndex={currentIndex} />
-                        )}
-                    </div>
-                    <div>
-                        {renderBulletPoints()}
-                        {singleTopic.name === "Piano Practice" && (
-                            <>
-                                {sequence} <br />
-                                <br /> Played Sequence: <br />{" "}
-                                {user ? (
-                                    <>
-                                        <br />
-                                        {keyStrokes.length > 0 &&
-                                            keyStrokes.forEach((key) => {
-                                                newKeys += key.key_press;
-                                                // return (
-                                                //     <div
-                                                //         key={key.time_logged}
-                                                //         style={{
-                                                //             display:
-                                                //                 "inline-block",
-                                                //         }}
-                                                //     >
-                                                //         {key.key_press}
-                                                //     </div>
-                                                // );
-                                            })}
-                                        {newKeys}
-                                        {sequence === newKeys.slice(0, 8) && (
-                                            <>
-                                                <br />
-                                                <br />
-                                                You have successfully played the
-                                                sequence
-                                            </>
-                                        )}
-                                        <br />
-                                    </>
-                                ) : (
-                                    <>
-                                        Please make an account to keep track of
-                                        your progress
-                                    </>
-                                )}
-                            </>
-                        )}
-                    </div>
-                    {!sequence && (
+    return (
+      <div>
+        {singleTopic && (
+          <div>
+            <div>
+              <h1>{singleTopic.name}</h1>
+            </div>
+
+            <div>
+              {showPiano && (
+                <Piano
+                  user={user}
+                  setStrokes={setStrokes}
+                  strokes={strokes}
+                  setKeyStrokes={setKeyStrokes}
+                />
+              )}
+            </div>
+            <div>
+              {showBarAndNotesImg && (
+                <BarsAndNotesLesson currentIndex={currentIndex} />
+              )}
+            </div>
+            <div>
+              {showTempo && <TempoLessonImage currentIndex={currentIndex} />}
+            </div>
+            <div>
+              {renderBulletPoints()}
+              {singleTopic.name === "Piano Practice" && (
+                <>
+                  {sequence} <br />
+                  <br /> Played Sequence: <br />{" "}
+                  {user ? (
+                    <>
+                      <br />
+                      {keyStrokes.length > 0 &&
+                        keyStrokes.forEach((key) => {
+                          newKeys += key.key_press;
+                          // return (
+                          //     <div
+                          //         key={key.time_logged}
+                          //         style={{
+                          //             display:
+                          //                 "inline-block",
+                          //         }}
+                          //     >
+                          //         {key.key_press}
+                          //     </div>
+                          // );
+                        })}
+                      {newKeys}
+                      {sequence === newKeys.slice(0, 8) && (
                         <>
-                            <button
-                                onClick={handlePreview}
-                                disabled={currentIndex === 0}
-                            >
-                                &laquo; Prev
-                            </button>
-                            <button
-                                onClick={handleNext}
-                                disabled={
-                                    currentIndex >= bulletPoint.length - 1
-                                }
-                            >
-                                Next &raquo;
-                            </button>
+                          <br />
+                          <br />
+                          You have successfully played the sequence
                         </>
-                    )}
-                </div>
+                      )}
+                      <br />
+                    </>
+                  ) : (
+                    <>Please make an account to keep track of your progress</>
+                  )}
+                </>
+              )}
+            </div>
+            {!sequence && (
+              <>
+                <button onClick={handlePreview} disabled={currentIndex === 0}>
+                  &laquo; Prev
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={currentIndex >= bulletPoint.length - 1}
+                >
+                  Next &raquo;
+                </button>
+                {currentIndex === bulletPoint.length - 1 && (
+                  <Link to="/musictool">
+                    <button>Checkout Music Tool &raquo;</button>
+                  </Link>
+                )}
+              </>
             )}
-        </div>
+          </div>
+        )}
+      </div>
     );
 }
 
