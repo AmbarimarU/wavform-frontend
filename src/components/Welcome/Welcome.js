@@ -61,7 +61,9 @@ function Welcome() {
         </div>
       </div> */}
 
-      <LessonCard />
+
+      <LessonCard completionPercentage={completionPercentage} />
+
     </div>
   );
 }

@@ -65,9 +65,3 @@
     margin-top: 10px;
 } */
 
-.topic-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr; 
-}
-
-.topic-container{}
