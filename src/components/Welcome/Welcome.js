@@ -4,7 +4,7 @@ import React from "react";
 import "./Welcome.css";
 import LessonCard from "../Lessons/LessonCard";
 
-function Welcome() {
+function Welcome({completionPercentage}) {
   //   const navigate = useNavigate();
   // const [user, ,] = useAuthHooks();
 
@@ -61,7 +61,7 @@ function Welcome() {
         </div>
       </div> */}
 
-      <LessonCard />
+      <LessonCard completionPercentage={completionPercentage} />
     </div>
   );
 }

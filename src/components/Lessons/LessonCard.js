@@ -4,8 +4,10 @@ import { fetchTopics } from "../Api/Api";
 import { Link, useParams } from "react-router-dom";
 import "./LessonCard.css";
 
-function LessonCard() {
+function LessonCard({ completion }) {
   const [topicData, setTopicData] = useState([]);
+  // const [isCompleted, setIsCompleted] = useState(0);
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,6 +24,26 @@ function LessonCard() {
     fetchTopicsData();
   }, [id]);
 
+  useEffect(() => {
+    const updateOverallProgress = () => {
+      const overallProgress = topicData.reduce((total, topic) => {
+        const completion = topic.progress ? topic.progress.completion : 0;
+        return total + (isNaN(completion) ? 0 : completion);
+      }, 0);
+
+      const averageProgress =
+        topicData.length > 0 ? overallProgress / topicData.length : 0;
+
+      localStorage.setItem(
+        `overall-completion-${id}`,
+        Math.round(averageProgress)
+      );
+    };
+
+    updateOverallProgress();
+  }, [topicData, id]);
+  
+
   return (
     <div className="card">
       {/* <div className="lesson-card">
@@ -30,15 +52,32 @@ function LessonCard() {
         <ProgressBar percent={completion} />
       </div> */}
 
-      {topicData.map((topic, index) => {
+      {/* {topicData.map((topic, index) => {
+        const completion = topic.progress ? topic.progress.completion : 0;
+        console.log(completion)
         return (
          <div key={index}>
           <Link to={`/topics/${topic.id}`}>
             <h3 key={topic.id}>{topic.name}</h3>
           </Link>
-          <ProgressBar />
+          <ProgressBar percent={completion || completionPercentage}/>
          </div>
           
+        );
+      })} */}
+
+      {topicData.map((topic, index) => {
+        const completion = topic.progress ? topic.progress.completion : 0;
+        // const progressTracker =
+        //   completion || parseInt(localStorage.getItem(`completion-${id}`));
+
+        return (
+          <div key={index}>
+            <Link to={`/topics/${topic.id}`}>
+              <h3 key={topic.id}>{topic.name}</h3>
+            </Link>
+            <ProgressBar percent={completion} />
+          </div>
         );
       })}
     </div>
