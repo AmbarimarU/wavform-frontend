@@ -4,10 +4,10 @@ import { fetchTopics } from "../Api/Api";
 import { Link, useParams } from "react-router-dom";
 import "./LessonCard.css";
 
+
 function LessonCard({ completion }) {
   const [topicData, setTopicData] = useState([]);
   // const [isCompleted, setIsCompleted] = useState(0);
-
   const { id } = useParams();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function LessonCard({ completion }) {
 
     fetchTopicsData();
   }, [id]);
-
+  
   useEffect(() => {
     const updateOverallProgress = () => {
       const overallProgress = topicData.reduce((total, topic) => {
@@ -43,7 +43,6 @@ function LessonCard({ completion }) {
     updateOverallProgress();
   }, [topicData, id]);
   
-
   return (
     <div className="card">
       {/* <div className="lesson-card">
@@ -52,14 +51,17 @@ function LessonCard({ completion }) {
         <ProgressBar percent={completion} />
       </div> */}
 
+
       {/* {topicData.map((topic, index) => {
         const completion = topic.progress ? topic.progress.completion : 0;
         console.log(completion)
+        
         return (
          <div key={index}>
           <Link to={`/topics/${topic.id}`}>
             <h3 key={topic.id}>{topic.name}</h3>
           </Link>
+
           <ProgressBar percent={completion || completionPercentage}/>
          </div>
           
