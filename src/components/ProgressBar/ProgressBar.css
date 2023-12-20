@@ -1,0 +1,19 @@
+.progress {
+  height: 20px;
+  background-color: grey;
+  border-radius: 10px;
+}
+
+.progress-filled {
+  height: 100%;
+  background-color: #0d6; /* green color */
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.progress-remaining {
+  padding-right: 5px; 
+  color: white;
+}

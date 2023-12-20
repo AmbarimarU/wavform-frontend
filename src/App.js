@@ -36,7 +36,7 @@ const Profile = React.lazy(() => import("./components/Profile/Profile"));
 const PrivateRoute = React.lazy(() =>
     import("./components/PrivateRoute/PrivateRoute")
 );
-const Topics = React.lazy(() => import("./components/Topics/Topics"));
+// const Topics = React.lazy(() => import("./components/Topics/Topics"));
 const TopicsDetails = React.lazy(() =>
     import("./components/Topics/TopicsDetails")
 );
@@ -111,9 +111,13 @@ function App() {
                                 </PrivateRoute>
                             }
                         />
-                        <Route path="/topics/:lessonId" element={<Topics />} />
-                        <Route
+                        {/* <Route path="/topics/:lessonId" element={<Topics />} /> */}
+                        {/* <Route
                             path="/topics/topic/:id"
+                            element={<TopicsDetails user={user} />}
+                        /> */}
+                         <Route
+                            path="/topics/:id"
                             element={<TopicsDetails user={user} />}
                         />
                         <Route path="/*" element={<FourOFour />} />
