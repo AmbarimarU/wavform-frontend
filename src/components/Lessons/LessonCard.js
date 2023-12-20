@@ -10,19 +10,19 @@ function LessonCard({ completion }) {
   // const [isCompleted, setIsCompleted] = useState(0);
   const { id } = useParams();
 
-  useEffect(() => {
-    async function fetchTopicsData() {
-      try {
-        const res = await fetchTopics(id);
-        console.log(res);
-        setTopicData(res);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchTopicsData() {
+  //     try {
+  //       const res = await fetchTopics(id);
+  //       console.log(res);
+  //       setTopicData(res);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
 
-    fetchTopicsData();
-  }, [id]);
+  //   fetchTopicsData();
+  // }, [id]);
   
   useEffect(() => {
     const updateOverallProgress = () => {
