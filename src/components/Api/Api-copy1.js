@@ -65,42 +65,18 @@ async function getAllTopics(lessonId) {
 const fetchTopics = async (lessonId) => {
     try {
         const response = await Axios.get(`/topics/lessons/${lessonId}`);
-        // console.log(response.data);
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error);
     }
 };
 
-// async function getSingleTopic(id) {
-//     try {
-//         let result = await Axios.get(`/topics/topic/${id}`);
-
-//         // console.log(result.data);
-//         return result.data;
-//     } catch (e) {
-//         alert(e.response.data.error);
-//         return;
-//     }
-// }
-
-// const fetchTopicDetail = async (id) => {
-//     try {
-//         const response = await Axios.get(`/topics/topic/${id}`);
-//         return response.data;
-//         //console.log(response.data)
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
-
-
-// from the topic_details table using inner join
 async function getSingleTopic(id) {
     try {
-        let result = await Axios.get(`/topic/topic/${id}`);
+        let result = await Axios.get(`/topics/topic/${id}`);
 
-        console.log(result.data);
+        // console.log(result.data);
         return result.data;
     } catch (e) {
         alert(e.response.data.error);
@@ -110,9 +86,9 @@ async function getSingleTopic(id) {
 
 const fetchTopicDetail = async (id) => {
     try {
-        const response = await Axios.get(`/topic/topic/${id}`);
+        const response = await Axios.get(`/topics/topic/${id}`);
         return response.data;
-        // console.log(response.data)
+        //console.log(response.data)
     } catch (error) {
         console.log(error);
     }
