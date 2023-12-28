@@ -800,7 +800,7 @@ function MusicTool() {
           <button
             onClick={handleNext}
             disabled={currentIndex >= musicToolTutorialInfo.length - 1}
-          >&laquo; Next</button>
+          >Next &raquo;</button>
         </div>
       </Modal>
     </>
