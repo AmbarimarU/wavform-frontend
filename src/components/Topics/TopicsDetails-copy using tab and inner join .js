@@ -12,7 +12,7 @@ function TopicsDetails({ user }) {
   const [sequence, setSequence] = useState("");
   const [keyStrokes, setKeyStrokes] = useState([]);
   let newKeys = "";
-  // const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
   const { id } = useParams();
 
   useEffect(() => {
@@ -76,13 +76,13 @@ function TopicsDetails({ user }) {
 
   // const bulletPoint = singleTopic?.description.split("\n") || [];
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(prev + 1, singleTopic.length - 1));
-  };
+  // const handleNext = () => {
+  //   // setCurrentIndex((prev) => Math.min(prev + 1, bulletPoint.length - 1));
+  // };
 
-  const handlePreview = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
+  // const handlePreview = () => {
+  //     setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  // };
 
   // function renderBulletPoints() {
   //     const currentBulletPoint = bulletPoint[currentIndex];
@@ -103,9 +103,25 @@ function TopicsDetails({ user }) {
   //     }
   // }
 
+  const handleTabClick = (index) => {
+    return setActiveTab(index);
+  };
+
   return (
     <div>
-      <div></div>
+      <div>
+        {/* <button onClick={() => handleTabClick(0)}>tab 1</button>
+        <button onClick={() => handleTabClick(1)}>tab 2</button>
+        <button onClick={() => handleTabClick(2)}>tab 3</button> */}
+
+        {singleTopic &&
+          singleTopic.length > 1 &&
+          singleTopic.map((topic, index) => (
+            <button key={index} onClick={() => handleTabClick(index)}>{`Tab ${
+              index + 1
+            }`}</button>
+          ))}
+      </div>
       {singleTopic && (
         <div>
           <div>
@@ -125,45 +141,25 @@ function TopicsDetails({ user }) {
 
           <div>
             {showBarAndNotesImg && (
-              <BarsAndNotesLesson currentIndex={currentIndex} />
+              <BarsAndNotesLesson currentIndex={activeTab} />
             )}
           </div>
 
           <div>
-            {showTempo && <TempoLessonImage currentIndex={currentIndex} />}
+            {showTempo && <TempoLessonImage currentIndex={activeTab} />}
           </div>
 
           <div>
-            {/* {singleTopic.map((topic, index) => {
+            {singleTopic.map((topic, index) => {
               return (
-                <div key={index}>
-                  <ul>
-                    <li>{topic.description}</li>
-                  </ul>
+                <div
+                  key={index}
+                  style={{ display: activeTab === index ? "block" : "none" }}
+                >
+                  <p>{topic.description}</p>
                 </div>
               );
-            })} */}
-
-            {/* {singleTopic.map((topic, index) => {
-              return (
-                <div key={index}>
-                  <ul>
-                    <li>{topic.description}</li>
-                  </ul>
-                </div>
-              );
-            })} */}
-
-            <ul>
-              {singleTopic[currentIndex]?.description
-                .split("\n")
-                .map((item, index) => (
-                  <li
-                    key={index}
-                    dangerouslySetInnerHTML={{ __html: item }}
-                   />
-                ))}
-            </ul>
+            })}
 
             {singleTopic[0].name === "Piano Practice" && (
               <>
@@ -204,24 +200,30 @@ function TopicsDetails({ user }) {
             )}
           </div>
 
-          {!sequence && (
-            <>
-              <button onClick={handlePreview} disabled={currentIndex === 0}>
-                &laquo; Prev
-              </button>
-              <button
-                onClick={handleNext}
-                disabled={currentIndex >= singleTopic.length - 1}
-              >
-                Next &raquo;
-              </button>
-              {currentIndex === singleTopic.length - 1 && (
-                <Link to="/musictool">
-                  <button>Checkout Music Tool &raquo;</button>
-                </Link>
-              )}
-            </>
-          )}
+          {/* <div>
+            <button onClick={handleNext}>
+              Next Section: {singleTopic[currentTopicIndex]?.name}
+            </button>
+          </div> */}
+
+          {/* {!sequence && (
+              <>
+                <button onClick={handlePreview} disabled={currentIndex === 0}>
+                  &laquo; Prev
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={currentIndex >= bulletPoint.length - 1}
+                >
+                  Next &raquo;
+                </button>
+                {currentIndex === bulletPoint.length - 1 && (
+                  <Link to="/musictool">
+                    <button>Checkout Music Tool &raquo;</button>
+                  </Link>
+                )}
+              </>
+            )} */}
         </div>
       )}
     </div>

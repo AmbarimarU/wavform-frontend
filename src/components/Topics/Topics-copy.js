@@ -7,7 +7,7 @@ function Topics() {
   const { lessonId } = useParams();
   // console.log(lessonId);
   const [topicsArray, setTopicsArray] = useState([]);
-console.log(topicsArray)
+
   useEffect(() => {
     async function fetchTopicsData() {
       try {
