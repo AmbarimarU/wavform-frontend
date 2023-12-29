@@ -7,8 +7,11 @@
 }
 .help-heading {
     text-align: center;
+    font-size: 50px;
+    font-family: serif;
+   
 }
-.pageNumbers-container {
+/* .pageNumbers-container {
     padding-top: 50px;
     justify-content: center;
     width: 100%;
@@ -42,8 +45,99 @@
 }
 .pageNumbers li button:focus {
     outline: none;
-}
+} */
 
 .MusicToolHelp h3 {
     text-transform: capitalize;
+    text-align: center;
+    font-family: serif;
 }
+.MusicToolHelp p {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.button-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    column-gap: 25px;
+    row-gap: 25px;
+
+}
+
+.help-buttons{
+    padding: 15px;
+    border-radius: .75rem;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+.help-buttons:hover{
+    background-color: hsl(196, 100%, 29%);
+    color: white;
+    cursor: pointer;
+}
+.collapse-container{
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.collapse-image{
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+ 
+}
+
+/* .collapse-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    font-weight: 700;
+    font-size: 1.25rem;
+    font-family: serif;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    background-color: white;
+    text-transform: capitalize;
+
+   
+ }
+
+.collapse-content.collapsed {
+    display: none;
+  }
+  
+.collapsed-content.expanded {
+    display: block;
+  }
+.collapse-container{
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.collapse-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+ 
+}
+.button-text{
+    color: #000;
+   
+}
+.button-text.expanded-text{
+    color: hsl(196, 100%, 39%);
+}
+.arrow{
+    color: hsl(196, 100%, 39%);
+}
+.arrow-expanded{
+    color: #000;
+}
+ */

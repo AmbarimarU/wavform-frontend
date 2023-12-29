@@ -47,6 +47,9 @@ const FourOFour = React.lazy(() => import("./components/FourOFour/FourOFour"));
 const MusicToolHelp = React.lazy(() =>
     import("./components/MusicToolHelp/MusicToolHelp")
 );
+const MusicToolHelpPage = React.lazy(() =>
+    import("./components/MusicToolHelp/MusicToolHelpPage")
+);
 
 function App() {
     const [user, setUser] = useAuthHooks();
@@ -125,6 +128,10 @@ function App() {
                         <Route
                             path="/musictoolhelp"
                             element={<MusicToolHelp />}
+                        />
+                         <Route
+                            path="/musictoolhelp/:id"
+                            element={<MusicToolHelpPage />}
                         />
                     </Routes>
                 </div>
