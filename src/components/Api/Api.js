@@ -98,7 +98,7 @@ const fetchTopics = async (lessonId) => {
 // from the topic_details table using inner join
 async function getSingleTopic(id) {
     try {
-        let result = await Axios.get(`/topic/topic/${id}`);
+        let result = await Axios.get(`/topics/topic/${id}`);
 
         console.log(result.data);
         return result.data;
@@ -110,7 +110,7 @@ async function getSingleTopic(id) {
 
 const fetchTopicDetail = async (id) => {
     try {
-        const response = await Axios.get(`/topic/topic/${id}`);
+        const response = await Axios.get(`/topics/topic/${id}`);
         return response.data;
         // console.log(response.data)
     } catch (error) {
