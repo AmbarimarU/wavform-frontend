@@ -40,88 +40,85 @@ function Lesson({ user }) {
         }
     }, [page]);
     return (
-        <div className="lesson">
-            <HeroLesson lesson={lesson} />
-            <div
-                className="lesson-container container"
-                ref={refTrack ? topRef : null}
-            >
-                <div className="lesson-menu">
-                    <span className="lesson-menu-top">In This Lesson</span>
-                    {lesson.titles.map((lesson, index) => (
-                        <div
-                            className={
-                                index === page
-                                    ? "lesson-side-selected"
-                                    : "lesson-side"
-                            }
-                            key={index}
-                        >
-                            {lesson}
-                        </div>
-                    ))}
+      <div className="lesson">
+        <HeroLesson lesson={lesson} />
+        <div
+          className="lesson-container container"
+          ref={refTrack ? topRef : null}
+        >
+          <div className="lesson-menu">
+            <span className="lesson-menu-top">In This Lesson</span>
+            {lesson.titles.map((lesson, index) => (
+              <div
+                className={
+                  index === page ? "lesson-side-selected" : "lesson-side"
+                }
+                key={index}
+              >
+                {lesson}
+              </div>
+            ))}
+          </div>
+          <div className="lesson-content">
+            <div className="lesson-body">
+              <div className="lesson-header">
+                <h2 className="lesson-header-top">
+                  Follow Along with Our Interactive Piano
+                </h2>
+                Click the keys to play the notes, or use your computer keyboard
+                to play the keys.
+                <br />
+                <br />
+                <Piano
+                  user={user}
+                  setStrokes={setStrokes}
+                  strokes={strokes}
+                  setKeyStrokes={setKeyStrokes}
+                  keyStrokes={keyStrokes}
+                />
+              </div>
+              <div className="lesson-pane">
+                <h4>{lesson.titles[page]}</h4>
+                {lesson.information[page]}{" "}
+              </div>
+              <div className="lesson-bottom">
+                <div
+                  onClick={handlePrevious}
+                  style={{
+                    visibility: page > 0 ? "visible" : "hidden",
+                  }}
+                  className="lesson-buttons"
+                >
+                  <div>
+                    <FaIcons.FaChevronLeft />
+                  </div>
+                  <div>
+                    <h6>Previous Section</h6>
+                    {lesson.titles[page - 1]}
+                  </div>
                 </div>
-                <div className="lesson-content">
-                    <div className="lesson-body">
-                        <div className="lesson-header">
-                            <h2 className="lesson-header-top">
-                                Follow Along with Our Interactive Piano
-                            </h2>
-                            Click the keys to play the notes, or use your
-                            computer keyboard to play the keys.
-                            <br />
-                            <br />
-                            <Piano
-                                user={user}
-                                setStrokes={setStrokes}
-                                strokes={strokes}
-                                setKeyStrokes={setKeyStrokes}
-                            />
-                        </div>
-                        <div className="lesson-pane">
-                            <h4>{lesson.titles[page]}</h4>
-                            {lesson.information[page]}{" "}
-                        </div>
-                        <div className="lesson-bottom">
-                            <div
-                                onClick={handlePrevious}
-                                style={{
-                                    visibility: page > 0 ? "visible" : "hidden",
-                                }}
-                                className="lesson-buttons"
-                            >
-                                <div>
-                                    <FaIcons.FaChevronLeft />
-                                </div>
-                                <div>
-                                    <h6>Previous Section</h6>
-                                    {lesson.titles[page - 1]}
-                                </div>
-                            </div>
-                            <div
-                                onClick={handleNext}
-                                style={{
-                                    visibility:
-                                        page < lesson.titles.length - 1
-                                            ? "visible"
-                                            : "hidden",
-                                    textAlign: "right",
-                                }}
-                                className="lesson-buttons"
-                            >
-                                <div>
-                                    <h6>Next Section</h6>
-                                    {lesson.titles[page + 1]}
-                                </div>
-                                <div>
-                                    <FaIcons.FaChevronRight />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div
+                  onClick={handleNext}
+                  style={{
+                    visibility:
+                      page < lesson.titles.length - 1 ? "visible" : "hidden",
+                    textAlign: "right",
+                  }}
+                  className="lesson-buttons"
+                >
+                  <div>
+                    <h6>Next Section</h6>
+                    {lesson.titles[page + 1]}
+                  </div>
+                  <div>
+                    <FaIcons.FaChevronRight />
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     );
 }
 

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
 import "./MusicTool.scss";
 import * as Tone from "tone";
 import * as FaIcons from "react-icons/fa";
-import Modal from "./Modal";
+//import Modal from "./Modal";
 import HeroStudio from "../Hero/HeroStudio";
 const Reverb = React.lazy(() => import("../Reverb/Reverb"));
 const Sequencer = React.lazy(() => import("../Step Sequencer/StepSequencer"));
@@ -12,83 +12,83 @@ const Delay = React.lazy(() => import("../Delay/Delay"));
 function MusicTool() {
     const [displayTooltip, setDisplayTooltip] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const modal = useRef(null);
-    const musicToolTutorialInfo = [
-        {
-            title: "How to Use the Music Tool",
-            info: `Welcome to the music tool. In this tutorial, we will explain every section and what they mean/how to use it, 
-      going over all the parts of the sequencer as well as the effects.`,
-            gif: require("./MusicToolTutorialGifs/initial showing of the sequencer.gif"),
-        },
-        {
-            title: "Horizontal and Vertical Axis",
-            info: `The vertical axis shows which notes are going to be played in each row of the sequencer, and the horizontal axis
-        shows at which beat the notes will be played. So, the rows are different notes, and the columns are time.`,
-            gif: require("./MusicToolTutorialGifs/showing the y and x axis.gif"),
-        },
-        {
-            title: "Switching Between Instruments",
-            info: `This button over the top of the sequencer will switch between the 3 instruments, the synth and the 2 samplers. The sequences created on each
-      instrument will play simultaneously. For more information on what synths and samplers are, go to our help page.`,
-            gif: require("./MusicToolTutorialGifs/instrument changing.gif"),
-        },
-        {
-            title: "Changing the Instrument Sounds",
-            info: `You can use the dropdown next to the instrument change button to change the sounds of each instrument. So, for the synth, it would be
-        the type of oscillator being used. For the samplers, there are a selection of sounds, including harp, electric piano, bells and drums. Also, 
-        the instrument sounds can only be changed while the sequencer is stopped.`,
-            gif: require("./MusicToolTutorialGifs/instrument dropdown.gif"),
-        },
-        {
-            title: "Changing the Octave",
-            info: `Next to the instrument switch button, you can switch between the octaves for each instrument, going from 2 octaves above to 2 below. As you can see,
-        the notes will change along with the octave. Also, like the instrument sounds, it can only be changed while the sequencer is stopped.`,
-            gif: require("./MusicToolTutorialGifs/octave.gif"),
-        },
-        {
-            title: "Placing Events on the Sequencer",
-            info: `Each instrument has its own sequencer. To place events on the sequencer, just click one of the boxes and it will turn blue. That means at that
-        corresponding time/column, a note will play. The note that plays depends on which row the event is in.`,
-            gif: require("./MusicToolTutorialGifs/demonstrating where the sounds will fall.gif"),
-        },
-        {
-            title: "Play/Stop Button",
-            info: `Last but not least for the sequencer, the play/stop button will play or stop the sequences for all instruments simultaneously.`,
-            gif: require("./MusicToolTutorialGifs/play stop button.gif"),
-        },
-        {
-            title: "Reverb",
-            info: `The reverb will give the sounds a sense of space, with the size and time influencing the quality of the sound. The amount determines the ratio of 
-        dry sound (no reverb) to wet sound (full reverb). To apply it, adjust the parameters to your liking and press the apply button. For more information on what
-        reverb is, check the tooltips or check our help page.`,
-            gif: require("./MusicToolTutorialGifs/reverb demo.gif"),
-        },
-        {
-            title: "Delay",
-            info: `The delay causes the sounds to echo a certain amount of times, creating potentially interesting and unexpected counterplay between sounds. The time parameter
-        determines the time between each echo, and the feedback parameter determines how many times it will echo. You can adjust these on the fly as the sequencer is playing.`,
-            gif: require("./MusicToolTutorialGifs/delay demo.gif"),
-        },
-        {
-            title: "Tutorial Completed!",
-            info: `You have completed the Music Tool tutorial! Play around with all the sequencers and effects and see what sounds you can make. If you want more in depth explanations
-      of all the components, see our help page, the button is below the sequencer, right next to the play button.`,
-            gif: require("./MusicToolTutorialGifs/final showing of the sequencer.gif"),
-        },
-    ];
+    // const [currentIndex, setCurrentIndex] = useState(0);
+    // const modal = useRef(null);
+    // const musicToolTutorialInfo = [
+    //     {
+    //         title: "How to Use the Music Tool",
+    //         info: `Welcome to the music tool. In this tutorial, we will explain every section and what they mean/how to use it, 
+    //   going over all the parts of the sequencer as well as the effects.`,
+    //         gif: require("./MusicToolTutorialGifs/initial showing of the sequencer.gif"),
+    //     },
+    //     {
+    //         title: "Horizontal and Vertical Axis",
+    //         info: `The vertical axis shows which notes are going to be played in each row of the sequencer, and the horizontal axis
+    //     shows at which beat the notes will be played. So, the rows are different notes, and the columns are time.`,
+    //         gif: require("./MusicToolTutorialGifs/showing the y and x axis.gif"),
+    //     },
+    //     {
+    //         title: "Switching Between Instruments",
+    //         info: `This button over the top of the sequencer will switch between the 3 instruments, the synth and the 2 samplers. The sequences created on each
+    //   instrument will play simultaneously. For more information on what synths and samplers are, go to our help page.`,
+    //         gif: require("./MusicToolTutorialGifs/instrument changing.gif"),
+    //     },
+    //     {
+    //         title: "Changing the Instrument Sounds",
+    //         info: `You can use the dropdown next to the instrument change button to change the sounds of each instrument. So, for the synth, it would be
+    //     the type of oscillator being used. For the samplers, there are a selection of sounds, including harp, electric piano, bells and drums. Also, 
+    //     the instrument sounds can only be changed while the sequencer is stopped.`,
+    //         gif: require("./MusicToolTutorialGifs/instrument dropdown.gif"),
+    //     },
+    //     {
+    //         title: "Changing the Octave",
+    //         info: `Next to the instrument switch button, you can switch between the octaves for each instrument, going from 2 octaves above to 2 below. As you can see,
+    //     the notes will change along with the octave. Also, like the instrument sounds, it can only be changed while the sequencer is stopped.`,
+    //         gif: require("./MusicToolTutorialGifs/octave.gif"),
+    //     },
+    //     {
+    //         title: "Placing Events on the Sequencer",
+    //         info: `Each instrument has its own sequencer. To place events on the sequencer, just click one of the boxes and it will turn blue. That means at that
+    //     corresponding time/column, a note will play. The note that plays depends on which row the event is in.`,
+    //         gif: require("./MusicToolTutorialGifs/demonstrating where the sounds will fall.gif"),
+    //     },
+    //     {
+    //         title: "Play/Stop Button",
+    //         info: `Last but not least for the sequencer, the play/stop button will play or stop the sequences for all instruments simultaneously.`,
+    //         gif: require("./MusicToolTutorialGifs/play stop button.gif"),
+    //     },
+    //     {
+    //         title: "Reverb",
+    //         info: `The reverb will give the sounds a sense of space, with the size and time influencing the quality of the sound. The amount determines the ratio of 
+    //     dry sound (no reverb) to wet sound (full reverb). To apply it, adjust the parameters to your liking and press the apply button. For more information on what
+    //     reverb is, check the tooltips or check our help page.`,
+    //         gif: require("./MusicToolTutorialGifs/reverb demo.gif"),
+    //     },
+    //     {
+    //         title: "Delay",
+    //         info: `The delay causes the sounds to echo a certain amount of times, creating potentially interesting and unexpected counterplay between sounds. The time parameter
+    //     determines the time between each echo, and the feedback parameter determines how many times it will echo. You can adjust these on the fly as the sequencer is playing.`,
+    //         gif: require("./MusicToolTutorialGifs/delay demo.gif"),
+    //     },
+    //     {
+    //         title: "Tutorial Completed!",
+    //         info: `You have completed the Music Tool tutorial! Play around with all the sequencers and effects and see what sounds you can make. If you want more in depth explanations
+    //   of all the components, see our help page, the button is below the sequencer, right next to the play button.`,
+    //         gif: require("./MusicToolTutorialGifs/final showing of the sequencer.gif"),
+    //     },
+    // ];
 
-    const handleNext = () => {
-        setCurrentIndex((prev) =>
-            Math.min(prev + 1, musicToolTutorialInfo.length - 1)
-        );
-    };
+    // const handleNext = () => {
+    //     setCurrentIndex((prev) =>
+    //         Math.min(prev + 1, musicToolTutorialInfo.length - 1)
+    //     );
+    // };
 
-    const handlePrev = () => {
-        setCurrentIndex((prev) => Math.max(prev - 1, 0));
-    };
+    // const handlePrev = () => {
+    //     setCurrentIndex((prev) => Math.max(prev - 1, 0));
+    // };
 
     //const [beat, setBeat] = useState(0);
     const handleMouseOver = (section, e) => {
@@ -373,9 +373,9 @@ function MusicTool() {
         }
     };
 
-    const navToMusicHelp = () => {
-        navigate("/musictoolhelp");
-    };
+    // const navToMusicHelp = () => {
+    //     navigate("/musictoolhelp");
+    // };
     const notes = {
         "octave-2": ["F2", "D#2", "D2", "C2", "A#1", "G#1", "G1", "F1"],
         "octave-1": ["F3", "D#3", "D3", "C3", "A#2", "G#2", "G2", "F2"],
