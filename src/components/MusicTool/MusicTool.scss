@@ -20,17 +20,19 @@
         padding-bottom: 20px;
     }
     &-button {
-        background-color: var(--color-primary);
         border: 1px;
         border-radius: 5px;
         padding-left: 10px;
         padding-right: 10px;
         margin: 5px;
-        color: var(--color-white);
-    }
-    &-button:hover {
         background-color: var(--color-white);
         color: var(--color-primary);
+        box-shadow: 0 0 2px var(--color-primary-lightest),
+            0 0 10px rgba(167, 158, 204, 0.5);
+    }
+    &-button:hover {
+        background-color: var(--color-primary);
+        color: var(--color-white);
         box-shadow: 0 0 2px var(--color-primary-lightest),
             0 0 10px rgba(167, 158, 204, 0.5);
     }
@@ -46,13 +48,15 @@
         padding-left: 10px;
         line-height: 50px;
         text-align: center;
+        width: 100px;
     }
     &-playbutton {
-        display: flex;
         width: 250px;
         padding-top: 20px;
         padding-bottom: 20px;
         border: 0;
+        border-radius: 10px;
+        display: flex;
         align-items: center;
         justify-content: center;
         color: var(--color-white);
@@ -127,6 +131,22 @@
         color: var(--color-black-100);
         border: 0;
         margin: 5px;
+        &-white {
+            background-color: var(--color-white);
+            color: var(--color-primary);
+            border: 0;
+            width: 205px;
+            border-radius: 10px;
+            height: 40px;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &-white:hover {
+            box-shadow: 0 0 5px var(--color-primary),
+                0 0 10px rgba(167, 158, 204, 0.5);
+        }
     }
     &-selector:hover,
     &-selector-selected:hover {
@@ -143,21 +163,21 @@
         margin: 5px;
     }
     &-sequencer {
-        padding-left: 45px;
+        padding-left: 100px;
         width: fit-content;
         position: absolute;
     }
     &-sequencer2,
     &-sequencer3 {
-        padding-left: 45px;
+        padding-left: 100px;
         width: fit-content;
         visibility: hidden;
         position: absolute;
     }
     &-stepsequencer {
         padding-top: 10px;
-        height: 460px;
-        width: 478px;
+        height: 490px;
+        width: 520px;
         display: flex;
         background-color: var(--color-white-100);
         border-radius: 10px;
@@ -166,10 +186,10 @@
         justify-content: space-between;
     }
     &-bottom {
-        padding-left: 77px;
-        padding-top: 10px;
-        letter-spacing: 1.15em;
-        padding-bottom: 10px;
+        padding-left: 130px;
+        padding-top: 20px;
+        letter-spacing: 1.1em;
+        padding-bottom: 20px;
     }
 }
 .tooltip-box {
