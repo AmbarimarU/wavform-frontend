@@ -1,0 +1,129 @@
+.musictool {
+    padding: 10px 10px;
+    width: 100%;
+    height: 80vh;
+    display: grid;
+    background-color: rgb(197, 209, 247);
+    grid-template-areas:
+        "blank blank header effects"
+        "side side2 sequencer reverb"
+        "side side2 sequencer delay"
+        "side side2 bottom ebottom"
+        "side side2 bottom2 ebottom";
+    &_header {
+        grid-area: header;
+        margin-left: 50px;
+        margin-bottom: 20px;
+    }
+    &_bottom {
+        margin-left: -107px;
+        margin-top: 5px;
+        grid-area: bottom;
+        text-align: center;
+        letter-spacing: 20px;
+        width: 450px;
+    }
+    &_bottom2 {
+        margin-top: 10px;
+        grid-area: bottom2;
+        text-align: center;
+        width: 350px;
+    }
+    &_help {
+        border-radius: 50px;
+        margin-left: 15px;
+        padding: 10px 30px;
+        background-color: rgb(108, 139, 235);
+        color: white;
+        border-color: rgb(108, 139, 235);
+        border-style: solid;
+        justify-content: center;
+        text-align: center;
+        font-weight: 800;
+    }
+    &_side {
+        grid-area: side;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+    }
+    &_side2 {
+        grid-area: side2;
+        width: 200px;
+        padding-top: 26px;
+        line-height: 55px;
+        text-align: right;
+    }
+    &_sequencer {
+        margin-left: -120px;
+        padding: 0;
+        width: fit-content;
+        grid-area: sequencer;
+        z-index: 2;
+    }
+    &_sequencer2 {
+        margin-left: -120px;
+        padding: 0;
+        width: fit-content;
+        grid-area: sequencer;
+        z-index: 2;
+        visibility: hidden;
+    }
+    &_sequencer3 {
+        margin-left: -120px;
+        padding: 0;
+        width: fit-content;
+        grid-area: sequencer;
+        z-index: 2;
+        visibility: hidden;
+    }
+    &_effects {
+        grid-area: effects;
+    }
+    &_reverb {
+        grid-area: reverb;
+    }
+    &_delay {
+        grid-area: delay;
+    }
+    &_selector {
+        border-radius: 50px;
+        padding: 10px 30px;
+        width: 150px;
+        background-color: rgb(108, 139, 235);
+        color: white;
+        border-color: rgb(108, 139, 235);
+        border-style: solid;
+    }
+}
+.tooltip-box {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+.tooltip-trigger {
+    cursor: pointer;
+}
+.select-container {
+    display: inline;
+    position: relative;
+    margin-left: 10px;
+}
+.redBeat {
+    color: red;
+    display: inline-block;
+    white-space: nowrap;
+}
+.beat {
+    display: inline-block;
+    white-space: nowrap;
+}
+.redBeat:not(:last-child),
+.beat:not(:last-child) {
+    margin-right: 25px;
+}

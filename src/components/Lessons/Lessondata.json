@@ -1,0 +1,97 @@
+{
+    "lessons": [
+        {
+            "id": 1,
+            "category": "piano",
+            "title": "The Basics of the Piano",
+            "description": "Learn about keys, notes, and start playing simple tunes. Perfect for beginners ready to make music on the piano!",
+            "image": "https://images.unsplash.com/photo-1514119412350-e174d90d280e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "link": "",
+            "tags": ["Beginner", "Short", "In Progress"],
+            "titles": [
+                "Introduction to the Piano",
+                "Understanding Notes",
+                "Simple Melodic Patterns",
+                "Playing a Simple Tune"
+            ],
+            "information": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis, diam eu eleifend iaculis, diam sem ultrices odio, et pharetra mi mi non purus. Pellentesque interdum sed enim porttitor placerat. Sed sit amet justo vulputate, vulputate neque ut, viverra risus. Ut tincidunt mauris elit, id maximus ligula pulvinar pharetra. Vivamus vel condimentum ex. Morbi tempor egestas purus at euismod. Vestibulum id elementum elit, vitae luctus sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet eu enim a posuere. Aenean non sem arcu. Curabitur sollicitudin nisi orci, id malesuada tellus dignissim id. Donec hendrerit semper orci, eget hendrerit velit euismod ullamcorper. In blandit mauris ac ullamcorper interdum. Donec congue tempus fringilla. Quisque iaculis elementum lacus, sed tincidunt purus dignissim in. \nFusce pharetra fermentum elit ac malesuada. Donec eu nisl pellentesque, dictum tellus at, sagittis sapien. Ut facilisis, sem id finibus finibus, est purus vehicula ligula, ut molestie leo mi ut eros. Aliquam a faucibus ligula. Aliquam ut elit a nunc ultrices pulvinar. Donec sed libero urna. Etiam congue nibh felis, rutrum venenatis magna sodales sed. Vivamus lacinia pharetra orci sit amet tempus.",
+                "Aliquam vehicula ipsum magna, sit amet vulputate lacus consectetur vel. Maecenas fermentum elementum volutpat. Suspendisse justo lectus, semper at urna vel, ultrices sollicitudin sapien. Nam sit amet nibh vulputate, aliquam orci at, pharetra nulla. Praesent quis malesuada ipsum. Morbi laoreet urna eget lectus pretium auctor. Ut hendrerit, enim a porttitor finibus, dolor lectus placerat justo, sit amet lobortis enim ex eu nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tempus eu nisl at luctus. Pellentesque egestas risus mauris, quis ornare odio dictum tempor. Maecenas lectus leo, fermentum vitae ligula ac, hendrerit placerat lorem. Donec dictum libero pulvinar sapien dapibus ullamcorper. Nam sem orci, pulvinar non libero nec, interdum viverra lorem. Phasellus non ex bibendum eros elementum fringilla. Integer placerat elit nec turpis viverra lacinia. Vestibulum vel odio quis risus lacinia dictum ut efficitur arcu. In maximus, purus ac feugiat eleifend, magna arcu dapibus leo, vel feugiat ipsum elit in mi. Vestibulum posuere lectus nec cursus ornare. Aenean aliquam dignissim libero, sit amet rhoncus magna venenatis sit amet. Nullam lectus ex, vestibulum sit amet facilisis vel, iaculis vel mi. Morbi ac vulputate tortor, in molestie nulla. Suspendisse tempus tellus in semper ornare. Curabitur tristique arcu id ex posuere, in vestibulum turpis feugiat. Duis sagittis vehicula posuere. Nunc placerat varius pharetra. Ut id sagittis tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim neque at dictum lobortis.",
+                "Ut id risus at ipsum dictum lobortis. Proin eu nisi aliquet est blandit ultrices. Nunc fermentum urna vestibulum mauris volutpat scelerisque id non leo. Nullam placerat at diam sed pulvinar. Mauris et tellus fringilla, porttitor enim eget, consequat erat. Quisque hendrerit eros dui, vel ultricies elit tincidunt id. Fusce ipsum quam, iaculis dictum dui eget, euismod dignissim ipsum. Ut luctus justo ut neque molestie semper. Integer ac vehicula est, at fermentum mauris. Mauris viverra, magna id aliquet aliquet, enim libero convallis nulla, et blandit eros magna ut turpis. Phasellus venenatis sit amet elit in laoreet. Phasellus nec purus turpis. Quisque eu vestibulum mi, vitae mollis justo. Nunc arcu massa, molestie vitae laoreet in, consectetur in nulla. Donec vehicula metus sit amet ultrices aliquet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam sed est diam. Sed egestas sit amet ligula non scelerisque. Maecenas in libero quis ante gravida ultricies lobortis non leo. Sed vel sem et odio finibus tempor eu ut turpis. Mauris aliquam ullamcorper libero id vestibulum. Praesent id neque id turpis pretium tristique eu eget magna.",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus posuere sapien dolor, at mollis lorem gravida quis. Cras id aliquam nisl, nec faucibus diam. Praesent fermentum ligula velit, vitae faucibus metus vulputate a. In sed lorem vulputate, condimentum purus sed, fringilla metus. Nunc semper justo ligula, vel maximus felis bibendum tempus. Aenean lorem eros, aliquam at congue sed, ullamcorper id nunc. Duis consequat, lacus at vestibulum bibendum, felis nunc sollicitudin turpis, sed viverra diam risus sed nibh. Nunc bibendum lacus nisi, ac consectetur mauris porttitor at. Nam at fringilla dui. Aenean id elementum ligula, in malesuada tortor. Maecenas non tellus consequat, tincidunt turpis ac, sodales libero. Proin id tempor massa. Curabitur egestas pharetra dui, sed suscipit ante scelerisque vel. Praesent vitae maximus nulla, eu dapibus velit. Praesent sit amet urna a purus efficitur efficitur in vel neque. Sed efficitur tincidunt sapien, pellentesque aliquam velit fringilla et. Donec dolor justo, sollicitudin sit amet sagittis quis, pulvinar in eros. Proin vitae ligula a nulla luctus elementum. Ut tempus, ante vestibulum lobortis feugiat, sapien diam consequat velit, non varius elit velit ut nunc. Curabitur ac tortor volutpat, sagittis lorem vitae, dapibus ipsum. Proin quam erat, sodales porttitor ex vitae, gravida aliquam enim. In hac habitasse platea dictumst."
+            ]
+        },
+        {
+            "id": 2,
+            "category": "technique",
+            "title": "Octave Odyssey",
+            "description": "Explore the concept of octaves, understanding their role in creating musical depth. Ideal for beginners curious about expanding their musical range!",
+            "image": "https://images.unsplash.com/photo-1600474848954-080e61d18c0d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8b2N0YXZlfGVufDB8fDB8fHww",
+            "link": "",
+            "tags": ["Beginner", "Short", "Not Started"]
+        },
+        {
+            "id": 3,
+            "category": "theory",
+            "title": "Interval Insight",
+            "description": "Demystify musical intervals and discover how they shape melody and harmony. An intermediate lesson providing insights into the language of music!",
+            "image": "https://images.unsplash.com/photo-1466428996289-fb355538da1b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "link": "",
+            "tags": ["Intermediate", "Short", "Not Started"]
+        },
+        {
+            "id": 4,
+            "category": "harmony",
+            "title": "Chords Unleashed",
+            "description": "Unlock the world of chords, understanding how multiple notes come together to create harmony. A concise intermediate lesson for those eager to enhance their chord vocabulary!",
+            "image": "https://images.unsplash.com/photo-1536594527669-2f555de54e95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG11c2ljJTIwY2hvcmR8ZW58MHx8MHx8fDA%3D",
+            "link": "",
+            "tags": ["Intermediate", "Short", "Not Started"]
+        },
+        {
+            "id": 5,
+            "category": "technique",
+            "title": "Scale Mastery",
+            "description": "Master the essential scales that form the foundation of musical fluency. An intermediate lesson providing key insights into mastering scales effortlessly!",
+            "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "link": "",
+            "tags": ["Intermediate", "Short", "Not Started"]
+        },
+        {
+            "id": 6,
+            "category": "piano",
+            "title": "Piano Keys: Beyond the Basics",
+            "description": "Take your piano skills to the next level by exploring advanced techniques for playing in different keys. A longer intermediate lesson for those ready to expand their musical horizons!",
+            "image": "https://images.unsplash.com/photo-1589666629225-750e2f7875f5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "link": "",
+            "tags": ["Intermediate", "Long", "Not Started"]
+        },
+        {
+            "id": 7,
+            "category": "harmony",
+            "title": "Harmony in Action",
+            "description": "Apply chords practically, learning how to accompany melodies and create a harmonious musical landscape. An intermediate lesson for hands-on experience with harmonies!",
+            "image": "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "link": "",
+            "tags": ["Intermediate", "Long", "Not Started"]
+        },
+        {
+            "id": 8,
+            "category": "technique",
+            "title": "Scales Galore",
+            "description": "Dive deep into various scales, including major, minor, and pentatonic, enhancing your musical versatility. An expert-level lesson for those seeking in-depth scale knowledge!",
+            "image": "https://images.unsplash.com/photo-1507838153414-b4b713384a76?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "link": "",
+            "tags": ["Expert", "Very Long", "Not Started"]
+        },
+        {
+            "id": 9,
+            "category": "piano",
+            "title": "Piano Pulse: Rhythms and Beats",
+            "description": "Discover the heartbeat of piano playing, focusing on rhythms, beats, and how to infuse life into your music. Perfect for beginners looking to enhance their musical pulse!",
+            "image": "https://images.unsplash.com/photo-1584882793511-33ac865aedb7?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "link": "",
+            "tags": ["Beginner", "Short", "Not Started"]
+        }
+    ]
+}

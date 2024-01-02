@@ -1,0 +1,88 @@
+.lesson {
+    padding: 20px;
+    border-radius: 10px;
+    &-header {
+        background-color: rgba(0, 127, 173, 0.15);
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        &-top {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    }
+
+    &-container {
+        display: flex;
+    }
+    &-content {
+        width: 100%;
+    }
+    &-menu {
+        text-align: left;
+        padding-left: 10px;
+        margin: 20px 0;
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        align-self: flex-start;
+        &-top {
+            padding: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+    &-body {
+        width: 100%;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: white;
+    }
+    &-side {
+        padding: 10px;
+        margin-bottom: 5px;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        &-selected {
+            padding: 10px;
+            margin-bottom: 5px;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            color: var(--color-primary);
+            background-color: white;
+        }
+    }
+    &-bottom {
+        padding-top: 25px;
+        display: flex;
+        justify-content: space-between;
+    }
+    &-buttons:hover,
+    &-buttons:focus-within {
+        box-shadow: 0 0 2px var(--color-primary-lightest),
+            0 0 10px rgba(167, 158, 204, 0.5);
+    }
+    &-buttons {
+        display: flex;
+        align-items: center;
+        background-color: var(--color-white-100);
+        border-radius: 5px;
+        > div {
+            padding: 12px;
+            font-size: 10px;
+        }
+        h6 {
+            margin: 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 8px;
+            color: var(--color-primary-lightest);
+        }
+    }
+    &-pane {
+        padding-top: 10px;
+    }
+}
+.container {
+    width: 1000px;
+}

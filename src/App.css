@@ -1,37 +1,43 @@
-.App {
-    text-align: center;
-}
+:root {
+    --color-white: hsl(0, 0%, 100%);
+    --color-white-100: hsl(0, 0%, 95%);
+    --color-white-200: hsl(0, 0%, 90%);
+    --color-white-300: hsl(0, 0%, 85%);
+    --color-white-400: hsl(0, 0%, 80%);
+    --color-white-500: hsl(0, 0%, 75%);
+    --color-white-600: hsl(0, 0%, 70%);
+    --color-white-700: hsl(0, 0%, 65%);
+    --color-white-800: hsl(0, 0%, 60%);
+    --color-white-900: hsl(0, 0%, 55%);
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
+    --color-black: hsl(0, 0%, 0%);
+    --color-black-100: hsl(0, 0%, 5%);
+    --color-black-200: hsl(0, 0%, 10%);
+    --color-black-300: hsl(0, 0%, 15%);
+    --color-black-400: hsl(0, 0%, 20%);
+    --color-black-500: hsl(0, 0%, 25%);
+    --color-black-600: hsl(0, 0%, 30%);
+    --color-black-700: hsl(0, 0%, 35%);
+    --color-black-800: hsl(0, 0%, 40%);
+    --color-black-900: hsl(0, 0%, 45%);
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
+    --color-primary: hsl(196, 100%, 34%);
+    --color-primary-light: hsl(196, 100%, 39%);
+    --color-primary-lighter: hsl(196, 100%, 44%);
+    --color-primary-lightest: hsl(196, 100%, 49%);
+    --color-primary-dark: hsl(196, 100%, 29%);
+    --color-primary-darker: hsl(196, 100%, 24%);
+    --color-primary-darkest: hsl(196, 100%, 19%);
+    --color-primary-opacity-15: hsla(196, 100%, 34%, 0.15);
 
-.App-header {
-    background-color: #282c34;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    --color-secondary: hsl(251, 31%, 56%);
+    --color-secondary-light: hsl(251, 31%, 61%);
+    --color-secondary-lighter: hsl(251, 31%, 66%);
+    --color-secondary-lightest: hsl(251, 31%, 71%);
+    --color-secondary-dark: hsl(251, 31%, 51%);
+    --color-secondary-darker: hsl(251, 31%, 46%);
+    --color-secondary-darkest: hsl(251, 31%, 41%);
 }
-
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+body {
+    background-color: var(--color-white-100);
 }

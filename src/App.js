@@ -1,6 +1,6 @@
 // DEPENDENCIES
 import React, { useState } from "react";
-
+import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // COMPONENTS
@@ -14,11 +14,10 @@ const About = React.lazy(() => import("./components/About/About"));
 const Login = React.lazy(() => import("./components/Login/Login"));
 const Signup = React.lazy(() => import("./components/Signup/Signup"));
 const Welcome = React.lazy(() => import("./components/Welcome/Welcome"));
+const Lesson = React.lazy(() => import("./components/Lessons/Lesson"));
 const Lessons = React.lazy(() => import("./components/Lessons/Lessons"));
 const Nav = React.lazy(() => import("./components/Nav/Nav"));
-const ToggleNavBar = React.lazy(() =>
-    import("./components/ToggleNav/ToggleNavBar")
-);
+
 const Home = React.lazy(() => import("./components/Home/Home"));
 const Synth = React.lazy(() => import("./components/Synth/Synth"));
 const MusicTool = React.lazy(() => import("./components/MusicTool/MusicTool"));
@@ -65,15 +64,13 @@ function App() {
     return (
         <React.Suspense fallback={<Loader />}>
             <Router>
-                <ToggleNavBar>
-                    <Nav
-                        user={user}
-                        logout={logout}
-                        showSidebar={showSidebar}
-                        sidebar={sidebar}
-                        setSidebar={setSidebar}
-                    />
-                </ToggleNavBar>
+                <Nav
+                    user={user}
+                    logout={logout}
+                    showSidebar={showSidebar}
+                    sidebar={sidebar}
+                    setSidebar={setSidebar}
+                />
                 <div
                     onClick={() => {
                         setSidebar(false);
@@ -89,7 +86,14 @@ function App() {
                             element={<Login setUser={setUser} />}
                         />
                         <Route path="/delay" element={<Delay />} />
-                        <Route path="/lessons" element={<Lessons />} />
+                        <Route
+                            path="/lessons"
+                            element={<Lessons user={user} />}
+                        />
+                        <Route
+                            path="/lesson"
+                            element={<Lesson user={user} />}
+                        />
                         <Route path="/synth" element={<Synth />} />
                         <Route path="/sampler" element={<Sampler />} />
                         <Route path="/reverb" element={<Reverb />} />
@@ -119,7 +123,7 @@ function App() {
                             path="/topics/topic/:id"
                             element={<TopicsDetails user={user} />}
                         />
-                         <Route
+                        <Route
                             path="/topics/:id"
                             element={<TopicsDetails user={user} />}
                         />
@@ -129,15 +133,13 @@ function App() {
                             path="/musictoolhelp"
                             element={<MusicToolHelp />}
                         />
-                         <Route
+                        <Route
                             path="/musictoolhelp/:id"
                             element={<MusicToolHelpPage />}
                         />
                     </Routes>
                 </div>
-                <ToggleNavBar>
-                    <Footer />
-                </ToggleNavBar>
+                <Footer />
             </Router>{" "}
         </React.Suspense>
     );
