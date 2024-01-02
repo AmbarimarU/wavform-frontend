@@ -1,33 +1,66 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { fetchLessons } from "../Api/Api";
-import "./Lessons.css";
+import React, { useState } from "react";
+import "./Lessons.scss";
+import LessonsCard from "./LessonsCard";
+import data from "./Lessondata.json";
+import HeroHome from "../Hero/HeroHome";
 function Lessons() {
-    const [lessonsArray, setlessonsArray] = useState([]);
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                let res = await fetchLessons();
-                setlessonsArray(res);
-            } catch (e) {
-                console.log(e);
-            }
+    const [filteredLessons, setFilteredLessons] = useState(data.lessons);
+    const filterLessons = (tag) => {
+        if (tag === "All") {
+            setFilteredLessons(data.lessons);
+        } else {
+            const filtered = data.lessons.filter((lesson) =>
+                lesson.tags.includes(tag)
+            );
+            setFilteredLessons(filtered);
         }
-        fetchData();
-    }, []);
-
+    };
     return (
-        <div className="lessons">
-            {lessonsArray.map((lesson) => {
-                return (
-                    <Link key={lesson.id} to={`/topics/${lesson.id}`}>
-                        <button className="lessons-button">
-                            {lesson.name}
-                        </button>
-                    </Link>
-                );
-            })}
-        </div>
+        <>
+            <HeroHome />
+            <div className="lessons">
+                <div className="lessons-container container">
+                    <div className="lessons-content">
+                        <div className="lessons-header">
+                            <h2>Lessons Library</h2>
+                            <div className="lessons-buttons">
+                                <button
+                                    className="lessons-button"
+                                    onClick={() => filterLessons("All")}
+                                >
+                                    All Lessons
+                                </button>
+                                <button
+                                    className="lessons-button"
+                                    onClick={() => filterLessons("In Progress")}
+                                >
+                                    In Progress
+                                </button>
+                                <button
+                                    className="lessons-button"
+                                    onClick={() => filterLessons("Not Started")}
+                                >
+                                    Not Started
+                                </button>
+                                <button
+                                    className="lessons-button"
+                                    onClick={() => filterLessons("Completed")}
+                                >
+                                    Completed
+                                </button>
+                            </div>
+                        </div>
+                        <div className="lessons-body">
+                            {filteredLessons.map((lesson, index) => {
+                                return (
+                                    <LessonsCard lesson={lesson} key={index} />
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }
 

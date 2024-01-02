@@ -288,7 +288,7 @@ function StepSequencer({
                                         className="sequencer-note"
                                         style={{
                                             backgroundColor:
-                                                "rgb(243, 244, 246)",
+                                                "rgb(255, 255, 255)",
                                         }}
                                         onClick={(e) => {
                                             handleNoteClick(
@@ -300,15 +300,15 @@ function StepSequencer({
                                             if (
                                                 e.target.style[
                                                     "background-color"
-                                                ] === "rgb(243, 244, 246)"
+                                                ] === "rgb(255, 255, 255)"
                                             ) {
                                                 e.target.style[
                                                     "background-color"
-                                                ] = "rgb(64, 105, 229)";
+                                                ] = "hsl(196, 100%, 19%)";
                                             } else {
                                                 e.target.style[
                                                     "background-color"
-                                                ] = "rgb(243, 244, 246)";
+                                                ] = "rgb(255, 255, 255)";
                                             }
                                         }}
                                     ></button>

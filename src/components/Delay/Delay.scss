@@ -1,17 +1,15 @@
 .delay {
-    width: 75%;
-    padding-left: 5px;
-    padding-bottom: 5px;
-    margin: 10px;
-    border: 1px white solid;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-white-100);
     border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
     display: grid;
-    background-color: rgb(248, 249, 250);
+    gap: 10px;
     grid-template-areas:
         "header header"
-        "slider1 time"
-        "slider2 feedback"
+        "time slider1"
+        "feedback slider2 "
         "slider3 amount"
         "submit submit";
 
@@ -23,21 +21,18 @@
     }
     &_time {
         grid-area: time;
-        padding-left: 10px;
     }
     &_slider2 {
         grid-area: slider2;
     }
     &_amount {
         grid-area: amount;
-        padding-left: 10px;
     }
     &_slider3 {
         grid-area: slider3;
     }
     &_feedback {
         grid-area: feedback;
-        padding-left: 10px;
     }
     &_submit {
         grid-area: submit;
@@ -45,7 +40,6 @@
     }
     &_slider {
         width: 100%;
-        opacity: 0.7;
         -webkit-transition: 0.2s;
         transition: opacity 0.2s;
         &:hover {
@@ -64,7 +58,6 @@
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
-        opacity: 0.8;
         -webkit-transition: 0.2s;
         transition: opacity 0.2s;
         &:hover {

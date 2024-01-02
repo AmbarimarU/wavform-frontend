@@ -72,40 +72,30 @@ function Reverb({
 
     return (
         <div className="reverb">
-            <h2 className="reverb-header">
+            <h6 className="reverb-header">
                 Reverb{" "}
-                <span
-                    className="tooltip-trigger"
-                    onMouseOver={(e) => handleMouseOver("reverb", e)}
-                    onMouseOut={() => handleMouseOut("reverb")}
-                >
-                    ?
-                </span>
-            </h2>
-            {moreInfo &&
-                moreInfo.map((page, index) => (
-                    <div
-                        className="tooltip-box"
-                        id="tooltip-box"
-                        key={page}
-                        style={{
-                            display: `${
-                                displayTooltip[page] ? "block" : "none"
-                            }`,
-                            position: "absolute",
-                            backgroundColor: "#f9f9f9",
-                            border: "1px solid #ccc",
-                            padding: "10px",
-                            borderRadius: "5px",
-                            boxShadow: "0 0 5px rgba(0, 0, 0, 0.3)",
-                            zIndex: "9999",
-                            left: `${tooltipPosition.x}px`,
-                            top: `${tooltipPosition.y}px`,
-                        }}
-                    >
-                        <p>{moreInfoFaqs[index]}</p>
-                    </div>
-                ))}
+                <div class="tooltip-container">
+                    <span class="tooltip-trigger">?</span>
+                    <span class="toolbox">
+                        Reverb is what gives sound space. Make your instrument
+                        sound like it's inside a room or a church.
+                        <br />
+                        <br />
+                        <span style={{ fontWeight: "bold" }}>Time:</span> The
+                        amount of milliseconds before a sound reverberates,
+                        essentially like an echo.
+                        <br />
+                        <br />
+                        <span style={{ fontWeight: "bold" }}>Size:</span> The
+                        size of the room. A smaller room will have a shorter
+                        reverb time.
+                        <br />
+                        <br />
+                        <span style={{ fontWeight: "bold" }}>Amount:</span> The
+                        amount of reverb applied to the sound.
+                    </span>
+                </div>
+            </h6>
             <div className="reverb-header__timediv">
                 <input
                     type="range"
@@ -117,16 +107,7 @@ function Reverb({
                     onChange={valueHandler}
                 />
             </div>
-            <span className="reverb-time">
-                Time{" "}
-                <span
-                    className="tooltip-trigger"
-                    onMouseOver={(e) => handleMouseOver("reverb-time", e)}
-                    onMouseOut={() => handleMouseOut("reverb-time")}
-                >
-                    ?
-                </span>
-            </span>
+            <span className="reverb-time">Time</span>
             <div className="reverb-header__sizediv">
                 <input
                     type="range"
@@ -138,16 +119,7 @@ function Reverb({
                     onChange={valueHandler}
                 />
             </div>
-            <span className="reverb-size">
-                Size{" "}
-                <span
-                    className="tooltip-trigger"
-                    onMouseOver={(e) => handleMouseOver("reverb-size", e)}
-                    onMouseOut={() => handleMouseOut("reverb-size")}
-                >
-                    ?
-                </span>
-            </span>
+            <span className="reverb-size">Size</span>
             <div className="reverb-header__amountdiv">
                 <input
                     type="range"
@@ -159,21 +131,12 @@ function Reverb({
                     onChange={valueHandler}
                 />
             </div>{" "}
-            <span className="reverb-amount">
-                Amount{" "}
-                <span
-                    className="tooltip-trigger"
-                    onMouseOver={(e) => handleMouseOver("reverb-amount", e)}
-                    onMouseOut={() => handleMouseOut("reverb-amount")}
-                >
-                    ?
-                </span>
-            </span>
+            <span className="reverb-amount">Amount</span>
             <div className="reverb-header__btndiv">
-                <button className="reverb_button" onClick={resetValues}>
+                <button className="reverb-button" onClick={resetValues}>
                     Reset
                 </button>
-                <button className="reverb_button" onClick={applyReverb}>
+                <button className="reverb-button" onClick={applyReverb}>
                     Apply
                 </button>
             </div>

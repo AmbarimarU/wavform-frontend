@@ -69,40 +69,27 @@ function Delay({
     }, [delayValues, delay.delayTime, delay.feedback]);
     return (
         <div className="delay">
-            <h2 className="delay_header">
+            <h6 className="delay_header">
                 Delay{" "}
-                <span
-                    className="tooltip-trigger"
-                    onMouseOver={(e) => handleMouseOver("delay", e)}
-                    onMouseOut={() => handleMouseOut("delay")}
-                >
-                    ?
-                </span>
-            </h2>
-            {moreInfo &&
-                moreInfo.map((page, index) => (
-                    <div
-                        className="tooltip-box"
-                        id="tooltip-box"
-                        key={page}
-                        style={{
-                            display: `${
-                                displayTooltip[page] ? "block" : "none"
-                            }`,
-                            position: "absolute",
-                            backgroundColor: "#f9f9f9",
-                            border: "1px solid #ccc",
-                            padding: "10px",
-                            borderRadius: "5px",
-                            boxShadow: "0 0 5px rgba(0, 0, 0, 0.3)",
-                            zIndex: "9999",
-                            left: `${tooltipPosition.x}px`,
-                            top: `${tooltipPosition.y}px`,
-                        }}
-                    >
-                        <p>{moreInfoFaqs[index]}</p>
-                    </div>
-                ))}
+                <div class="tooltip-container">
+                    <span class="tooltip-trigger">?</span>
+                    <span class="toolbox">
+                        Delay is like an echo. It repeats the sound after a
+                        certain amount of time.
+                        <br />
+                        <br />
+                        <span style={{ fontWeight: "bold" }}>Time:</span> The
+                        amount of milliseconds before a sound repeats.
+                        <br />
+                        <br />
+                        <span style={{ fontWeight: "bold" }}>
+                            Feedback:
+                        </span>{" "}
+                        The amount of time the sound repeats.
+                        <br />
+                    </span>
+                </div>
+            </h6>
             <div className="delay_slider1">
                 <input
                     type="range"
@@ -119,16 +106,7 @@ function Delay({
                     }
                 />
             </div>
-            <span className="delay_time">
-                Time{" "}
-                <span
-                    className="tooltip-trigger"
-                    onMouseOver={(e) => handleMouseOver("delay-time", e)}
-                    onMouseOut={() => handleMouseOut("delay-time")}
-                >
-                    ?
-                </span>
-            </span>
+            <span className="delay_time">Time </span>
             <div className="delay_slider2">
                 <input
                     type="range"
@@ -145,16 +123,7 @@ function Delay({
                     }
                 />
             </div>
-            <span className="delay_feedback">
-                Feedback{" "}
-                <span
-                    className="tooltip-trigger"
-                    onMouseOver={(e) => handleMouseOver("delay-feedback", e)}
-                    onMouseOut={() => handleMouseOut("delay-feedback")}
-                >
-                    ?
-                </span>
-            </span>
+            <span className="delay_feedback">Feedback </span>
             <div className="delay_submit">
                 <button
                     className="delay_button"

@@ -1,98 +1,175 @@
 .musictool {
-    padding: 10px 10px;
-    width: 100%;
-    height: 80vh;
-    display: grid;
-    background-color: rgb(197, 209, 247);
-    grid-template-areas:
-        "blank blank header effects"
-        "side side2 sequencer reverb"
-        "side side2 sequencer delay"
-        "side side2 bottom ebottom"
-        "side side2 bottom2 ebottom";
-    &_header {
+    padding: 25px;
+    display: flex;
+    &-main {
+        background-color: var(--color-white);
+        border-radius: 10px;
+        margin-right: 10px;
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+    }
+    &-header {
         grid-area: header;
-        margin-left: 50px;
+        padding: 20px;
         margin-bottom: 20px;
     }
-    &_bottom {
-        margin-left: -107px;
-        margin-top: 5px;
-        grid-area: bottom;
-        text-align: center;
-        letter-spacing: 20px;
-        width: 450px;
+    &-top {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 20px;
     }
-    &_bottom2 {
-        margin-top: 10px;
-        grid-area: bottom2;
-        text-align: center;
-        width: 350px;
+    &-button {
+        background-color: var(--color-primary);
+        border: 1px;
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin: 5px;
+        color: var(--color-white);
     }
-    &_help {
-        border-radius: 50px;
-        margin-left: 15px;
-        padding: 10px 30px;
-        background-color: rgb(108, 139, 235);
-        color: white;
-        border-color: rgb(108, 139, 235);
-        border-style: solid;
+    &-button:hover {
+        background-color: var(--color-white);
+        color: var(--color-primary);
+        box-shadow: 0 0 2px var(--color-primary-lightest),
+            0 0 10px rgba(167, 158, 204, 0.5);
+    }
+    &-side {
+        align-self: flex-start;
+        background-color: var(--color-white);
+        padding: 10px;
+        border-radius: 10px;
+    }
+    &-side2 {
+        align-self: flex-start;
+        padding-top: 12px;
+        padding-left: 10px;
+        line-height: 50px;
+        text-align: center;
+    }
+    &-playbutton {
+        display: flex;
+        width: 250px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border: 0;
+        align-items: center;
         justify-content: center;
-        text-align: center;
-        font-weight: 800;
+        color: var(--color-white);
+        background-color: var(--color-primary);
     }
-    &_side {
-        grid-area: side;
-        writing-mode: vertical-rl;
-        text-orientation: upright;
+    &-playbutton:hover,
+    &-playbutton:focus-within {
+        background-color: var(--color-primary-darkest);
     }
-    &_side2 {
-        grid-area: side2;
-        width: 200px;
-        padding-top: 26px;
-        line-height: 55px;
-        text-align: right;
+    &-sounds {
+        width: 100%;
+        padding: 10px;
+        background-color: var(--color-white-100);
+        border-radius: 10px;
+        margin-top: 10px;
+        display: grid;
+        gap: 10px;
+        grid-template-areas:
+            "header header"
+            "octave oinput"
+            "synth sinput"
+            "sampler1 samp1input"
+            "sampler2 samp2input";
+        &-header {
+            grid-area: header;
+        }
+        &-octave {
+            grid-area: octave;
+        }
+        &-synth {
+            grid-area: oinput;
+        }
+        &-sampler1,
+        &-sampler2 {
+            grid-area: oinput;
+            visibility: hidden;
+        }
+        &-synthlabel {
+            grid-area: synth;
+        }
+        &-samp1label {
+            grid-area: sampler1;
+        }
+        &-samp2label {
+            grid-area: sampler2;
+        }
+        &-synthinput {
+            grid-area: sinput;
+        }
+        &-samp1input {
+            grid-area: samp1input;
+        }
+        &-samp2input {
+            grid-area: samp2input;
+        }
     }
-    &_sequencer {
-        margin-left: -120px;
-        padding: 0;
+    &-sampler {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        padding-left: 10px;
+    }
+    &-body {
+        display: flex;
+        padding: 10px;
+    }
+    &-selector {
+        width: 205px;
+        border-radius: 10px;
+        height: 40px;
+        background-color: var(--color-white-100);
+        color: var(--color-black-100);
+        border: 0;
+        margin: 5px;
+    }
+    &-selector:hover,
+    &-selector-selected:hover {
+        box-shadow: 0 0 5px var(--color-primary-lightest),
+            0 0 10px rgba(167, 158, 204, 0.5);
+    }
+    &-selector-selected {
+        width: 205px;
+        border-radius: 10px;
+        height: 40px;
+        background-color: var(--color-primary-dark);
+        color: var(--color-white);
+        border: 0;
+        margin: 5px;
+    }
+    &-sequencer {
+        padding-left: 45px;
         width: fit-content;
-        grid-area: sequencer;
-        z-index: 2;
+        position: absolute;
     }
-    &_sequencer2 {
-        margin-left: -120px;
-        padding: 0;
+    &-sequencer2,
+    &-sequencer3 {
+        padding-left: 45px;
         width: fit-content;
-        grid-area: sequencer;
-        z-index: 2;
         visibility: hidden;
+        position: absolute;
     }
-    &_sequencer3 {
-        margin-left: -120px;
-        padding: 0;
-        width: fit-content;
-        grid-area: sequencer;
-        z-index: 2;
-        visibility: hidden;
+    &-stepsequencer {
+        padding-top: 10px;
+        height: 460px;
+        width: 478px;
+        display: flex;
+        background-color: var(--color-white-100);
+        border-radius: 10px;
+        position: relative;
+        flex-direction: column;
+        justify-content: space-between;
     }
-    &_effects {
-        grid-area: effects;
-    }
-    &_reverb {
-        grid-area: reverb;
-    }
-    &_delay {
-        grid-area: delay;
-    }
-    &_selector {
-        border-radius: 50px;
-        padding: 10px 30px;
-        width: 150px;
-        background-color: rgb(108, 139, 235);
-        color: white;
-        border-color: rgb(108, 139, 235);
-        border-style: solid;
+    &-bottom {
+        padding-left: 77px;
+        padding-top: 10px;
+        letter-spacing: 1.15em;
+        padding-bottom: 10px;
     }
 }
 .tooltip-box {
@@ -106,9 +183,6 @@
     z-index: 9999;
 }
 
-.tooltip-trigger {
-    cursor: pointer;
-}
 .select-container {
     display: inline;
     position: relative;
@@ -126,4 +200,76 @@
 .redBeat:not(:last-child),
 .beat:not(:last-child) {
     margin-right: 25px;
+}
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.toolbox {
+    display: none;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    border-radius: 5px;
+    position: absolute;
+    width: 250px;
+}
+
+.toolbox::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0, 0, 0, 0.75) transparent;
+}
+
+.tooltip-trigger {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    line-height: 13px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.tooltip-trigger:hover + .toolbox,
+.toolbox:hover {
+    display: block;
+}
+
+.tooltip-trigger:focus-within + .toolbox,
+.toolbox:focus-within {
+    display: block;
 }

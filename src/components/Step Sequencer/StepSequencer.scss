@@ -5,18 +5,23 @@
     width: fit-content;
     border-radius: 10px;
     border: 1px solid white;
-    background-color: white;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: var(--color-primary-opacity-15);
     margin: auto;
     padding: 10px;
     &-note {
-        height: 3em;
-        width: 3em;
+        height: 2.5em;
+        width: 2.5em;
         border-radius: 10px;
         border-style: solid;
-        margin: 7px;
+        margin: 5px;
         padding: 10px;
-        border-image: linear-gradient(rgb(243, 244, 246), transparent);
+        border: 0;
+        border: 2px solid transparent;
+        transition: border-color 0.3s;
+    }
+    &-note:hover,
+    &-note:focus {
+        border-color: var(--color-primary-lightest);
     }
     &-row {
         display: inline-block;

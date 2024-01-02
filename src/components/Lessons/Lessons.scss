@@ -1,0 +1,63 @@
+.lessons {
+    &-card {
+        max-width: 320px;
+    }
+    &-content {
+        width: 1000px;
+    }
+    &-header {
+        text-align: left;
+        padding-top: 30px;
+        border-bottom: 2px solid black;
+        padding-bottom: 10px;
+        opacity: 10;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+    }
+    &-body {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 15px;
+        padding-bottom: 20px;
+    }
+    &-buttons {
+        margin-left: auto;
+    }
+    &-button {
+        margin-left: 10px;
+        border-radius: 5px;
+    }
+    &-button.active {
+        background-color: var(--color-white);
+        color: var(--color-primary);
+    }
+    &-button:not(.active) {
+        background-color: var(--color-white);
+        color: var(--color-black-600);
+        border: 2px solid transparent;
+        transition: border-color 0.3s, color 0.3s;
+    }
+    &-button:not(.active):hover {
+        background-color: var(--color-white);
+        border: 2px solid;
+        color: var(--color-primary);
+    }
+    &-button:not(.active):focus {
+        background-color: var(--color-primary);
+        border: 2px solid transparent;
+        color: var(--color-white);
+    }
+
+    &-container {
+        width: 1000px;
+    }
+    &-card:hover,
+    &-card:focus-within {
+        box-shadow: 0 0 2px var(--color-secondary),
+            0 0 10px rgba(167, 158, 204, 0.5);
+    }
+}
+a {
+    text-decoration: none;
+}
