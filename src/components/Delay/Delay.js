@@ -11,13 +11,13 @@ function Delay({
     displayTooltip,
     tooltipPosition,
 }) {
-    const moreInfo = ["delay", "delay-time", "delay-feedback", "delay-amount"];
-    const moreInfoFaqs = [
-        "Delay causes your sound to echo a certain amount of times. It can create some cool sounds!",
-        "Time is the amount of time (milliseconds) between each echo.",
-        "Feedback makes the echos happen more than once, creating a long 'tail' of sound.",
-        "Additional information goes here for delay amount!",
-    ];
+    //const moreInfo = ["delay", "delay-time", "delay-feedback", "delay-amount"];
+    // const moreInfoFaqs = [
+    //     "Delay causes your sound to echo a certain amount of times. It can create some cool sounds!",
+    //     "Time is the amount of time (milliseconds) between each echo.",
+    //     "Feedback makes the echos happen more than once, creating a long 'tail' of sound.",
+    //     "Additional information goes here for delay amount!",
+    // ];
     const initialDelayValues = {
         dTime: 0,
         dAmount: 0,

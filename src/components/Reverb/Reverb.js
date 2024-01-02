@@ -11,13 +11,13 @@ function Reverb({
     displayTooltip,
     tooltipPosition,
 }) {
-    const moreInfo = ["reverb", "reverb-time", "reverb-size", "reverb-amount"];
-    const moreInfoFaqs = [
-        "Reverb is what gives sound space. Make your instrument sound like it is inside a room or church using this.",
-        "Time is the amount of milliseconds before a sound reverberates, essentially like an echo.",
-        "Size is how big of a space the reverb is trying to emulate, lower = room or garage, higher = church or cave.",
-        "Amount is the ratio of reverb being used compared to the 'dry' signal, the sound with no reverb.",
-    ];
+    // const moreInfo = ["reverb", "reverb-time", "reverb-size", "reverb-amount"];
+    // const moreInfoFaqs = [
+    //     "Reverb is what gives sound space. Make your instrument sound like it is inside a room or church using this.",
+    //     "Time is the amount of milliseconds before a sound reverberates, essentially like an echo.",
+    //     "Size is how big of a space the reverb is trying to emulate, lower = room or garage, higher = church or cave.",
+    //     "Amount is the ratio of reverb being used compared to the 'dry' signal, the sound with no reverb.",
+    // ];
     const initialValues = {
         timeValue: 1,
         sizeValue: 1,
