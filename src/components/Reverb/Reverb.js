@@ -133,10 +133,10 @@ function Reverb({
             </div>{" "}
             <span className="reverb-amount">Amount</span>
             <div className="reverb-header__btndiv">
-                <button className="reverb-button" onClick={resetValues}>
+                <button className="musictool-button" onClick={resetValues}>
                     Reset
                 </button>
-                <button className="reverb-button" onClick={applyReverb}>
+                <button className="musictool-button" onClick={applyReverb}>
                     Apply
                 </button>
             </div>

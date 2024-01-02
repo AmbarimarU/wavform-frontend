@@ -126,7 +126,7 @@ function Delay({
             <span className="delay_feedback">Feedback </span>
             <div className="delay_submit">
                 <button
-                    className="delay_button"
+                    className="musictool-button"
                     onClick={(e) => {
                         setDelayValues(initialDelayValues);
                         // player.stop();

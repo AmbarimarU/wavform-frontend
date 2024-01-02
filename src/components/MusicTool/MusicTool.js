@@ -19,7 +19,7 @@ function MusicTool() {
     // const musicToolTutorialInfo = [
     //     {
     //         title: "How to Use the Music Tool",
-    //         info: `Welcome to the music tool. In this tutorial, we will explain every section and what they mean/how to use it, 
+    //         info: `Welcome to the music tool. In this tutorial, we will explain every section and what they mean/how to use it,
     //   going over all the parts of the sequencer as well as the effects.`,
     //         gif: require("./MusicToolTutorialGifs/initial showing of the sequencer.gif"),
     //     },
@@ -38,7 +38,7 @@ function MusicTool() {
     //     {
     //         title: "Changing the Instrument Sounds",
     //         info: `You can use the dropdown next to the instrument change button to change the sounds of each instrument. So, for the synth, it would be
-    //     the type of oscillator being used. For the samplers, there are a selection of sounds, including harp, electric piano, bells and drums. Also, 
+    //     the type of oscillator being used. For the samplers, there are a selection of sounds, including harp, electric piano, bells and drums. Also,
     //     the instrument sounds can only be changed while the sequencer is stopped.`,
     //         gif: require("./MusicToolTutorialGifs/instrument dropdown.gif"),
     //     },
@@ -61,7 +61,7 @@ function MusicTool() {
     //     },
     //     {
     //         title: "Reverb",
-    //         info: `The reverb will give the sounds a sense of space, with the size and time influencing the quality of the sound. The amount determines the ratio of 
+    //         info: `The reverb will give the sounds a sense of space, with the size and time influencing the quality of the sound. The amount determines the ratio of
     //     dry sound (no reverb) to wet sound (full reverb). To apply it, adjust the parameters to your liking and press the apply button. For more information on what
     //     reverb is, check the tooltips or check our help page.`,
     //         gif: require("./MusicToolTutorialGifs/reverb demo.gif"),
@@ -600,6 +600,10 @@ function MusicTool() {
                                 }}
                             >
                                 Sampler 2
+                            </button>
+                            <button className="musictool-selector-white">
+                                <FaIcons.FaPlus />
+                                &nbsp;&nbsp;Add New Sampler
                             </button>
                         </div>
                         <div className="musictool-stepsequencer">
