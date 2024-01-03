@@ -20,6 +20,7 @@ function Modal({ children, fade = false, defaultOpened = false }, ref) {
       open: () => setIsOpen(true),
       close: () => setIsOpen(false),
     }),
+    // eslint-disable-next-line
     []
   );
 
