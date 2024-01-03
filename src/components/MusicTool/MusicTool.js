@@ -75,7 +75,7 @@ function MusicTool() {
       {
           title: "Tutorial Completed!",
           info: `You have completed the Music Tool tutorial! Play around with all the sequencers and effects and see what sounds you can make. If you want more in depth explanations
-    of all the components, see our help page, the button is below the sequencer, right next to the play button.`,
+    of all the components, see our help page, the button is right next to our tutorial.`,
           gif: require("./MusicToolTutorialGifs/final showing.gif"),
       },
   ];
