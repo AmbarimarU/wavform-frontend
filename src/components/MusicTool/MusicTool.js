@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./MusicTool.scss";
 import * as Tone from "tone";
 import * as FaIcons from "react-icons/fa";
@@ -12,7 +12,7 @@ const Delay = React.lazy(() => import("../Delay/Delay"));
 function MusicTool() {
   const [displayTooltip, setDisplayTooltip] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const modal = useRef(null);
@@ -373,9 +373,9 @@ function MusicTool() {
     }
   };
 
-  // const navToMusicHelp = () => {
-  //     navigate("/musictoolhelp");
-  // };
+  const navToMusicHelp = () => {
+      navigate("/musictoolhelp");
+  };
   const notes = {
     "octave-2": ["F2", "D#2", "D2", "C2", "A#1", "G#1", "G1", "F1"],
     "octave-1": ["F3", "D#3", "D3", "C3", "A#2", "G#2", "G2", "F2"],
@@ -515,8 +515,11 @@ function MusicTool() {
             <div className="musictool-top">
               <h5>Sound Sequencers</h5>
               <div>
-                <button className="musictool-button" onClick={() => modal.current.open()}>View Tutorial</button>
-                <button className="musictool-button">Get Help</button>
+                <button className="musictool-button" onClick={() => {
+                    modal.current.open();
+                    setCurrentIndex(0)
+                    }}>View Tutorial</button>
+                <button className="musictool-button" onClick={navToMusicHelp}>Get Help</button>
               </div>
             </div>
             <span>
