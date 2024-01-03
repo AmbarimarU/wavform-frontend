@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import "./MusicTool.scss";
 import * as Tone from "tone";
 import * as FaIcons from "react-icons/fa";
@@ -12,7 +12,7 @@ const Delay = React.lazy(() => import("../Delay/Delay"));
 function MusicTool() {
   const [displayTooltip, setDisplayTooltip] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-  const navigate = useNavigate();
+//   const navigate = useNavigate();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const modal = useRef(null);
