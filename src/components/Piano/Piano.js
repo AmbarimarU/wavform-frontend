@@ -36,7 +36,7 @@ function Piano({ user, setStrokes, strokes, setKeyStrokes }) {
         }
         setKeyStrokes([]);
         if (user) deleteKeys();
-            // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [user]);
 
     return (
@@ -71,7 +71,7 @@ function Piano({ user, setStrokes, strokes, setKeyStrokes }) {
                                     );
                                 }
                             }}
-                            onMouseUp={() => releaseNote(index)}
+                            onMouseUp={() => releaseNote(note)}
                         >
                             {keyboard.letters[index]}
                         </div>
