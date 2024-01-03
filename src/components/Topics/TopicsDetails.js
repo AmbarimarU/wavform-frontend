@@ -12,7 +12,6 @@ function TopicsDetails({ user }) {
   const [sequence, setSequence] = useState("");
   const [keyStrokes, setKeyStrokes] = useState([]);
   let newKeys = "";
-  // const [activeTab, setActiveTab] = useState(0);
   const { id } = useParams();
 
   useEffect(() => {
