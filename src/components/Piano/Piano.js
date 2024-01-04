@@ -47,11 +47,14 @@ function Piano({ user, setStrokes, strokes, setKeyStrokes }) {
                     const key = keyboard.colors[index]
                         ? "piano-black-key"
                         : "piano-white-key";
+                    const noteText = keyboard.notes[index];
+                    const letter = keyboard.letters[index];
+
                     return (
                         <div
+                            className={key}
                             key={note}
                             id={note}
-                            className={key}
                             onMouseDown={() => {
                                 if (user) {
                                     playNote(
@@ -71,20 +74,34 @@ function Piano({ user, setStrokes, strokes, setKeyStrokes }) {
                                     );
                                 }
                             }}
-                            onMouseUp={() => releaseNote(note)}
+                            onMouseUp={() => {
+                                releaseNote(note);
+                            }}
+                            style={{
+                                position: "relative",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "space-between",
+                                justifyItems: "center",
+                            }}
                         >
-                            {keyboard.letters[index]}
+                            <span
+                                style={{
+                                    alignSelf: "flex-start",
+                                    width: "100%",
+                                }}
+                            >
+                                {letter}
+                            </span>
+                            <span
+                                style={{ alignSelf: "flex-end", width: "100%" }}
+                            >
+                                {noteText}
+                            </span>
                         </div>
                     );
                 })}
             </div>
-
-            {/*<div class="piano-range">
-          <div class="piano-range-line"></div>
-          //{/* <p className="piano-range-text">Octaves</p> 
-          <p className="piano-range-text"></p>
-        </div>
-      </div>*/}
         </div>
     );
 }

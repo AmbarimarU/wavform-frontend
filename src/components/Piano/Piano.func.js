@@ -112,7 +112,8 @@ const playNote = async (
     setStrokes
 ) => {
     if (document.getElementById(note)) {
-        document.getElementById(note).style.backgroundColor = "blue";
+        document.getElementById(note).style.backgroundColor =
+            "var(--color-primary-dark)";
         sampler.triggerAttack(note);
         //synth.triggerAttack(note, "8n");
         if (user !== null) {
@@ -126,7 +127,8 @@ const playNote = async (
 
 const releaseNote = (index) => {
     const indexOf = keyboard.notes.indexOf(index);
-    document.getElementById(keyboard.notes[indexOf]).style = "";
+    document.getElementById(keyboard.notes[indexOf]).style.backgroundColor =
+        keyboard.colors[indexOf] ? "black" : "white";
     // synth.triggerRelease(".1");
     sampler.triggerRelease(keyboard.notes[indexOf]);
 };
