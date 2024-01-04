@@ -123,10 +123,10 @@ function App() {
                             path="/topics/topic/:id"
                             element={<TopicsDetails user={user} />}
                         />
-                        <Route
+                        {/* <Route
                             path="/topics/:id"
                             element={<TopicsDetails user={user} />}
-                        />
+                        /> */}
                         <Route path="/*" element={<FourOFour />} />
                         {/* // <Route path="/musicnotes" element={<MusicNotes />} /> */}
                         <Route

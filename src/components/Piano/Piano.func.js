@@ -1,17 +1,21 @@
 import * as Tone from "tone";
 import { insertKey } from "../Api/Api";
 
+// const pianoSamples = {
+//     name: "Casio",
+//     notes: ["A1", "A2", "B1", "C2", "D2"],
+//     url: "https://tonejs.github.io/audio/casio/",
+// };
 const pianoSamples = {
-    name: "Casio",
-    notes: ["A1", "A2", "B1", "C2", "D2"],
-    url: "https://tonejs.github.io/audio/casio/",
+    A1: require("./audio/piano/A1.mp3"),
+    A2: require("./audio/piano/A2.mp3"),
+    A3: require("./audio/piano/A3.mp3"),
+    A4: require("./audio/piano/A4.mp3"),
+    A5: require("./audio/piano/A5.mp3"),
 };
+const sustainedNotes = [];
+const sampler = new Tone.Sampler(pianoSamples).toDestination();
 
-let urlsObj = {};
-
-pianoSamples.notes.forEach((note) => {
-    urlsObj[note] = `${note}.mp3`;
-});
 /*
 notes: [
         "C4",
@@ -49,7 +53,6 @@ const keyboard = {
     colors: [0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
 };
 
-const synth = new Tone.Synth().toDestination();
 async function insertNote(note, user) {
     try {
         insertKey(note, user);
@@ -57,7 +60,50 @@ async function insertNote(note, user) {
         console.log(e);
     }
 }
+const sustainNote = (note) => {
+    if (!sustainedNotes.includes(note)) {
+        sustainedNotes.push(note);
+        playNote(note);
+    }
+};
 
+// New function to handle keyup events for releasing sustained notes
+const releaseSustainedNote = (note) => {
+    const index = sustainedNotes.indexOf(note);
+    if (index !== -1) {
+        sustainedNotes.splice(index, 1);
+        releaseNote(note); // Release the note when key is released
+    }
+};
+
+// Function to play a key using keyboard events
+const playKey = (event, user = null, strokes, setStrokes) => {
+    if (event.type === "keydown") {
+        for (let i = 0; i < keyboard.notes.length; i++) {
+            if (event.keyCode === keyboard.keys[i]) {
+                sustainNote(keyboard.notes[i]);
+            }
+        }
+    } else if (event.type === "keyup") {
+        for (let i = 0; i < keyboard.notes.length; i++) {
+            if (event.keyCode === keyboard.keys[i]) {
+                releaseSustainedNote(keyboard.notes[i]);
+            }
+        }
+    }
+};
+const releaseKey = (event) => {
+    for (let i = 0; i < keyboard.notes.length; i++) {
+        if (event.keyCode === keyboard.keys[i]) {
+            releaseSustainedNote(keyboard.notes[i]);
+        }
+        // if (document.getElementById(keyboard.notes[i])) {
+        //     document.getElementById(keyboard.notes[i]).style = "";
+        //     sampler.triggerRelease(keyboard.notes[i]);
+        // }
+    }
+    //synth.triggerRelease(".0001");
+};
 const playNote = async (
     note,
     user = null,
@@ -67,7 +113,8 @@ const playNote = async (
 ) => {
     if (document.getElementById(note)) {
         document.getElementById(note).style.backgroundColor = "blue";
-        synth.triggerAttack(note, "8n");
+        sampler.triggerAttack(note);
+        //synth.triggerAttack(note, "8n");
         if (user !== null) {
             let stroke = strokes;
             stroke++;
@@ -78,24 +125,18 @@ const playNote = async (
 };
 
 const releaseNote = (index) => {
-    document.getElementById(keyboard.notes[index]).style = "";
-    synth.triggerRelease(".1");
+    const indexOf = keyboard.notes.indexOf(index);
+    document.getElementById(keyboard.notes[indexOf]).style = "";
+    // synth.triggerRelease(".1");
+    sampler.triggerRelease(keyboard.notes[indexOf]);
 };
 
-const releaseKey = () => {
-    for (let i = 0; i < keyboard.notes.length; i++) {
-        if (document.getElementById(keyboard.notes[i]))
-            document.getElementById(keyboard.notes[i]).style = "";
-    }
-    synth.triggerRelease(".0001");
-};
-
-const playKey = (event, user = null, strokes, setStrokes) => {
-    for (let i = 0; i < keyboard.notes.length; i++) {
-        if (event.keyCode === keyboard.keys[i]) {
-            playNote(keyboard.notes[i], user, i, strokes, setStrokes);
-        }
-    }
-};
+// const playKey = (event, user = null, strokes, setStrokes) => {
+//     for (let i = 0; i < keyboard.notes.length; i++) {
+//         if (event.keyCode === keyboard.keys[i]) {
+//             playNote(keyboard.notes[i], user, i, strokes, setStrokes);
+//         }
+//     }
+// };
 
 export { keyboard, playNote, releaseNote, releaseKey, playKey };
