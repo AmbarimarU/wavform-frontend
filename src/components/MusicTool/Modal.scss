@@ -31,24 +31,24 @@
 }
 
 .modal > .modal-close {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 1.25em;
-    padding: 7px;
-    background: rgba(84, 142, 208, 0.749);
-    border: 1px solid #c3c0c0;
-    border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999999;
-    box-sizing: border-box;
-    text-align: center;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1.25em;
+  padding: 7px;
+  background: rgba(84, 142, 208, 0.749);
+  border: 1px solid #c3c0c0;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .modal > .modal-close:hover {
