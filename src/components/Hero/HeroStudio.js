@@ -35,8 +35,8 @@ function HeroStudio() {
                     <h2 className="lessonhero-title">The Studio</h2>
                     <p className="lessonhero-description">
                         Unlead your musical genius witih the Studio! Dive into
-                        melody and sequence ceeation, fine-tune instrucments,
-                        and add the perfect touch with reverb and delay. Elevate
+                        melody and sequence creation, fine-tune instruments, and
+                        add the perfect touch with reverb and delay. Elevate
                         your sound, today!
                     </p>{" "}
                 </div>
