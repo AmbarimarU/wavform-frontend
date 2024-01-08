@@ -36,19 +36,22 @@ function Login({ setUser }) {
                 password,
                 username,
             });
-            const jwtToken = result.data.token;
-            console.log(jwtToken);
+            if (result.data.token.error) {
+                return alert(result.data.token.error);
+            } else {
+                const jwtToken = result.data.token;
+                //console.log(jwtToken);
+                window.localStorage.setItem("jwtToken", jwtToken);
+                const decodedToken = jwtDecode(jwtToken);
+                //console.log(decodedToken);
 
-            window.localStorage.setItem("jwtToken", jwtToken);
-            const decodedToken = jwtDecode(jwtToken);
-            console.log(decodedToken);
-
-            setUser({
-                email: decodedToken.email,
-                username: decodedToken.username,
-                id: decodedToken.id,
-            });
-            navigate("/");
+                setUser({
+                    email: decodedToken.email,
+                    username: decodedToken.username,
+                    id: decodedToken.id,
+                });
+                navigate("/");
+            }
         } catch (error) {
             console.log(error);
         }
