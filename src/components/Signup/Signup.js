@@ -50,20 +50,24 @@ function Signup() {
         }
     }, [checkToken, navigate]);
 
-
     async function handleOnSubmit(e) {
         e.preventDefault();
         try {
-            await createUsers({
+            let result = await createUsers({
                 email,
                 password,
                 username: usernameInput,
             });
-
-            alert("Congrats! Welcome to the Wavform Family!!");
-            navigate("/login");
+            if (!result) {
+                alert(
+                    "Sign up was unsuccessfully, Please use a different email."
+                );
+            } else {
+                alert("Congrats! Welcome to the Wavform Family!!");
+                navigate("/login");
+            }
         } catch (e) {
-            console.log(e);
+            return alert(e);
         }
     }
 

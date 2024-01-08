@@ -94,7 +94,6 @@ const fetchTopics = async (lessonId) => {
 //     }
 // };
 
-
 // from the topic_details table using inner join
 async function getSingleTopic(id) {
     try {
@@ -136,7 +135,7 @@ const createUsers = async (userData) => {
         console.log(result.data);
         return result.data;
     } catch (error) {
-        console.error(error);
+        //console.error(error);
     }
 };
 
@@ -146,7 +145,7 @@ const loginUsers = async (userData) => {
         console.log(result);
         return result;
     } catch (error) {
-        console.error(error);
+        alert(error.response.data.error.error);
     }
 };
 async function getSession() {
