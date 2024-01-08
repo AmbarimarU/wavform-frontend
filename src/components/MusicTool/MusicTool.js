@@ -860,6 +860,7 @@ function MusicTool() {
             handleMouseOut={handleMouseOut}
             displayTooltip={displayTooltip}
             tooltipPosition={tooltipPosition}
+            started={sequencer.started}
           />
           <Delay
             delay={delay}

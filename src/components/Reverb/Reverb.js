@@ -10,6 +10,7 @@ function Reverb({
     handleMouseOut,
     displayTooltip,
     tooltipPosition,
+    started
 }) {
     // const moreInfo = ["reverb", "reverb-time", "reverb-size", "reverb-amount"];
     // const moreInfoFaqs = [
@@ -28,14 +29,16 @@ function Reverb({
 
     const applyReverb = () => {
         // Reverb effect
-        reverb.dispose();
-        setReverb(
-            new Tone.Reverb({
-                decay: reverbValues?.timeValue / 10,
-                preDelay: reverbValues?.sizeValue / 10,
-                wet: reverbValues?.amountValue / 100,
-            }).toDestination()
-        );
+        if (started) {
+            reverb.dispose();
+            setReverb(
+                new Tone.Reverb({
+                    decay: reverbValues?.timeValue / 10,
+                    preDelay: reverbValues?.sizeValue / 10,
+                    wet: reverbValues?.amountValue / 100,
+                }).toDestination()
+            );
+        }
 
         // Oscillator
         // const oscillator = new Tone.Oscillator(440, "sine").connect(reverb);
