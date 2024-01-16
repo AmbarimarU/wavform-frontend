@@ -13,7 +13,7 @@ function Footer() {
                     </div>
                     <div className="footer-copy">
                         {" "}
-                        &copy; 2023 WavForm - All Rights Resevered
+                        &copy; 2023 WavForm - All Rights Reserved
                     </div>
                     <div className="footer-social">
                         <div className="footer-iconbg">
